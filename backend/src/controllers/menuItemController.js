@@ -71,6 +71,23 @@ const deleteMenuItem = async (req, res) => {
   }
 };
 
+// menuItemController.js
+const searchMenuItems = async (req, res) => {
+  try {
+    const { q } = req.query;
+
+    const items = await MenuItem.find({
+      name: { $regex: q, $options: "i" },
+    });
+
+    res.status(200).json(items);
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   createMenuItem,
   getMenuItems,

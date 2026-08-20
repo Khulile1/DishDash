@@ -1,4 +1,4 @@
-// Declaration: import Express and required files
+// Import Express
 const express = require("express");
 
 // Import controller functions
@@ -9,17 +9,24 @@ const authMiddleware = require("../middleware/authMiddleware");
 const roleMiddleware = require("../middleware/roleMiddleware");
 const loginRateLimitMiddleware = require("../middleware/loginRateLimitMiddleware");
 
-// Create an Express router for authentication routes
+// Create router
 const router = express.Router();
 
-// Public route: register a new user
+// ==============================
+// PUBLIC ROUTES
+// ==============================
+
+// Register
 router.post("/register", register);
 
-// Public route: log in an existing user
-// Login route protected by 3-attempt limiter
+// Login
 router.post("/login", loginRateLimitMiddleware, login);
 
-// Protected route: test auth middleware and return the logged-in user
+// ==============================
+// PROTECTED ROUTES
+// ==============================
+
+// Test authentication
 router.get("/me", authMiddleware, (req, res) => {
   res.json({
     message: "Auth middleware is working",
@@ -27,7 +34,7 @@ router.get("/me", authMiddleware, (req, res) => {
   });
 });
 
-// Protected route: only admin users can access this route
+// Admin only
 router.get(
   "/admin-only",
   authMiddleware,
@@ -37,10 +44,10 @@ router.get(
       message: "Admin access granted",
       user: req.user,
     });
-  }
+  },
 );
 
-// Protected route: only customer users can access this route
+// Customer only
 router.get(
   "/customer-only",
   authMiddleware,
@@ -50,22 +57,34 @@ router.get(
       message: "Customer access granted",
       user: req.user,
     });
-  }
+  },
 );
 
-router.get("/driver-only", authMiddleware, roleMiddleware("driver"), (req, res) => {
-  res.json({
-    message: "Driver access granted",
-    user: req.user,
-  });
-});
+// Driver only
+router.get(
+  "/driver-only",
+  authMiddleware,
+  roleMiddleware("driver"),
+  (req, res) => {
+    res.json({
+      message: "Driver access granted",
+      user: req.user,
+    });
+  },
+);
 
-router.get("/restaurant-only", authMiddleware, roleMiddleware("restaurant"), (req, res) => {
-  res.json({
-    message: "Restaurant access granted",
-    user: req.user,
-  });
-});
+// Restaurant only
+router.get(
+  "/restaurant-only",
+  authMiddleware,
+  roleMiddleware("restaurant"),
+  (req, res) => {
+    res.json({
+      message: "Restaurant access granted",
+      user: req.user,
+    });
+  },
+);
 
-// Export router so app.js can use these routes
+// Export router
 module.exports = router;

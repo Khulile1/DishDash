@@ -46,7 +46,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
 
       // Only these roles are allowed
-      enum: ["customer", "restaurant", "driver", "admin"],
+      enum: ["customer", "restaurant", "admin"],
 
       // If no role is provided, the user becomes a customer by default
       default: "customer",
