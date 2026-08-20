@@ -56,7 +56,7 @@ function LoginPage() {
 
       // Redirect after showing success message
       setTimeout(() => {
-        navigate("/");
+        navigate("/home");
       }, 1000);
 
     } catch (error) {

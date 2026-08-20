@@ -8,7 +8,7 @@ const api = axios.create({
   // api.get("/restaurants")
   // becomes:
   // http://localhost:5324/api/restaurants
-  baseURL: "http://localhost:5324/api",
+  baseURL: "http://localhost:5325/api",
 
   // Tell the backend that we are sending JSON data
   headers: {
