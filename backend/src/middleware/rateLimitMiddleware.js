@@ -9,7 +9,7 @@ const rateLimitMiddleware = rateLimit({
 
   // Maximum number of requests allowed in the time window
   // In this case, each user/IP can make 10 requests per minute
-  max: 10,
+  max: 80,
 
   // Response message sent when the request limit is reached
   message: {

@@ -1,63 +1,235 @@
-// Import mongoose so we can create a schema and model for MongoDB
+// ======================================
+// IMPORTS
+// ======================================
+
+// Import mongoose so we can create
+// schemas and models for MongoDB
 const mongoose = require("mongoose");
 
-// Create the User schema
-// A schema defines the structure/rules for documents in the users collection
+// ======================================
+// USER SCHEMA
+// ======================================
+
 const UserSchema = new mongoose.Schema(
   {
+    // ======================================
+    // NAME
+    // ======================================
+
     name: {
-      // The user's full name must be a string
       type: String,
 
-      // This field is required when registering a user
-      required: true,
+      required: [true, "Name is required"],
 
-      // Removes extra spaces before and after the name
       trim: true,
+
+      minlength: [2, "Name must be at least 2 characters"],
+
+      maxlength: [50, "Name cannot exceed 50 characters"],
+
+      // Allows letters, spaces,
+      // hyphens and apostrophes
+      match: [
+        /^[\p{L}\s'-]+$/u,
+        "Name can only contain letters, spaces, hyphens and apostrophes",
+      ],
     },
+
+    // ======================================
+    // SURNAME
+    // ======================================
+
+    surname: {
+      type: String,
+
+      required: [true, "Surname is required"],
+
+      trim: true,
+
+      minlength: [2, "Surname must be at least 2 characters"],
+
+      maxlength: [50, "Surname cannot exceed 50 characters"],
+
+      match: [
+        /^[\p{L}\s'-]+$/u,
+        "Surname can only contain letters, spaces, hyphens and apostrophes",
+      ],
+    },
+
+    // ======================================
+    // EMAIL
+    // ======================================
 
     email: {
-      // The user's email must be a string
       type: String,
 
-      // Email is required for registration and login
-      required: true,
+      required: [true, "Email address is required"],
 
-      // Makes sure each email can only be used once
       unique: true,
 
-      // Converts the email to lowercase before saving
       lowercase: true,
 
-      // Removes extra spaces before and after the email
       trim: true,
+
+      maxlength: [254, "Email address is too long"],
+
+      match: [
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+        "Please enter a valid email address",
+      ],
     },
 
+    // ======================================
+    // PASSWORD
+    // ======================================
+
     password: {
-      // The password is stored as a hashed string
       type: String,
 
-      // Password is required when creating a user account
+      required: [true, "Password is required"],
+
+      minlength: [8, "Password must be at least 8 characters"],
+    },
+
+    // ======================================
+    // ROLE
+    // ======================================
+
+    role: {
+      type: String,
+
+      enum: {
+        values: ["customer", "restaurant", "driver", "admin"],
+
+        message: "{VALUE} is not a valid user role",
+      },
+
+      default: "customer",
+
       required: true,
     },
 
-    role: {
-      // The role must be a string
+    // ======================================
+    // EMAIL VERIFICATION STATUS
+    // ======================================
+
+    isVerified: {
+      type: Boolean,
+
+      default: false,
+    },
+
+    // ======================================
+    // VERIFICATION CODE
+    // ======================================
+
+    verificationCode: {
       type: String,
 
-      // Only these roles are allowed
-      enum: ["customer", "restaurant", "admin"],
+      default: null,
 
-      // If no role is provided, the user becomes a customer by default
-      default: "customer",
+      validate: {
+        validator: function (value) {
+          // null is allowed when the user
+          // has no active verification code
+          if (value === null) {
+            return true;
+          }
+
+          // Must contain exactly 6 numbers
+          return /^\d{6}$/.test(value);
+        },
+
+        message: "Verification code must contain exactly 6 numbers",
+      },
+    },
+
+    // ======================================
+    // VERIFICATION CODE EXPIRY
+    // ======================================
+
+    verificationCodeExpires: {
+      type: Date,
+
+      default: null,
+    },
+
+    // ======================================
+    // PASSWORD RESET CODE
+    // ======================================
+
+    /*
+      We do not store the actual 6-digit
+      password reset code.
+
+      The controller hashes the code using
+      SHA-256 before saving it.
+
+      SHA-256 produces a 64-character
+      hexadecimal string.
+    */
+
+    passwordResetCode: {
+      type: String,
+
+      default: null,
+
+      maxlength: [64, "Password reset code hash is invalid"],
+    },
+
+    // ======================================
+    // PASSWORD RESET TOKEN
+    // ======================================
+
+    /*
+      The password reset token is also
+      hashed before being stored.
+
+      The real token is only sent to the
+      user's email.
+
+      The database stores only the
+      SHA-256 hash.
+    */
+
+    passwordResetToken: {
+      type: String,
+
+      default: null,
+
+      maxlength: [64, "Password reset token hash is invalid"],
+    },
+
+    // ======================================
+    // PASSWORD RESET EXPIRY
+    // ======================================
+
+    /*
+      Both the reset code and reset token
+      expire at this time.
+
+      Our controller currently gives them
+      a 10-minute lifetime.
+    */
+
+    passwordResetExpires: {
+      type: Date,
+
+      default: null,
     },
   },
+
+  // ======================================
+  // OPTIONS
+  // ======================================
+
   {
-    // Automatically adds createdAt and updatedAt fields
     timestamps: true,
-  }
+  },
 );
 
-// Create and export the User model
-// Mongoose will use this model to interact with the users collection in MongoDB
+// ======================================
+// EXPORT MODEL
+// ======================================
+
 module.exports = mongoose.model("User", UserSchema);

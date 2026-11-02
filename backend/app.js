@@ -1,52 +1,176 @@
-//Declarations
-// Importing your app
-// Cors = sharing of resources from frontend to backend
-// Middleware
-// Routes
+// ======================================
+// IMPORTS
+// ======================================
 
-// Import required libraries and route/middleware files
 const express = require("express");
 const cors = require("cors");
 
-//routes
-const authRoutes = require("./src/routes/authRoutes");
+// ======================================
+// ROUTES
+// ======================================
+
+const routingRoutes = require("./src/routes/routingRoutes.js");
+
+const addressRoutes = require("./src/routes/addressRoutes.js");
+
+const authRoutes = require("./src/routes/authRoutes.js");
+
 const menuItemRoutes = require("./src/routes/menuItemRoutes.js");
-const restaurantRoute = require("./src/routes/restaurantRoutes.js");
-const orderRoutes = require("./src/routes/orderRoutes.js")
-const paymentRoutes = require("./src/routes/paymentRoutes.js")
-const orderitemRoutes = require("./src/routes/orderitemRoutes.js")
 
-const rateLimitMiddleware = require("./src/middleware/rateLimitMiddleware");
+const favouriteRoutes = require("./src/routes/favouriteRoutes.js");
 
-// Create the Express application
+const restaurantRoutes = require("./src/routes/restaurantRoutes.js");
+
+const orderRoutes = require("./src/routes/orderRoutes.js");
+
+const paymentRoutes = require("./src/routes/paymentRoutes.js");
+
+const orderItemRoutes = require("./src/routes/orderItemRoutes.js");
+
+const mapRoutes = require("./src/routes/mapRoutes.js");
+
+const searchRoutes = require("./src/routes/searchRoutes.js");
+
+// ======================================
+// MIDDLEWARE
+// ======================================
+
+const rateLimitMiddleware = require("./src/middleware/rateLimitMiddleware.js");
+
+// ======================================
+// CREATE EXPRESS APPLICATION
+// ======================================
+
 const app = express();
 
-// Allow the frontend to connect to the backend
-app.use(cors({
- origin: process.env.CLIENT_URL || "http://localhost:5173",
-  credentials: true,
-}));
+// ======================================
+// CORS
+// ======================================
 
-// Allow the app to read JSON request bodies
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL || "http://localhost:5173",
+
+    credentials: true,
+  }),
+);
+
+// ======================================
+// JSON MIDDLEWARE
+// ======================================
+
 app.use(express.json());
 
-// Apply rate limiting before routes
+// ======================================
+// RATE LIMITING
+// ======================================
+
 app.use(rateLimitMiddleware);
 
-// Test route to check if the API is running
+// ======================================
+// ROOT TEST ROUTE
+// ======================================
+
 app.get("/", (req, res) => {
-  res.json({
-    message: "Local Bite Platform API is running",
+  return res.status(200).json({
+    message: "Dish Dash Platform API is running",
   });
 });
 
-// Connect authentication API routes
-app.use("/api/auth", authRoutes);
-app.use("/api/menuItems", menuItemRoutes);
-app.use("/api/restaurant", restaurantRoute);
-app.use("/api/order", orderRoutes);
-app.use("/api/payment", paymentRoutes);
-app.use("/api/orderitem", orderitemRoutes);
+// ======================================
+// API TEST ROUTE
+// ======================================
 
-// Export the configured app so server.js can start it
+app.get("/api/test", (req, res) => {
+  return res.status(200).json({
+    message: "Backend connected successfully",
+  });
+});
+
+// ======================================
+// ADDRESSES
+// ======================================
+
+app.use("/api/addresses", addressRoutes);
+
+// ======================================
+// AUTHENTICATION
+// ======================================
+
+app.use("/api/auth", authRoutes);
+
+// ======================================
+// MENU ITEMS
+// ======================================
+
+app.use("/api/menuItems", menuItemRoutes);
+
+// ======================================
+// RESTAURANTS
+// ======================================
+
+app.use("/api/restaurant", restaurantRoutes);
+
+// ======================================
+// ORDERS
+// ======================================
+
+app.use("/api/order", orderRoutes);
+
+// ======================================
+// SEARCH
+// ======================================
+
+// Example:
+// GET /api/search?q=burger
+
+app.use("/api/search", searchRoutes);
+
+// ======================================
+// PAYMENTS
+// ======================================
+
+app.use("/api/payment", paymentRoutes);
+
+// ======================================
+// ORDER ITEMS
+// ======================================
+
+app.use("/api/orderItem", orderItemRoutes);
+
+// ======================================
+// ROUTING / DISTANCE
+// ======================================
+
+app.use("/api/favourite", favouriteRoutes);
+
+// ======================================
+// ROUTING / DISTANCE
+// ======================================
+
+app.use("/api/routes", routingRoutes);
+
+// ======================================
+// MAPS
+// ======================================
+
+app.use("/api/maps", mapRoutes);
+
+// ======================================
+// 404 API ROUTE
+// ======================================
+
+// Any /api route that reaches this point
+// does not exist.
+
+app.use("/api", (req, res) => {
+  return res.status(404).json({
+    message: `API route not found: ${req.method} ${req.originalUrl}`,
+  });
+});
+
+// ======================================
+// EXPORT APP
+// ======================================
+
 module.exports = app;

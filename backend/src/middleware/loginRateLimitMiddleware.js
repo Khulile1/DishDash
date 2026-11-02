@@ -5,7 +5,8 @@ const loginRateLimitMiddleware = rateLimit({
   windowMs: 15 * 60 * 1000,
 
   // Allow only 3 login attempts in 15 minutes
-  max: 3,
+  max: 60,
+  max: 65,
 
   // Only count failed login attempts
   skipSuccessfulRequests: true,
@@ -15,7 +16,8 @@ const loginRateLimitMiddleware = rateLimit({
 
   // Message returned when blocked
   message: {
-    message: "Too many failed login attempts. Please try again after 15 minutes.",
+    message:
+      "Too many failed login attempts. Please try again after 15 minutes.",
   },
 });
 

@@ -1,90 +1,177 @@
-// Import Express
+// ======================================
+// IMPORT EXPRESS
+// ======================================
+
 const express = require("express");
 
-// Import controller functions
-const { register, login } = require("../controllers/authController");
+// ======================================
+// IMPORT CONTROLLERS
+// ======================================
 
-// Import middleware
+const {
+  register,
+  login,
+  verifyEmail,
+  resendVerificationCode,
+  forgotPassword,
+  verifyResetToken,
+  resetPassword,
+} = require("../controllers/authController");
+
+// ======================================
+// IMPORT MIDDLEWARE
+// ======================================
+
 const authMiddleware = require("../middleware/authMiddleware");
+
 const roleMiddleware = require("../middleware/roleMiddleware");
+
 const loginRateLimitMiddleware = require("../middleware/loginRateLimitMiddleware");
 
-// Create router
+// ======================================
+// CREATE ROUTER
+// ======================================
+
 const router = express.Router();
 
-// ==============================
-// PUBLIC ROUTES
-// ==============================
+// ======================================
+// PUBLIC AUTH ROUTES
+// ======================================
 
-// Register
+// ======================================
+// REGISTER
+// ======================================
+
 router.post("/register", register);
 
-// Login
+// ======================================
+// LOGIN
+// ======================================
+
 router.post("/login", loginRateLimitMiddleware, login);
 
-// ==============================
-// PROTECTED ROUTES
-// ==============================
+// ======================================
+// VERIFY EMAIL
+// ======================================
 
-// Test authentication
+router.post("/verify-email", verifyEmail);
+
+// ======================================
+// RESEND VERIFICATION CODE
+// ======================================
+
+router.post("/resend-verification", resendVerificationCode);
+
+// ======================================
+// FORGOT PASSWORD
+// ======================================
+
+router.post("/forgot-password", forgotPassword);
+
+// ======================================
+// VERIFY PASSWORD RESET LINK
+// ======================================
+
+// This runs when the user clicks the link
+// from the reset password email.
+//
+// It checks:
+// - email
+// - reset token
+// - whether the token exists
+// - whether the token has expired
+//
+// It DOES NOT change the password.
+router.post("/verify-reset-token", verifyResetToken);
+
+// ======================================
+// RESET PASSWORD
+// ======================================
+
+// This runs only after the user enters:
+// - 6-digit reset code
+// - new password
+// - confirmation password
+router.post("/reset-password", resetPassword);
+
+// ======================================
+// PROTECTED AUTH ROUTES
+// ======================================
+
+// ======================================
+// CURRENT USER / TEST AUTH
+// ======================================
+
 router.get("/me", authMiddleware, (req, res) => {
-  res.json({
+  return res.status(200).json({
     message: "Auth middleware is working",
+
     user: req.user,
   });
 });
 
-// Admin only
+// ======================================
+// ADMIN ONLY
+// ======================================
+
 router.get(
   "/admin-only",
+
   authMiddleware,
+
   roleMiddleware("admin"),
+
   (req, res) => {
-    res.json({
+    return res.status(200).json({
       message: "Admin access granted",
+
       user: req.user,
     });
   },
 );
 
-// Customer only
+// ======================================
+// CUSTOMER ONLY
+// ======================================
+
 router.get(
   "/customer-only",
+
   authMiddleware,
+
   roleMiddleware("customer"),
+
   (req, res) => {
-    res.json({
+    return res.status(200).json({
       message: "Customer access granted",
+
       user: req.user,
     });
   },
 );
 
-// Driver only
-router.get(
-  "/driver-only",
-  authMiddleware,
-  roleMiddleware("driver"),
-  (req, res) => {
-    res.json({
-      message: "Driver access granted",
-      user: req.user,
-    });
-  },
-);
+// ======================================
+// RESTAURANT ONLY
+// ======================================
 
-// Restaurant only
 router.get(
   "/restaurant-only",
+
   authMiddleware,
+
   roleMiddleware("restaurant"),
+
   (req, res) => {
-    res.json({
+    return res.status(200).json({
       message: "Restaurant access granted",
+
       user: req.user,
     });
   },
 );
 
-// Export router
+// ======================================
+// EXPORT ROUTER
+// ======================================
+
 module.exports = router;
