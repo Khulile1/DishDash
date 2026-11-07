@@ -1,6 +1,4 @@
-// ======================================
 // IMPORTS
-// ======================================
 
 const Address = require("../models/address");
 
@@ -17,9 +15,7 @@ const {
   calculateOrderPricing,
 } = require("../services/pricing/deliveryPricingService");
 
-// ======================================
 // FORMAT SAVED ADDRESS
-// ======================================
 
 const formatSavedAddress = (location) => {
   if (!location) {
@@ -41,9 +37,7 @@ const formatSavedAddress = (location) => {
   return structuredAddress || String(location.formatted_address || "").trim();
 };
 
-// ======================================
 // GET VALID COORDINATES
-// ======================================
 
 const getCoordinates = (location) => {
   if (!location) {
@@ -68,9 +62,8 @@ const getCoordinates = (location) => {
   };
 };
 
-// ======================================
 // GET CUSTOMER ADDRESS
-// ======================================
+
 //
 // If checkout sends an address ID,
 // use that exact saved address.
@@ -80,12 +73,9 @@ const getCoordinates = (location) => {
 // 1. Default address
 // 2. Newest saved address
 //
-// ======================================
 
 const getCustomerAddress = async (userId, addressId = null) => {
-  // ======================================
   // SPECIFIC SELECTED ADDRESS
-  // ======================================
 
   if (addressId) {
     const selectedAddress = await Address.findOne({
@@ -98,18 +88,14 @@ const getCustomerAddress = async (userId, addressId = null) => {
     }
   }
 
-  // ======================================
   // DEFAULT ADDRESS
-  // ======================================
 
   let address = await Address.findOne({
     user_id: userId,
     is_default: true,
   });
 
-  // ======================================
   // FALLBACK
-  // ======================================
 
   if (!address) {
     address = await Address.findOne({
@@ -122,9 +108,7 @@ const getCustomerAddress = async (userId, addressId = null) => {
   return address;
 };
 
-// ======================================
 // ROUND ROUTE VALUE
-// ======================================
 
 const roundRouteValue = (value, decimals = 2) => {
   const number = Number(value);
@@ -136,9 +120,7 @@ const roundRouteValue = (value, decimals = 2) => {
   return Number(number.toFixed(decimals));
 };
 
-// ======================================
 // CREATE ROUTE SEGMENT
-// ======================================
 
 const createRouteSegment = ({ from, to, routeData }) => {
   return {
@@ -162,15 +144,11 @@ const createRouteSegment = ({ from, to, routeData }) => {
   };
 };
 
-// ======================================
 // GET ONE RESTAURANT ROUTE
-// ======================================
 
 const getRestaurantRoute = async (req, res) => {
   try {
-    // ======================================
     // USER
-    // ======================================
 
     const userId = req.user?.id;
 
@@ -180,9 +158,7 @@ const getRestaurantRoute = async (req, res) => {
       });
     }
 
-    // ======================================
     // RESTAURANT
-    // ======================================
 
     const restaurantId = req.params.restaurantId;
 
@@ -192,9 +168,7 @@ const getRestaurantRoute = async (req, res) => {
       });
     }
 
-    // ======================================
     // CUSTOMER ADDRESS
-    // ======================================
 
     const customerAddress = await getCustomerAddress(userId);
 
@@ -205,9 +179,7 @@ const getRestaurantRoute = async (req, res) => {
       });
     }
 
-    // ======================================
     // FIND RESTAURANT
-    // ======================================
 
     const restaurant = await Restaurant.findById(restaurantId);
 
@@ -217,9 +189,7 @@ const getRestaurantRoute = async (req, res) => {
       });
     }
 
-    // ======================================
     // COORDINATES
-    // ======================================
 
     const customerCoordinates = getCoordinates(customerAddress);
 
@@ -237,17 +207,13 @@ const getRestaurantRoute = async (req, res) => {
       });
     }
 
-    // ======================================
     // ADDRESS STRINGS
-    // ======================================
 
     const customerAddressText = formatSavedAddress(customerAddress);
 
     const restaurantAddressText = formatSavedAddress(restaurant);
 
-    // ======================================
     // GEOAPIFY
-    // ======================================
 
     const routeData = await calculateDrivingRoute({
       origin: customerCoordinates,
@@ -255,15 +221,11 @@ const getRestaurantRoute = async (req, res) => {
       destination: restaurantCoordinates,
     });
 
-    // ======================================
     // DELIVERY PRICE PREVIEW
-    // ======================================
 
     const deliveryPrice = calculateDeliveryPrice(routeData.distanceKm);
 
-    // ======================================
     // RESPONSE
-    // ======================================
 
     return res.status(200).json({
       restaurantId: String(restaurant._id),
@@ -303,15 +265,11 @@ const getRestaurantRoute = async (req, res) => {
   }
 };
 
-// ======================================
 // GET ALL RESTAURANT DISTANCES
-// ======================================
 
 const getRestaurantDistances = async (req, res) => {
   try {
-    // ======================================
     // USER
-    // ======================================
 
     const userId = req.user?.id;
 
@@ -321,9 +279,7 @@ const getRestaurantDistances = async (req, res) => {
       });
     }
 
-    // ======================================
     // CUSTOMER ADDRESS
-    // ======================================
 
     const customerAddress = await getCustomerAddress(userId);
 
@@ -341,9 +297,7 @@ const getRestaurantDistances = async (req, res) => {
       });
     }
 
-    // ======================================
     // RESTAURANTS
-    // ======================================
 
     const restaurantDocuments = await Restaurant.find({
       latitude: {
@@ -355,9 +309,7 @@ const getRestaurantDistances = async (req, res) => {
       },
     }).select("_id name latitude longitude");
 
-    // ======================================
     // DESTINATIONS
-    // ======================================
 
     const destinations = restaurantDocuments
       .map((restaurant) => {
@@ -379,9 +331,7 @@ const getRestaurantDistances = async (req, res) => {
       })
       .filter(Boolean);
 
-    // ======================================
     // NOTHING TO CALCULATE
-    // ======================================
 
     if (destinations.length === 0) {
       return res.status(200).json({
@@ -395,9 +345,7 @@ const getRestaurantDistances = async (req, res) => {
       });
     }
 
-    // ======================================
     // GEOAPIFY MATRIX
-    // ======================================
 
     const matrixData = await calculateDrivingMatrix({
       origin,
@@ -405,9 +353,7 @@ const getRestaurantDistances = async (req, res) => {
       destinations,
     });
 
-    // ======================================
     // ADD DELIVERY PRICES
-    // ======================================
 
     const distancesWithDeliveryPrice = matrixData.map((restaurant) => {
       const deliveryPrice = calculateDeliveryPrice(restaurant.distanceKm);
@@ -421,9 +367,7 @@ const getRestaurantDistances = async (req, res) => {
       };
     });
 
-    // ======================================
     // RESPONSE
-    // ======================================
 
     return res.status(200).json({
       addressId: String(customerAddress._id),
@@ -443,9 +387,8 @@ const getRestaurantDistances = async (req, res) => {
   }
 };
 
-// ======================================
 // GET DELIVERY QUOTE
-// ======================================
+
 //
 // SINGLE:
 //
@@ -467,13 +410,10 @@ const getRestaurantDistances = async (req, res) => {
 //
 // and selects the shorter route.
 //
-// ======================================
 
 const getDeliveryQuote = async (req, res) => {
   try {
-    // ======================================
     // USER
-    // ======================================
 
     const userId = req.user?.id;
 
@@ -483,9 +423,7 @@ const getDeliveryQuote = async (req, res) => {
       });
     }
 
-    // ======================================
     // REQUEST
-    // ======================================
 
     const restaurantIdsInput = req.body?.restaurantIds;
 
@@ -493,9 +431,7 @@ const getDeliveryQuote = async (req, res) => {
 
     const selectedAddressId = req.body?.addressId || null;
 
-    // ======================================
     // VALIDATE RESTAURANTS
-    // ======================================
 
     if (!Array.isArray(restaurantIdsInput)) {
       return res.status(400).json({
@@ -523,9 +459,7 @@ const getDeliveryQuote = async (req, res) => {
       });
     }
 
-    // ======================================
     // VALIDATE SUBTOTAL
-    // ======================================
 
     if (!Number.isFinite(subtotal) || subtotal < 0) {
       return res.status(400).json({
@@ -533,9 +467,7 @@ const getDeliveryQuote = async (req, res) => {
       });
     }
 
-    // ======================================
     // SELECTED DELIVERY ADDRESS
-    // ======================================
 
     const customerAddress = await getCustomerAddress(userId, selectedAddressId);
 
@@ -553,9 +485,7 @@ const getDeliveryQuote = async (req, res) => {
       });
     }
 
-    // ======================================
     // LOAD RESTAURANTS
-    // ======================================
 
     const restaurantDocuments = await Restaurant.find({
       _id: {
@@ -578,9 +508,7 @@ const getDeliveryQuote = async (req, res) => {
       ),
     );
 
-    // ======================================
     // COORDINATES
-    // ======================================
 
     const restaurantStops = restaurants.map((restaurant) => ({
       restaurant,
@@ -596,9 +524,7 @@ const getDeliveryQuote = async (req, res) => {
       });
     }
 
-    // ======================================
     // ONE RESTAURANT
-    // ======================================
 
     if (restaurantStops.length === 1) {
       const stop = restaurantStops[0];
@@ -660,17 +586,13 @@ const getDeliveryQuote = async (req, res) => {
       });
     }
 
-    // ======================================
     // TWO RESTAURANTS
-    // ======================================
 
     const restaurantA = restaurantStops[0];
 
     const restaurantB = restaurantStops[1];
 
-    // ======================================
     // CALCULATE ROUTES
-    // ======================================
 
     const [aToB, bToA, aToCustomer, bToCustomer] = await Promise.all([
       // Restaurant A -> Restaurant B
@@ -702,9 +624,7 @@ const getDeliveryQuote = async (req, res) => {
       }),
     ]);
 
-    // ======================================
     // A -> B -> CUSTOMER
-    // ======================================
 
     const routeABDistance =
       Number(aToB.distanceKm) + Number(bToCustomer.distanceKm);
@@ -712,9 +632,7 @@ const getDeliveryQuote = async (req, res) => {
     const routeABDuration =
       Number(aToB.durationMinutes) + Number(bToCustomer.durationMinutes);
 
-    // ======================================
     // B -> A -> CUSTOMER
-    // ======================================
 
     const routeBADistance =
       Number(bToA.distanceKm) + Number(aToCustomer.distanceKm);
@@ -722,9 +640,7 @@ const getDeliveryQuote = async (req, res) => {
     const routeBADuration =
       Number(bToA.durationMinutes) + Number(aToCustomer.durationMinutes);
 
-    // ======================================
     // VALIDATE
-    // ======================================
 
     if (
       !Number.isFinite(routeABDistance) ||
@@ -737,9 +653,7 @@ const getDeliveryQuote = async (req, res) => {
       });
     }
 
-    // ======================================
     // CHOOSE SHORTEST ROUTE
-    // ======================================
 
     const useAB =
       routeABDistance < routeBADistance ||
@@ -752,9 +666,7 @@ const getDeliveryQuote = async (req, res) => {
     let pickupOrder;
     let segments;
 
-    // ======================================
     // A -> B -> CUSTOMER
-    // ======================================
 
     if (useAB) {
       selectedDistanceKm = routeABDistance;
@@ -818,9 +730,7 @@ const getDeliveryQuote = async (req, res) => {
       ];
     }
 
-    // ======================================
     // B -> A -> CUSTOMER
-    // ======================================
     else {
       selectedDistanceKm = routeBADistance;
 
@@ -883,9 +793,7 @@ const getDeliveryQuote = async (req, res) => {
       ];
     }
 
-    // ======================================
     // CALCULATE PRICING
-    // ======================================
 
     const pricing = calculateOrderPricing({
       subtotal,
@@ -893,9 +801,7 @@ const getDeliveryQuote = async (req, res) => {
       distanceKm: selectedDistanceKm,
     });
 
-    // ======================================
     // RESPONSE
-    // ======================================
 
     return res.status(200).json({
       bundle: true,
@@ -923,9 +829,7 @@ const getDeliveryQuote = async (req, res) => {
   }
 };
 
-// ======================================
 // EXPORTS
-// ======================================
 
 module.exports = {
   getRestaurantRoute,
