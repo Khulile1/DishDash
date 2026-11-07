@@ -1,0 +1,28 @@
+/* ====================================== */
+/* GLOBAL STYLES */
+/* ====================================== */
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+
+  background-color: #f6f8fb;
+
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+
+  color: #0f172a;
+}
+/* ====================================== */
+/* HIDE LARGE PAGE HEADERS ON MOBILE      */
+/* ====================================== */
+
+@media (max-width: 600px) {
+  .mobile-page-header {
+    display: none !important;
+  }
+}

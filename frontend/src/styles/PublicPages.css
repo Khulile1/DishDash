@@ -1,0 +1,626 @@
+/* =========================================================
+   DISH DASH — PUBLIC WEBSITE PAGES
+========================================================= */
+
+.public-page-layout {
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  background: whitesmoke;
+}
+
+.public-page {
+  flex: 1;
+
+  width: 100%;
+
+  padding: 38px 0 76px;
+
+  background: whitesmoke;
+}
+
+.public-container {
+  width: min(1180px, calc(100% - 40px));
+
+  margin: 0 auto;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.public-hero {
+  margin-bottom: 52px;
+
+  padding: 38px;
+
+  color: #ffffff;
+
+  background: linear-gradient(135deg, #071a2b, #0d2940);
+
+  border-radius: 22px;
+
+  box-shadow: 0 14px 34px rgba(7, 26, 43, 0.12);
+}
+
+.public-eyebrow {
+  display: inline-block;
+
+  margin-bottom: 10px;
+
+  color: #ff7a2d;
+
+  font-size: 0.72rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.09em;
+
+  text-transform: uppercase;
+}
+
+.public-hero h1 {
+  max-width: 780px;
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: clamp(2.2rem, 5vw, 3.6rem);
+
+  line-height: 1.04;
+
+  letter-spacing: -0.045em;
+}
+
+.public-hero p {
+  max-width: 680px;
+
+  margin: 16px 0 0;
+
+  color: #c6d2dc;
+
+  font-size: 0.95rem;
+
+  line-height: 1.7;
+}
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.public-section {
+  margin-bottom: 55px;
+}
+
+.public-section-heading {
+  max-width: 670px;
+
+  margin-bottom: 26px;
+}
+
+.public-section-heading > span {
+  color: #ff5a00;
+
+  font-size: 0.7rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.09em;
+}
+
+.public-section-heading h2 {
+  margin: 8px 0 0;
+
+  color: #071a2b;
+
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+}
+
+.public-section-heading p {
+  margin: 9px 0 0;
+
+  color: #64748b;
+
+  line-height: 1.7;
+}
+
+/* =========================================================
+   STEPS
+========================================================= */
+
+.public-step-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 18px;
+}
+
+.public-step-card {
+  min-width: 0;
+
+  padding: 22px;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 17px;
+
+  box-shadow: 0 8px 24px rgba(7, 26, 43, 0.045);
+}
+
+.public-step-top {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 25px;
+}
+
+.public-step-number {
+  color: #94a3b8;
+
+  font-size: 0.72rem;
+
+  font-weight: 800;
+}
+
+.public-step-icon {
+  width: 44px;
+  height: 44px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: #ff5a00;
+
+  background: #fff1e8;
+
+  border-radius: 12px;
+}
+
+.public-step-card h3 {
+  margin: 0;
+
+  color: #071a2b;
+}
+
+.public-step-card p {
+  margin: 9px 0 0;
+
+  color: #64748b;
+
+  font-size: 0.84rem;
+
+  line-height: 1.65;
+}
+
+/* =========================================================
+   FEATURE PANEL
+========================================================= */
+
+.public-feature-panel {
+  display: grid;
+
+  grid-template-columns: 1fr auto;
+
+  align-items: center;
+
+  gap: 40px;
+
+  padding: 35px;
+
+  color: #ffffff;
+
+  background: #071a2b;
+
+  border-radius: 20px;
+}
+
+.public-feature-panel h2 {
+  max-width: 600px;
+
+  margin: 0;
+
+  font-size: 2rem;
+}
+
+.public-eyebrow--light {
+  color: #ff8a43;
+}
+
+.public-check-list {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 12px 24px;
+
+  margin-top: 24px;
+}
+
+.public-check-list > div {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color: #d3dde6;
+}
+
+.public-check-list svg {
+  flex-shrink: 0;
+
+  color: #ff6b14;
+}
+
+.public-feature-icon-large {
+  width: 150px;
+  height: 150px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: #ff6b14;
+
+  background: rgba(255, 255, 255, 0.07);
+
+  border-radius: 30px;
+}
+
+/* =========================================================
+   RESTAURANTS TOOLBAR
+========================================================= */
+
+.public-restaurant-toolbar {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 25px;
+
+  margin-bottom: 24px;
+}
+
+.public-restaurant-toolbar h2 {
+  margin: 0;
+
+  color: #071a2b;
+}
+
+.public-restaurant-toolbar p {
+  margin: 5px 0 0;
+
+  color: #64748b;
+}
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+.public-search {
+  width: min(350px, 100%);
+
+  min-height: 46px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 0 14px;
+
+  color: #64748b;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 12px;
+}
+
+.public-search input {
+  width: 100%;
+
+  border: 0;
+
+  outline: 0;
+
+  background: transparent;
+}
+
+/* =========================================================
+   RESTAURANT GRID
+========================================================= */
+
+.public-restaurant-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 20px;
+}
+
+.public-restaurant-card {
+  min-width: 0;
+
+  overflow: hidden;
+
+  display: flex;
+
+  flex-direction: column;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 18px;
+
+  box-shadow: 0 10px 26px rgba(7, 26, 43, 0.05);
+}
+
+.public-restaurant-image {
+  height: 190px;
+
+  overflow: hidden;
+
+  background: #eeeeee;
+}
+
+.public-restaurant-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+.public-restaurant-placeholder {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: #ff5a00;
+
+  background: #fff1e8;
+}
+
+.public-restaurant-content {
+  flex: 1;
+
+  display: flex;
+
+  flex-direction: column;
+
+  padding: 18px;
+}
+
+.public-restaurant-label {
+  color: #ff5a00;
+
+  font-size: 0.68rem;
+
+  font-weight: 800;
+
+  text-transform: uppercase;
+}
+
+.public-restaurant-content h3 {
+  margin: 6px 0 0;
+
+  color: #071a2b;
+}
+
+.public-restaurant-description {
+  margin: 10px 0;
+
+  color: #64748b;
+
+  font-size: 0.82rem;
+
+  line-height: 1.55;
+}
+
+.public-restaurant-address {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 7px;
+
+  margin: 7px 0 16px;
+
+  color: #64748b;
+
+  font-size: 0.78rem;
+
+  line-height: 1.5;
+}
+
+.public-restaurant-address svg {
+  flex-shrink: 0;
+
+  color: #ff5a00;
+}
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.public-restaurant-button,
+.public-primary-button {
+  min-height: 42px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-top: auto;
+
+  padding: 9px 14px;
+
+  color: #ffffff;
+
+  background: #ff5a00;
+
+  border: 1px solid #ff5a00;
+
+  border-radius: 10px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.public-restaurant-button:hover,
+.public-primary-button:hover {
+  background: #e34f00;
+
+  border-color: #e34f00;
+}
+
+/* =========================================================
+   STATES
+========================================================= */
+
+.public-state {
+  min-height: 280px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+
+  text-align: center;
+
+  background: #ffffff;
+
+  border: 1px solid #e5e7eb;
+
+  border-radius: 18px;
+}
+
+.public-state h3 {
+  margin: 13px 0 0;
+
+  color: #071a2b;
+}
+
+.public-state p {
+  max-width: 450px;
+
+  color: #64748b;
+}
+
+.public-state-icon {
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: #ff5a00;
+
+  background: #fff1e8;
+
+  border-radius: 15px;
+}
+
+.public-loader {
+  width: 40px;
+  height: 40px;
+
+  border: 4px solid #eeeeee;
+
+  border-top-color: #ff5a00;
+
+  border-radius: 50%;
+
+  animation: public-loader-spin 0.8s linear infinite;
+}
+
+@keyframes public-loader-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 950px) {
+  .public-step-grid,
+  .public-restaurant-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 650px) {
+  .public-page {
+    padding-top: 22px;
+  }
+
+  .public-container {
+    width: calc(100% - 24px);
+  }
+
+  .public-hero {
+    padding: 25px 20px;
+
+    border-radius: 18px;
+  }
+
+  .public-step-grid,
+  .public-restaurant-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .public-restaurant-toolbar {
+    align-items: stretch;
+
+    flex-direction: column;
+  }
+
+  .public-search {
+    width: 100%;
+  }
+
+  .public-feature-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .public-feature-icon-large {
+    display: none;
+  }
+
+  .public-check-list {
+    grid-template-columns: 1fr;
+  }
+}

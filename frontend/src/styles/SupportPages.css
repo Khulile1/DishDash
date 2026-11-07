@@ -1,0 +1,1303 @@
+/* =========================================================
+   DISH DASH — SUPPORT PAGES
+========================================================= */
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+.support-page-layout {
+  --support-navy: #071a2b;
+  --support-navy-light: #0d2940;
+
+  --support-orange: #f97316;
+  --support-orange-dark: #ea580c;
+  --support-orange-light: #fff4ec;
+
+  --support-background: #f6f7f9;
+  --support-surface: #ffffff;
+
+  --support-text: #172033;
+  --support-muted: #64748b;
+  --support-border: #e2e8f0;
+
+  --support-green: #047857;
+  --support-green-bg: #ecfdf5;
+
+  --support-red: #991b1b;
+  --support-red-bg: #fff1f1;
+
+  --support-shadow: 0 10px 30px rgba(7, 26, 43, 0.055);
+
+  --support-shadow-hover: 0 18px 40px rgba(7, 26, 43, 0.09);
+
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  background: var(--support-background);
+}
+
+/* =========================================================
+   RESET
+========================================================= */
+
+.support-page-layout *,
+.support-page-layout *::before,
+.support-page-layout *::after {
+  box-sizing: border-box;
+}
+
+.support-page-layout button,
+.support-page-layout input,
+.support-page-layout textarea,
+.support-page-layout select {
+  font: inherit;
+}
+
+.support-page-layout a {
+  text-decoration: none;
+}
+
+/* =========================================================
+   MAIN PAGE
+========================================================= */
+
+.support-page {
+  width: 100%;
+
+  flex: 1;
+
+  padding: 36px 0 72px;
+
+  background: var(--support-background);
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.support-container {
+  width: min(1180px, calc(100% - 40px));
+
+  margin: 0 auto;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.support-hero {
+  width: 100%;
+
+  margin-bottom: 34px;
+
+  padding: 36px 38px;
+
+  color: #ffffff;
+
+  background: linear-gradient(
+    135deg,
+    var(--support-navy) 0%,
+    var(--support-navy-light) 100%
+  );
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 22px;
+
+  box-shadow: 0 14px 34px rgba(7, 26, 43, 0.13);
+}
+
+.support-hero--compact {
+  padding: 28px 30px;
+}
+
+/* =========================================================
+   HERO EYEBROW
+========================================================= */
+
+.support-eyebrow {
+  width: fit-content;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin-bottom: 12px;
+
+  padding: 6px 11px;
+
+  color: #fb923c;
+
+  background: rgba(249, 115, 22, 0.13);
+
+  border: 1px solid rgba(249, 115, 22, 0.22);
+
+  border-radius: 999px;
+
+  font-size: 0.71rem;
+  font-weight: 800;
+
+  letter-spacing: 0.07em;
+
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   HERO TEXT
+========================================================= */
+
+.support-hero h1 {
+  max-width: 780px;
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: clamp(2.25rem, 4.5vw, 3.6rem);
+
+  font-weight: 850;
+
+  line-height: 1.02;
+
+  letter-spacing: -0.045em;
+}
+
+.support-hero p {
+  max-width: 700px;
+
+  margin: 15px 0 0;
+
+  color: #c6d2dc;
+
+  font-size: 15px;
+
+  line-height: 1.7;
+}
+
+/* =========================================================
+   HERO ACTIONS
+========================================================= */
+
+.support-hero-actions {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  margin-top: 22px;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.support-primary-button,
+.support-secondary-button {
+  min-height: 46px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 0 18px;
+
+  border-radius: 12px;
+
+  font-size: 14px;
+  font-weight: 750;
+
+  cursor: pointer;
+
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+/* =========================================================
+   PRIMARY BUTTON
+========================================================= */
+
+.support-primary-button {
+  color: #ffffff;
+
+  background: var(--support-orange);
+
+  border: 1px solid var(--support-orange);
+
+  box-shadow: 0 8px 20px rgba(249, 115, 22, 0.2);
+}
+
+.support-primary-button:hover:not(:disabled) {
+  background: var(--support-orange-dark);
+
+  border-color: var(--support-orange-dark);
+
+  transform: translateY(-1px);
+
+  box-shadow: 0 11px 24px rgba(249, 115, 22, 0.26);
+}
+
+/* =========================================================
+   SECONDARY BUTTON
+========================================================= */
+
+.support-secondary-button {
+  color: var(--support-navy);
+
+  background: #ffffff;
+
+  border: 1px solid var(--support-border);
+}
+
+.support-secondary-button:hover {
+  background: #f8fafc;
+
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   GENERAL GRIDS
+========================================================= */
+
+.support-grid {
+  display: grid;
+
+  gap: 18px;
+
+  margin-bottom: 26px;
+}
+
+.support-grid--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.support-grid--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+/* =========================================================
+   SHARED CARDS
+========================================================= */
+
+.support-info-card,
+.support-feature-card,
+.support-resource-card,
+.support-side-card,
+.support-contact-card,
+.support-value-card,
+.support-cta-card,
+.support-faq-card {
+  background: #ffffff;
+
+  border: 1px solid var(--support-border);
+
+  border-radius: 18px;
+
+  box-shadow: var(--support-shadow);
+}
+
+.support-info-card,
+.support-value-card {
+  padding: 22px;
+}
+
+.support-feature-card,
+.support-resource-card {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 14px;
+
+  padding: 20px;
+}
+
+.support-contact-card,
+.support-side-card {
+  padding: 26px;
+}
+
+/* =========================================================
+   CARD TEXT
+========================================================= */
+
+.support-info-card h3,
+.support-feature-card h3,
+.support-resource-card h3,
+.support-value-card h3 {
+  margin: 0 0 8px;
+
+  color: var(--support-navy);
+
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.support-info-card p,
+.support-feature-card p,
+.support-resource-card p,
+.support-value-card p {
+  margin: 0;
+
+  color: var(--support-muted);
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+/* =========================================================
+   CARD ICON
+========================================================= */
+
+.support-info-icon,
+.support-feature-icon,
+.support-resource-icon {
+  width: 46px;
+  height: 46px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: var(--support-orange);
+
+  background: rgba(249, 115, 22, 0.1);
+
+  border-radius: 13px;
+}
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.support-section {
+  margin-bottom: 28px;
+}
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.support-section-heading {
+  margin-bottom: 20px;
+}
+
+.support-section-heading h2 {
+  margin: 0;
+
+  color: var(--support-navy);
+
+  font-size: clamp(1.7rem, 3vw, 2.2rem);
+
+  font-weight: 820;
+
+  line-height: 1.15;
+
+  letter-spacing: -0.03em;
+}
+
+.support-section-heading p {
+  max-width: 650px;
+
+  margin: 8px 0 0;
+
+  color: var(--support-muted);
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+/* =========================================================
+   VALUES
+========================================================= */
+
+.support-values {
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 18px;
+}
+
+/* =========================================================
+   LEGACY CONTACT LAYOUT
+========================================================= */
+
+.support-contact-layout {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.4fr)
+    minmax(300px, 0.6fr);
+
+  gap: 20px;
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.support-form {
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+/* =========================================================
+   FORM ROW
+========================================================= */
+
+.support-form-row {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 18px;
+}
+
+/* =========================================================
+   FORM GROUP
+========================================================= */
+
+.support-form-group {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.support-form-group label {
+  color: #334155;
+
+  font-size: 13px;
+
+  font-weight: 750;
+}
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+.support-form-group input,
+.support-form-group textarea,
+.support-form-group select {
+  width: 100%;
+
+  color: var(--support-navy);
+
+  background: #ffffff;
+
+  border: 1px solid #dce3e9;
+
+  border-radius: 11px;
+
+  outline: none;
+
+  font-size: 14px;
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.support-form-group input,
+.support-form-group select {
+  min-height: 49px;
+
+  padding: 0 14px;
+}
+
+.support-form-group textarea {
+  min-height: 130px;
+
+  padding: 13px 14px;
+
+  resize: vertical;
+
+  line-height: 1.55;
+}
+
+.support-form-group input::placeholder,
+.support-form-group textarea::placeholder {
+  color: #94a3b8;
+}
+
+/* =========================================================
+   INPUT FOCUS
+========================================================= */
+
+.support-form-group input:focus,
+.support-form-group textarea:focus,
+.support-form-group select:focus {
+  border-color: var(--support-orange);
+
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+}
+
+/* =========================================================
+   LIST
+========================================================= */
+
+.support-list-card {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+.support-list-row {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  padding: 14px 0;
+
+  color: var(--support-muted);
+
+  border-bottom: 1px solid #edf2f7;
+
+  font-size: 14px;
+}
+
+.support-list-row:last-child {
+  border-bottom: 0;
+}
+
+.support-list-row strong {
+  color: var(--support-navy);
+}
+
+/* =========================================================
+   NOTE BOX
+========================================================= */
+
+.support-note-box {
+  margin-top: 18px;
+
+  padding: 16px;
+
+  color: #7c2d12;
+
+  background: rgba(249, 115, 22, 0.08);
+
+  border: 1px solid rgba(249, 115, 22, 0.14);
+
+  border-radius: 14px;
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+/* =========================================================
+   SUCCESS MESSAGE
+========================================================= */
+
+.support-success-message {
+  margin-bottom: 18px;
+
+  padding: 14px 16px;
+
+  color: var(--support-green);
+
+  background: var(--support-green-bg);
+
+  border: 1px solid #a7f3d0;
+
+  border-radius: 12px;
+
+  font-size: 14px;
+
+  line-height: 1.55;
+}
+
+/* =========================================================
+   FAQ
+========================================================= */
+
+.support-faq-section {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 14px;
+}
+
+.support-faq-card {
+  overflow: hidden;
+}
+
+.support-faq-card--open {
+  border-color: rgba(249, 115, 22, 0.18);
+}
+
+.support-faq-button {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  padding: 20px 22px;
+
+  color: var(--support-navy);
+
+  background: transparent;
+
+  border: 0;
+
+  font-size: 16px;
+
+  font-weight: 750;
+
+  text-align: left;
+
+  cursor: pointer;
+}
+
+.support-faq-answer {
+  padding: 0 22px 20px;
+
+  color: var(--support-muted);
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.support-cta-card {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 18px;
+
+  margin-top: 8px;
+
+  padding: 24px;
+}
+
+.support-cta-card h2 {
+  margin: 0;
+
+  color: var(--support-navy);
+
+  font-size: 24px;
+
+  font-weight: 800;
+}
+
+.support-cta-card p {
+  margin: 6px 0 0;
+
+  color: var(--support-muted);
+
+  font-size: 14px;
+
+  line-height: 1.7;
+}
+
+/* =========================================================
+   PARTNER PAGE
+========================================================= */
+
+/* =========================================================
+   PARTNER HERO
+========================================================= */
+
+.partner-hero {
+  width: 100%;
+
+  max-width: none;
+
+  margin-bottom: 48px;
+}
+
+.partner-hero h1 {
+  max-width: 760px;
+}
+
+.partner-hero p {
+  max-width: 660px;
+}
+
+/* =========================================================
+   PARTNER SECTION LABEL
+========================================================= */
+
+.partner-section-label {
+  display: inline-block;
+
+  margin-bottom: 9px;
+
+  color: var(--support-orange);
+
+  font-size: 0.71rem;
+  font-weight: 850;
+
+  letter-spacing: 0.1em;
+
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   PARTNER PROCESS
+========================================================= */
+
+.partner-process {
+  width: 100%;
+
+  margin-bottom: 56px;
+}
+
+.partner-process-heading {
+  max-width: 700px;
+
+  margin-bottom: 26px;
+}
+
+/* =========================================================
+   PARTNER STEPS
+========================================================= */
+
+.partner-steps {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 16px;
+}
+
+/* =========================================================
+   PARTNER STEP
+========================================================= */
+
+.partner-step {
+  min-width: 0;
+
+  min-height: 220px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  padding: 21px;
+
+  background: #ffffff;
+
+  border: 1px solid var(--support-border);
+
+  border-radius: 16px;
+
+  box-shadow: 0 8px 24px rgba(7, 26, 43, 0.045);
+
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.partner-step:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(249, 115, 22, 0.22);
+
+  box-shadow: var(--support-shadow-hover);
+}
+
+/* =========================================================
+   STEP HEADER
+========================================================= */
+
+.partner-step-top {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-bottom: 30px;
+}
+
+.partner-step-number {
+  color: #94a3b8;
+
+  font-size: 0.72rem;
+
+  font-weight: 850;
+
+  letter-spacing: 0.12em;
+}
+
+.partner-step-icon {
+  width: 44px;
+  height: 44px;
+
+  flex-shrink: 0;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: var(--support-orange);
+
+  background: var(--support-orange-light);
+
+  border: 1px solid rgba(249, 115, 22, 0.12);
+
+  border-radius: 12px;
+}
+
+/* =========================================================
+   STEP TEXT
+========================================================= */
+
+.partner-step h3 {
+  margin: 0;
+
+  color: var(--support-navy);
+
+  font-size: 1rem;
+
+  font-weight: 800;
+}
+
+.partner-step p {
+  margin: 9px 0 0;
+
+  color: var(--support-muted);
+
+  font-size: 0.8rem;
+
+  line-height: 1.65;
+}
+
+/* =========================================================
+   APPLICATION SECTION
+========================================================= */
+
+.partner-application-section {
+  width: 100%;
+
+  margin-bottom: 16px;
+}
+
+/* =========================================================
+   APPLICATION CARD
+========================================================= */
+
+.partner-application-card {
+  width: min(900px, 100%);
+
+  margin: 0 auto;
+
+  padding: 32px;
+
+  background: #ffffff;
+
+  border: 1px solid var(--support-border);
+
+  border-radius: 20px;
+
+  box-shadow: 0 12px 34px rgba(7, 26, 43, 0.06);
+}
+
+/* =========================================================
+   FORM HEADING
+========================================================= */
+
+.partner-form-heading {
+  max-width: 650px;
+
+  margin-bottom: 28px;
+}
+
+/* =========================================================
+   PARTNER FORM
+========================================================= */
+
+.partner-form {
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 18px;
+}
+
+/* =========================================================
+   PARTNER SUCCESS
+========================================================= */
+
+.partner-success-message {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 10px;
+
+  margin-bottom: 22px;
+}
+
+.partner-success-message svg {
+  flex-shrink: 0;
+
+  margin-top: 1px;
+}
+
+/* =========================================================
+   PARTNER ERROR
+========================================================= */
+
+.partner-form-error {
+  margin-bottom: 22px;
+
+  padding: 12px 14px;
+
+  color: var(--support-red);
+
+  background: var(--support-red-bg);
+
+  border: 1px solid rgba(198, 40, 40, 0.16);
+
+  border-radius: 11px;
+
+  font-size: 0.8rem;
+
+  font-weight: 650;
+
+  line-height: 1.5;
+}
+
+/* =========================================================
+   FORM FOOTER
+========================================================= */
+
+.partner-form-footer {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  margin-top: 7px;
+
+  padding-top: 21px;
+
+  border-top: 1px solid var(--support-border);
+}
+
+.partner-form-footer p {
+  max-width: 500px;
+
+  margin: 0;
+
+  color: var(--support-muted);
+
+  font-size: 0.72rem;
+
+  line-height: 1.55;
+}
+
+/* =========================================================
+   PARTNER SUBMIT
+========================================================= */
+
+.partner-submit-button {
+  min-width: 190px;
+
+  flex-shrink: 0;
+}
+
+.partner-submit-button:disabled {
+  opacity: 0.68;
+
+  cursor: wait;
+
+  transform: none;
+}
+
+/* =========================================================
+   SUBMIT LOADER
+========================================================= */
+
+.partner-submit-loader {
+  width: 15px;
+  height: 15px;
+
+  flex-shrink: 0;
+
+  border: 2px solid rgba(255, 255, 255, 0.4);
+
+  border-top-color: #ffffff;
+
+  border-radius: 50%;
+
+  animation: partner-submit-spin 0.7s linear infinite;
+}
+
+@keyframes partner-submit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   GOOGLE FORM IFRAME
+========================================================= */
+
+.partner-google-form-frame {
+  position: absolute;
+
+  left: -9999px;
+
+  width: 1px;
+  height: 1px;
+
+  opacity: 0;
+
+  border: 0;
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+.support-page-layout a:focus-visible,
+.support-page-layout button:focus-visible,
+.support-page-layout input:focus-visible,
+.support-page-layout textarea:focus-visible,
+.support-page-layout select:focus-visible {
+  outline: 3px solid rgba(249, 115, 22, 0.22);
+
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   DESKTOP / SMALL LAPTOP
+========================================================= */
+
+@media (max-width: 1024px) {
+  .support-grid--three,
+  .support-grid--two,
+  .support-values,
+  .support-contact-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .partner-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .partner-step {
+    min-height: 200px;
+  }
+
+  .support-cta-card {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 700px) {
+  .support-page {
+    padding: 24px 0 52px;
+  }
+
+  .support-container {
+    width: calc(100% - 24px);
+  }
+
+  .support-hero {
+    padding: 27px 22px;
+
+    border-radius: 18px;
+  }
+
+  .support-hero h1 {
+    font-size: clamp(2rem, 9vw, 2.8rem);
+  }
+
+  .support-section-heading h2 {
+    font-size: 1.65rem;
+  }
+
+  .support-form-row {
+    grid-template-columns: 1fr;
+
+    gap: 16px;
+  }
+
+  .support-info-card,
+  .support-value-card,
+  .support-contact-card,
+  .support-side-card {
+    padding: 20px;
+  }
+
+  .support-faq-button,
+  .support-faq-answer {
+    padding-left: 18px;
+
+    padding-right: 18px;
+  }
+
+  .partner-hero {
+    margin-bottom: 40px;
+  }
+
+  .partner-process {
+    margin-bottom: 46px;
+  }
+
+  .partner-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .partner-step {
+    min-height: 0;
+  }
+
+  .partner-step-top {
+    margin-bottom: 20px;
+  }
+
+  .partner-application-card {
+    padding: 24px 20px;
+
+    border-radius: 17px;
+  }
+
+  .partner-form-footer {
+    align-items: stretch;
+
+    flex-direction: column;
+
+    gap: 17px;
+  }
+
+  .partner-submit-button {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+  .support-container {
+    width: calc(100% - 20px);
+  }
+
+  .support-hero {
+    padding: 24px 18px;
+  }
+
+  .support-hero h1 {
+    font-size: 2rem;
+  }
+
+  .support-hero p {
+    font-size: 14px;
+  }
+
+  .support-primary-button,
+  .support-secondary-button {
+    width: 100%;
+  }
+
+  .support-hero-actions {
+    flex-direction: column;
+  }
+
+  .partner-application-card {
+    padding: 21px 16px;
+  }
+
+  .partner-step {
+    padding: 19px;
+  }
+
+  .support-form-group input,
+  .support-form-group select {
+    min-height: 48px;
+  }
+
+  .support-form-group textarea {
+    min-height: 120px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .support-page-layout *,
+  .support-page-layout *::before,
+  .support-page-layout *::after {
+    animation: none !important;
+
+    transition: none !important;
+
+    scroll-behavior: auto !important;
+  }
+}

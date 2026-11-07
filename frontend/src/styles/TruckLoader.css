@@ -1,0 +1,491 @@
+/* =========================================================
+   DISH DASH GLOBAL TRUCK LOADER
+   RESPONSIVE SIZE
+   LARGE ON DESKTOP
+   MEDIUM ON TABLET
+   SMALL ON MOBILE
+   DARK + TRANSPARENT
+   NO ORANGE
+   NO BORDER AROUND TRUCK
+   ========================================================= */
+
+/* ====================================== */
+/* OVERLAY */
+/* ====================================== */
+
+.truck-loader-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 99999;
+
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 24px;
+
+  background: rgba(0, 0, 0, 0.68);
+
+  backdrop-filter: blur(2px);
+
+  -webkit-backdrop-filter: blur(2px);
+
+  cursor: wait;
+
+  animation: truck-loader-overlay-in 150ms ease;
+}
+
+/* ====================================== */
+/* LOADER */
+/* ====================================== */
+
+.truck-loader {
+  position: relative;
+
+  /*
+    Desktop:
+    up to 480px wide.
+
+    As the screen shrinks,
+    the loader also shrinks.
+  */
+
+  width: min(480px, calc(100vw - 80px));
+
+  padding: 26px 10px;
+}
+
+/* ====================================== */
+/* ROAD */
+/* ====================================== */
+
+.truck-loader-road {
+  position: relative;
+
+  width: 100%;
+
+  height: 76px;
+
+  display: flex;
+
+  align-items: center;
+}
+
+/* ====================================== */
+/* ROAD BASE */
+/* ====================================== */
+
+.truck-loader-road-line {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  top: 50%;
+
+  height: 3px;
+
+  transform: translateY(-50%);
+
+  overflow: hidden;
+
+  background: rgba(255, 255, 255, 0.22);
+
+  border-radius: 999px;
+}
+
+/* ====================================== */
+/* MOVING ROAD DASHES */
+/* ====================================== */
+
+.truck-loader-road-line::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0,
+    transparent 22px,
+    rgba(255, 255, 255, 0.7) 22px,
+    rgba(255, 255, 255, 0.7) 34px
+  );
+
+  animation: truck-loader-road-move 650ms linear infinite;
+}
+
+/* ====================================== */
+/* TRUCK */
+/* ====================================== */
+
+.truck-loader-truck {
+  position: absolute;
+
+  top: 50%;
+
+  left: 4%;
+
+  z-index: 3;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  transform: translate(-50%, -50%);
+
+  transition: left 100ms linear;
+
+  will-change: left;
+}
+
+/* ====================================== */
+/* TRUCK ICON */
+/* ====================================== */
+
+.truck-loader-truck-icon {
+  width: 62px;
+  height: 62px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  color: #ffffff;
+
+  background: transparent;
+
+  border: none;
+
+  border-radius: 0;
+
+  box-shadow: none;
+
+  animation: truck-loader-drive 380ms ease-in-out infinite alternate;
+}
+
+/* ====================================== */
+/* TRUCK SVG */
+/* ====================================== */
+
+.truck-loader-truck-icon svg {
+  width: 48px;
+  height: 48px;
+
+  color: #ffffff;
+
+  stroke-width: 2.1;
+
+  filter: drop-shadow(0 5px 6px rgba(0, 0, 0, 0.55));
+}
+
+/* ====================================== */
+/* TRUCK SHADOW */
+/* ====================================== */
+
+.truck-loader-shadow {
+  width: 46px;
+
+  height: 5px;
+
+  margin-top: 2px;
+
+  background: rgba(0, 0, 0, 0.4);
+
+  border-radius: 50%;
+
+  filter: blur(3px);
+
+  animation: truck-loader-shadow 380ms ease-in-out infinite alternate;
+}
+
+/* ====================================== */
+/* OVERLAY FADE */
+/* ====================================== */
+
+@keyframes truck-loader-overlay-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* ====================================== */
+/* ROAD MOVEMENT */
+/* ====================================== */
+
+@keyframes truck-loader-road-move {
+  from {
+    transform: translateX(-34px);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* ====================================== */
+/* TRUCK MOVEMENT */
+/* ====================================== */
+
+@keyframes truck-loader-drive {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-3px);
+  }
+}
+
+/* ====================================== */
+/* TRUCK SHADOW MOVEMENT */
+/* ====================================== */
+
+@keyframes truck-loader-shadow {
+  from {
+    transform: scaleX(1);
+
+    opacity: 0.38;
+  }
+
+  to {
+    transform: scaleX(0.84);
+
+    opacity: 0.2;
+  }
+}
+
+/* ========================================================= */
+/* MEDIUM DESKTOP */
+/* ========================================================= */
+
+@media (max-width: 1200px) {
+  .truck-loader {
+    width: min(420px, calc(100vw - 70px));
+
+    padding: 22px 9px;
+  }
+
+  .truck-loader-road {
+    height: 68px;
+  }
+
+  .truck-loader-truck-icon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .truck-loader-truck-icon svg {
+    width: 43px;
+    height: 43px;
+  }
+
+  .truck-loader-shadow {
+    width: 41px;
+    height: 5px;
+  }
+}
+
+/* ========================================================= */
+/* TABLET */
+/* ========================================================= */
+
+@media (max-width: 900px) {
+  .truck-loader-overlay {
+    padding: 18px;
+  }
+
+  .truck-loader {
+    width: min(340px, calc(100vw - 50px));
+
+    padding: 18px 7px;
+  }
+
+  .truck-loader-road {
+    height: 58px;
+  }
+
+  .truck-loader-road-line {
+    height: 2px;
+  }
+
+  .truck-loader-road-line::after {
+    background: repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 18px,
+      rgba(255, 255, 255, 0.7) 18px,
+      rgba(255, 255, 255, 0.7) 28px
+    );
+  }
+
+  .truck-loader-truck-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .truck-loader-truck-icon svg {
+    width: 37px;
+    height: 37px;
+  }
+
+  .truck-loader-shadow {
+    width: 36px;
+    height: 4px;
+  }
+}
+
+/* ========================================================= */
+/* MOBILE */
+/* ========================================================= */
+
+@media (max-width: 600px) {
+  .truck-loader-overlay {
+    padding: 12px;
+
+    background: rgba(0, 0, 0, 0.7);
+
+    backdrop-filter: blur(1.5px);
+
+    -webkit-backdrop-filter: blur(1.5px);
+  }
+
+  .truck-loader {
+    width: min(245px, calc(100vw - 34px));
+
+    padding: 12px 4px;
+
+    margin: 0 auto;
+  }
+
+  .truck-loader-road {
+    height: 44px;
+  }
+
+  .truck-loader-road-line {
+    height: 1.5px;
+  }
+
+  .truck-loader-road-line::after {
+    background: repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 14px,
+      rgba(255, 255, 255, 0.68) 14px,
+      rgba(255, 255, 255, 0.68) 22px
+    );
+  }
+
+  .truck-loader-truck-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .truck-loader-truck-icon svg {
+    width: 27px;
+    height: 27px;
+  }
+
+  .truck-loader-shadow {
+    width: 27px;
+
+    height: 3px;
+
+    margin-top: 1px;
+  }
+}
+
+/* ========================================================= */
+/* SMALL MOBILE */
+/* ========================================================= */
+
+@media (max-width: 430px) {
+  .truck-loader {
+    width: min(215px, calc(100vw - 30px));
+
+    padding: 9px 3px;
+  }
+
+  .truck-loader-road {
+    height: 38px;
+  }
+
+  .truck-loader-truck-icon {
+    width: 31px;
+    height: 31px;
+  }
+
+  .truck-loader-truck-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .truck-loader-shadow {
+    width: 24px;
+
+    height: 3px;
+  }
+}
+
+/* ========================================================= */
+/* VERY SMALL MOBILE */
+/* ========================================================= */
+
+@media (max-width: 360px) {
+  .truck-loader {
+    width: min(185px, calc(100vw - 24px));
+  }
+
+  .truck-loader-road {
+    height: 34px;
+  }
+
+  .truck-loader-truck-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .truck-loader-truck-icon svg {
+    width: 21px;
+    height: 21px;
+  }
+
+  .truck-loader-shadow {
+    width: 21px;
+
+    height: 2.5px;
+  }
+}
+
+/* ========================================================= */
+/* REDUCED MOTION */
+/* ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .truck-loader-overlay,
+  .truck-loader-road-line::after,
+  .truck-loader-truck-icon,
+  .truck-loader-shadow {
+    animation: none !important;
+  }
+
+  .truck-loader-truck {
+    transition: left 100ms linear;
+  }
+}

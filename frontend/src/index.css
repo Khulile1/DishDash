@@ -1,10 +1,33 @@
+/* ====================================== */
+/* GLOBAL STYLES                          */
+/* ====================================== */
+
 * {
   box-sizing: border-box;
 }
 
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
 body {
   margin: 0;
+
   font-family: Arial, sans-serif;
+
   background: black;
+
   color: #222;
+}
+
+/* ====================================== */
+/* MOBILE - HIDE LARGE PAGE HEADERS       */
+/* ====================================== */
+
+@media (max-width: 600px) {
+  .mobile-page-header {
+    display: none !important;
+  }
 }

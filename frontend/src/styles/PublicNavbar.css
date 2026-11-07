@@ -1,0 +1,414 @@
+/* =========================================================
+   DISH DASH — PUBLIC NAVBAR
+========================================================= */
+
+.public-navbar {
+  --public-orange: #ff6b14;
+  --public-orange-dark: #e85b08;
+
+  --public-navy: #071a2b;
+  --public-navy-light: #0d2940;
+
+  --public-text: #dce5ec;
+  --public-muted: #aab9c6;
+
+  --public-border: rgba(255, 255, 255, 0.12);
+
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 5000;
+  background: var(--public-navy);
+  border-bottom: 1px solid var(--public-border);
+}
+
+/* =========================================================
+   LANDING PAGE OVERLAY
+========================================================= */
+
+.public-navbar--overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+
+  /* Extend the gradient behind the slightly lowered navigation. */
+  padding-bottom: 18px;
+  background: linear-gradient(
+    180deg,
+    rgba(7, 26, 43, 0.78) 0%,
+    rgba(7, 26, 43, 0.36) 65%,
+    transparent 100%
+  );
+  border-bottom: none;
+}
+
+/* Keep the overlay navigation comfortably inside the hero edges. */
+.public-navbar--overlay .public-navbar-shell {
+  width: min(1400px, calc(100% - 100px));
+  transform: translateY(10px);
+}
+
+/* =========================================================
+   RESET
+========================================================= */
+
+.public-navbar,
+.public-navbar *,
+.public-navbar *::before,
+.public-navbar *::after {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   NAVBAR SHELL
+========================================================= */
+
+.public-navbar-shell {
+  width: min(1480px, calc(100% - 80px));
+  height: 76px;
+  min-height: 76px;
+  display: grid;
+  grid-template-columns: 180px 1fr 260px;
+  align-items: center;
+  gap: 24px;
+  margin: 0 auto;
+}
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.public-navbar-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: fit-content;
+  text-decoration: none;
+}
+
+.public-navbar-logo img {
+  display: block;
+  width: auto;
+  height: 46px;
+  max-width: 100px;
+  object-fit: contain;
+}
+
+/* =========================================================
+   PANEL
+========================================================= */
+
+.public-navbar-panel {
+  min-width: 0;
+  display: contents;
+}
+
+/* =========================================================
+   NAV LINKS
+========================================================= */
+
+.public-navbar-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 46px;
+  min-width: 0;
+}
+
+.public-navbar-link {
+  position: relative;
+  min-height: 76px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    color 170ms ease,
+    opacity 170ms ease;
+}
+
+.public-navbar-link:hover {
+  color: #ffffff;
+}
+
+/* =========================================================
+   ACTIVE NAV LINK
+========================================================= */
+
+.public-navbar-link--active {
+  color: #ffffff;
+}
+
+.public-navbar-link--active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  width: 34px;
+  height: 4px;
+  transform: translateX(-50%);
+  background: var(--public-orange);
+  border-radius: 999px;
+}
+
+/* =========================================================
+   NAVBAR ACTIONS
+========================================================= */
+
+.public-navbar-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  min-width: 0;
+}
+
+/* =========================================================
+   LOGIN BUTTON
+========================================================= */
+
+.public-navbar-login {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 18px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition:
+    background 170ms ease,
+    border-color 170ms ease,
+    transform 170ms ease;
+}
+
+.public-navbar-login:hover {
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.28);
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   ORDER BUTTON
+========================================================= */
+
+.public-navbar-order {
+  min-height: 46px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0 21px;
+  color: #ffffff;
+  background: var(--public-orange);
+  border: 1px solid var(--public-orange);
+  border-radius: 13px;
+  font-size: 13px;
+  font-weight: 750;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(255, 107, 20, 0.24);
+  transition:
+    background 170ms ease,
+    border-color 170ms ease,
+    transform 170ms ease,
+    box-shadow 170ms ease;
+}
+
+.public-navbar-order:hover {
+  background: var(--public-orange-dark);
+  border-color: var(--public-orange-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 26px rgba(255, 107, 20, 0.32);
+}
+
+/* =========================================================
+   MOBILE MENU BUTTON
+========================================================= */
+
+.public-navbar-menu-button {
+  width: 42px;
+  height: 42px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  margin-left: auto;
+  padding: 0;
+  color: var(--public-orange);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 11px;
+  cursor: pointer;
+}
+
+/* =========================================================
+   LAPTOP
+========================================================= */
+
+@media (max-width: 1200px) {
+  .public-navbar-shell {
+    width: calc(100% - 48px);
+    grid-template-columns: 130px 1fr 230px;
+    gap: 18px;
+  }
+
+  .public-navbar--overlay .public-navbar-shell {
+    width: calc(100% - 64px);
+  }
+
+  .public-navbar-links {
+    gap: 30px;
+  }
+
+  .public-navbar-logo img {
+    height: 42px;
+  }
+
+  .public-navbar-link {
+    font-size: 13px;
+  }
+
+  .public-navbar-login {
+    padding: 0 15px;
+  }
+
+  .public-navbar-order {
+    padding: 0 17px;
+  }
+}
+
+/* =========================================================
+   TABLET / MOBILE MENU
+========================================================= */
+
+@media (max-width: 850px) {
+  .public-navbar-shell {
+    width: calc(100% - 30px);
+    height: 66px;
+    min-height: 66px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    gap: 12px;
+  }
+
+  .public-navbar--overlay {
+    padding-bottom: 10px;
+  }
+
+  .public-navbar--overlay .public-navbar-shell {
+    width: calc(100% - 30px);
+    transform: translateY(5px);
+  }
+
+  .public-navbar-logo {
+    flex: 0 0 auto;
+  }
+
+  .public-navbar-logo img {
+    height: 40px;
+  }
+
+  .public-navbar-menu-button {
+    display: inline-flex;
+  }
+
+  .public-navbar-panel {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    z-index: 100;
+    width: 100%;
+    display: none;
+    padding: 14px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+    background: rgba(7, 26, 43, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 16px;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.32);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+  }
+
+  .public-navbar-panel--open {
+    display: flex;
+  }
+
+  .public-navbar-links {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+  }
+
+  .public-navbar-link {
+    width: 100%;
+    min-height: 48px;
+    justify-content: flex-start;
+    padding: 0 14px;
+    border-radius: 10px;
+  }
+
+  .public-navbar-link:hover,
+  .public-navbar-link--active {
+    background: rgba(255, 107, 20, 0.11);
+  }
+
+  .public-navbar-link--active::after {
+    display: none;
+  }
+
+  .public-navbar-actions {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    padding-top: 13px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .public-navbar-login,
+  .public-navbar-order {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 430px) {
+  .public-navbar-shell {
+    width: calc(100% - 24px);
+  }
+
+  .public-navbar--overlay .public-navbar-shell {
+    width: calc(100% - 24px);
+  }
+
+  .public-navbar-logo img {
+    height: 36px;
+  }
+
+  .public-navbar-actions {
+    grid-template-columns: 1fr;
+  }
+}

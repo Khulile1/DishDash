@@ -1,0 +1,1728 @@
+/* ====================================== */
+/* PROFILE PAGE */
+/* ====================================== */
+
+.profile-page {
+  min-height: 100vh;
+
+  padding: 42px 5% 70px;
+
+  color: #0f172a;
+
+  background: #f6f8fb;
+
+  box-sizing: border-box;
+}
+
+.profile-page *,
+.profile-page *::before,
+.profile-page *::after {
+  box-sizing: border-box;
+}
+
+/* ====================================== */
+/* PAGE HEADER */
+/* ====================================== */
+
+.profile-header {
+  width: 100%;
+  max-width: 1380px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 30px;
+
+  margin: 0 auto 28px;
+}
+
+.profile-header h1 {
+  margin: 4px 0 8px;
+
+  color: #071a2b;
+
+  font-size: clamp(2rem, 3vw, 2.7rem);
+
+  font-weight: 800;
+
+  letter-spacing: -0.04em;
+}
+
+.profile-header > div > p:last-child {
+  margin: 0;
+
+  color: #64748b;
+
+  font-size: 0.95rem;
+}
+
+.profile-eyebrow {
+  margin: 0;
+
+  color: #f97316;
+
+  font-size: 0.76rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+}
+
+.profile-home-link {
+  min-height: 44px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 18px;
+
+  color: #071a2b;
+
+  background: #ffffff;
+
+  border: 1px solid #dce3ea;
+
+  border-radius: 11px;
+
+  font-size: 0.88rem;
+
+  font-weight: 700;
+
+  text-decoration: none;
+}
+
+/* ====================================== */
+/* PROFILE SUMMARY */
+/* ====================================== */
+
+.profile-summary {
+  width: 100%;
+  max-width: 1380px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 18px;
+
+  margin: 0 auto 24px;
+
+  padding: 22px 25px;
+
+  background: #071a2b;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  border-radius: 18px;
+
+  box-shadow: 0 14px 38px rgba(7, 26, 43, 0.12);
+}
+
+.profile-avatar {
+  width: 62px;
+  height: 62px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  color: #ffffff;
+
+  background: linear-gradient(135deg, #f97316, #ea580c);
+
+  border-radius: 16px;
+
+  font-size: 1.2rem;
+
+  font-weight: 800;
+}
+
+.profile-summary-details {
+  min-width: 0;
+}
+
+.profile-summary-details h2 {
+  margin: 0 0 7px;
+
+  color: #ffffff;
+
+  font-size: 1.25rem;
+}
+
+.profile-summary-email {
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  color: #b9c7d5;
+
+  font-size: 0.88rem;
+}
+
+.profile-role {
+  margin-left: auto;
+
+  padding: 7px 12px;
+
+  color: #ffffff;
+
+  background: rgba(249, 115, 22, 0.15);
+
+  border: 1px solid rgba(249, 115, 22, 0.35);
+
+  border-radius: 99px;
+
+  font-size: 0.78rem;
+
+  font-weight: 700;
+
+  text-transform: capitalize;
+}
+
+/* ====================================== */
+/* PROFILE LAYOUT */
+/* ====================================== */
+
+.profile-layout {
+  width: 100%;
+  max-width: 1380px;
+
+  display: grid;
+
+  grid-template-columns:
+    255px
+    minmax(0, 1fr);
+
+  align-items: start;
+
+  gap: 24px;
+
+  margin: 0 auto;
+}
+
+/* ====================================== */
+/* SIDEBAR */
+/* ====================================== */
+
+.profile-sidebar {
+  position: sticky;
+
+  top: 112px;
+
+  padding: 12px;
+
+  background: #ffffff;
+
+  border: 1px solid #e1e7ed;
+
+  border-radius: 16px;
+
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+}
+
+.profile-menu {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.profile-menu-item {
+  width: 100%;
+  min-height: 48px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 0 13px;
+
+  color: #475569;
+
+  background: transparent;
+
+  border: 0;
+
+  border-radius: 10px;
+
+  font-family: inherit;
+
+  font-size: 0.88rem;
+
+  font-weight: 650;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background-color 160ms ease,
+    color 160ms ease;
+}
+
+.profile-menu-item:hover {
+  color: #071a2b;
+
+  background: #f7f8fa;
+}
+
+.profile-menu-item--active {
+  color: #f97316;
+
+  background: #fff4ec;
+}
+
+.profile-menu-item--active:hover {
+  color: #f97316;
+
+  background: #fff4ec;
+}
+
+.profile-menu-arrow {
+  margin-left: auto;
+}
+
+.profile-sidebar-divider {
+  height: 1px;
+
+  margin: 11px 4px;
+
+  background: #e5e7eb;
+}
+
+.profile-menu-item--logout {
+  color: #dc2626;
+}
+
+.profile-menu-item--logout:hover {
+  color: #b91c1c;
+
+  background: #fef2f2;
+}
+
+/* ====================================== */
+/* CONTENT */
+/* ====================================== */
+
+.profile-content {
+  min-width: 0;
+}
+
+/* ====================================== */
+/* SETTINGS CARD */
+/* ====================================== */
+
+.settings-card {
+  padding: 30px;
+
+  background: #ffffff;
+
+  border: 1px solid #e1e7ed;
+
+  border-radius: 18px;
+
+  box-shadow: 0 8px 26px rgba(15, 23, 42, 0.045);
+}
+
+.settings-card-header {
+  display: flex;
+  align-items: center;
+
+  gap: 15px;
+
+  margin-bottom: 28px;
+
+  padding-bottom: 22px;
+
+  border-bottom: 1px solid #edf0f3;
+}
+
+.settings-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  color: #f97316;
+
+  background: #fff4ec;
+
+  border-radius: 13px;
+}
+
+.settings-icon svg {
+  width: 23px;
+  height: 23px;
+}
+
+.settings-card-header h2 {
+  margin: 0 0 5px;
+
+  color: #071a2b;
+
+  font-size: 1.25rem;
+
+  font-weight: 750;
+}
+
+.settings-card-header p {
+  margin: 0;
+
+  color: #718096;
+
+  font-size: 0.87rem;
+}
+
+/* ====================================== */
+/* FORM */
+/* ====================================== */
+
+.settings-form {
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+.settings-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 18px;
+}
+
+.settings-field {
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+}
+
+.settings-field label {
+  color: #334155;
+
+  font-size: 0.84rem;
+
+  font-weight: 650;
+}
+
+.settings-field small {
+  color: #94a3b8;
+
+  font-size: 0.75rem;
+}
+
+/* ====================================== */
+/* INPUT */
+/* ====================================== */
+
+.settings-input {
+  position: relative;
+
+  min-height: 48px;
+
+  display: flex;
+  align-items: center;
+
+  color: #94a3b8;
+
+  background: #ffffff;
+
+  border: 1px solid #dce3ea;
+
+  border-radius: 10px;
+
+  transition:
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.settings-input:focus-within {
+  border-color: #f97316;
+
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+}
+
+.settings-input > svg {
+  flex-shrink: 0;
+
+  margin-left: 14px;
+}
+
+.settings-input input {
+  width: 100%;
+  min-width: 0;
+
+  height: 46px;
+
+  padding: 0 44px 0 11px;
+
+  color: #0f172a;
+
+  background: transparent;
+
+  border: 0;
+
+  outline: 0;
+
+  font: inherit;
+
+  font-size: 0.88rem;
+}
+
+.settings-input--disabled {
+  background: #f7f8fa;
+}
+
+.settings-input--disabled input {
+  color: #64748b;
+
+  cursor: not-allowed;
+}
+
+.settings-simple-input {
+  width: 100%;
+  min-height: 48px;
+
+  padding: 0 14px;
+
+  color: #0f172a;
+
+  background: #ffffff;
+
+  border: 1px solid #dce3ea;
+
+  border-radius: 10px;
+
+  outline: 0;
+
+  font: inherit;
+
+  font-size: 0.88rem;
+}
+
+.settings-simple-input:focus {
+  border-color: #f97316;
+
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+}
+
+/* ====================================== */
+/* PASSWORD EYE */
+/* ====================================== */
+
+.settings-eye-button {
+  position: absolute;
+
+  right: 8px;
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #64748b;
+
+  background: transparent;
+
+  border: 0;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+}
+
+.settings-eye-button:hover {
+  color: #f97316;
+
+  background: #fff4ec;
+}
+
+/* ====================================== */
+/* BUTTONS */
+/* ====================================== */
+
+.settings-actions {
+  display: flex;
+  justify-content: flex-end;
+
+  padding-top: 3px;
+}
+
+.settings-save-button {
+  min-height: 46px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 0 20px;
+
+  color: #ffffff;
+
+  background: #f97316;
+
+  border: 1px solid #f97316;
+
+  border-radius: 10px;
+
+  font-family: inherit;
+
+  font-size: 0.86rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background-color 160ms ease,
+    transform 160ms ease;
+}
+
+.settings-save-button:hover {
+  background: #ea580c;
+
+  border-color: #ea580c;
+
+  transform: translateY(-1px);
+}
+
+/* ====================================== */
+/* SECURITY NOTE */
+/* ====================================== */
+
+.settings-security-note {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 10px;
+
+  padding: 14px 15px;
+
+  color: #475569;
+
+  background: #f8fafc;
+
+  border: 1px solid #e2e8f0;
+
+  border-radius: 10px;
+}
+
+.settings-security-note svg {
+  flex-shrink: 0;
+
+  margin-top: 1px;
+
+  color: #f97316;
+}
+
+.settings-security-note p {
+  margin: 0;
+
+  font-size: 0.8rem;
+
+  line-height: 1.6;
+}
+
+/* ====================================== */
+/* TOGGLES */
+/* ====================================== */
+
+.settings-toggle-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.settings-toggle-row {
+  min-height: 85px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 25px;
+
+  padding: 18px 2px;
+
+  border-bottom: 1px solid #edf0f3;
+}
+
+.settings-toggle-row:first-child {
+  padding-top: 4px;
+}
+
+.settings-toggle-row:last-child {
+  border-bottom: 0;
+}
+
+.settings-toggle-information {
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+}
+
+.settings-toggle-icon {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  color: #f97316;
+
+  background: #fff4ec;
+
+  border-radius: 11px;
+}
+
+.settings-toggle-information h3 {
+  margin: 0 0 4px;
+
+  color: #0f172a;
+
+  font-size: 0.92rem;
+}
+
+.settings-toggle-information p {
+  margin: 0;
+
+  color: #718096;
+
+  font-size: 0.8rem;
+
+  line-height: 1.5;
+}
+
+/* ====================================== */
+/* SWITCH */
+/* ====================================== */
+
+.settings-switch {
+  position: relative;
+
+  width: 46px;
+  height: 26px;
+
+  flex-shrink: 0;
+}
+
+.settings-switch input {
+  width: 0;
+  height: 0;
+
+  opacity: 0;
+}
+
+.settings-slider {
+  position: absolute;
+
+  inset: 0;
+
+  background: #cbd5e1;
+
+  border-radius: 99px;
+
+  cursor: pointer;
+
+  transition: background-color 180ms ease;
+}
+
+.settings-slider::before {
+  content: "";
+
+  position: absolute;
+
+  left: 3px;
+  bottom: 3px;
+
+  width: 20px;
+  height: 20px;
+
+  background: #ffffff;
+
+  border-radius: 50%;
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16);
+
+  transition: transform 180ms ease;
+}
+
+.settings-switch input:checked + .settings-slider {
+  background: #f97316;
+}
+
+.settings-switch input:checked + .settings-slider::before {
+  transform: translateX(20px);
+}
+
+/* ====================================== */
+/* PREFERENCES */
+/* ====================================== */
+
+.settings-preference-card {
+  min-height: 90px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 24px;
+
+  padding: 20px 0;
+
+  border-bottom: 1px solid #edf0f3;
+}
+
+.settings-preference-card:last-child {
+  border-bottom: 0;
+}
+
+.settings-preference-card h3 {
+  margin: 0 0 5px;
+
+  color: #0f172a;
+
+  font-size: 0.93rem;
+}
+
+.settings-preference-card p {
+  margin: 0;
+
+  color: #718096;
+
+  font-size: 0.8rem;
+}
+
+.settings-preference-card select {
+  min-width: 150px;
+  height: 44px;
+
+  padding: 0 12px;
+
+  color: #334155;
+
+  background: #ffffff;
+
+  border: 1px solid #dce3ea;
+
+  border-radius: 9px;
+
+  outline: 0;
+
+  cursor: pointer;
+}
+
+/* ====================================== */
+/* TABLET */
+/* ====================================== */
+
+@media (max-width: 900px) {
+  .profile-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-sidebar {
+    position: static;
+  }
+
+  .profile-menu {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .profile-menu-arrow {
+    display: none;
+  }
+}
+
+/* ====================================== */
+/* MOBILE */
+/* ====================================== */
+
+@media (max-width: 650px) {
+  .profile-page {
+    padding: 25px 15px 50px;
+  }
+
+  .profile-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .profile-summary {
+    align-items: flex-start;
+
+    flex-wrap: wrap;
+  }
+
+  .profile-role {
+    width: fit-content;
+
+    margin-left: 0;
+  }
+
+  .profile-menu {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .settings-card {
+    padding: 22px 18px;
+  }
+
+  .settings-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .settings-toggle-row,
+  .settings-preference-card {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .settings-preference-card select {
+    width: 100%;
+  }
+
+  .settings-actions {
+    justify-content: stretch;
+  }
+
+  .settings-save-button {
+    width: 100%;
+  }
+}
+/* =========================================================
+   PROFILE SETTINGS - BALANCE & PAYMENTS
+   Append to the bottom of ProfileSettings.css
+   ========================================================= */
+
+/* ====================================== */
+/* PROFILE SUMMARY ACTIONS                */
+/* ====================================== */
+
+.profile-summary-actions {
+  margin-left: auto;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+/* ====================================== */
+/* BALANCE PREVIEW                        */
+/* ====================================== */
+
+.profile-balance-preview {
+  min-height: 48px;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 9px 12px;
+
+  color: #2d2d2d;
+
+  background: #ffffff;
+
+  border: 1px solid #e8e8e8;
+  border-radius: 12px;
+
+  font-family: inherit;
+
+  cursor: pointer;
+
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.profile-balance-preview:hover {
+  transform: translateY(-1px);
+
+  border-color: rgba(255, 90, 0, 0.24);
+
+  box-shadow: 0 7px 18px rgba(0, 0, 0, 0.06);
+}
+
+.profile-balance-preview > svg:first-child {
+  color: #ff5a00;
+}
+
+.profile-balance-preview-text {
+  min-width: 104px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  gap: 2px;
+}
+
+.profile-balance-preview-text small {
+  color: #707070;
+
+  font-size: 0.65rem;
+  font-weight: 650;
+}
+
+.profile-balance-preview-text strong {
+  color: #2d2d2d;
+
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+.profile-balance-preview--credit {
+  background: #ecfdf3;
+
+  border-color: rgba(22, 128, 61, 0.14);
+}
+
+.profile-balance-preview--credit > svg:first-child,
+.profile-balance-preview--credit .profile-balance-preview-text strong {
+  color: #16803d;
+}
+
+.profile-balance-preview--debt {
+  background: #fff1f1;
+
+  border-color: rgba(198, 40, 40, 0.14);
+}
+
+.profile-balance-preview--debt > svg:first-child,
+.profile-balance-preview--debt .profile-balance-preview-text strong {
+  color: #c62828;
+}
+
+/* ====================================== */
+/* BALANCE CARD                           */
+/* ====================================== */
+
+.settings-card--balance {
+  overflow: hidden;
+}
+
+/* ====================================== */
+/* BALANCE HERO                           */
+/* ====================================== */
+
+.settings-balance-hero {
+  margin-bottom: 20px;
+
+  padding: 22px;
+
+  border: 1px solid #e8e8e8;
+  border-radius: 16px;
+}
+
+.settings-balance-hero--credit {
+  background: #ecfdf3;
+
+  border-color: rgba(22, 128, 61, 0.14);
+}
+
+.settings-balance-hero--debt {
+  background: #fff1f1;
+
+  border-color: rgba(198, 40, 40, 0.14);
+}
+
+.settings-balance-hero--zero {
+  background: whitesmoke;
+}
+
+.settings-balance-hero-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 20px;
+}
+
+.settings-balance-hero-top > div:first-child {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+}
+
+.settings-balance-label {
+  color: #707070;
+
+  font-size: 0.75rem;
+  font-weight: 700;
+
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.settings-balance-amount {
+  color: #2d2d2d;
+
+  font-size: clamp(2rem, 4vw, 2.7rem);
+  font-weight: 850;
+
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.settings-balance-hero--credit .settings-balance-amount {
+  color: #16803d;
+}
+
+.settings-balance-hero--debt .settings-balance-amount {
+  color: #c62828;
+}
+
+.settings-balance-hero p {
+  max-width: 650px;
+
+  margin: 15px 0 0;
+
+  color: #5f6368;
+
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+/* ====================================== */
+/* REVEAL BUTTON                          */
+/* ====================================== */
+
+.settings-balance-reveal {
+  min-height: 38px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 8px 11px;
+
+  color: #2d2d2d;
+
+  background: #ffffff;
+
+  border: 1px solid #e8e8e8;
+  border-radius: 9px;
+
+  font-family: inherit;
+  font-size: 0.74rem;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+/* ====================================== */
+/* BALANCE STATS                          */
+/* ====================================== */
+
+.settings-balance-status-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 12px;
+
+  margin-bottom: 20px;
+}
+
+.settings-balance-stat {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+
+  padding: 16px;
+
+  background: whitesmoke;
+
+  border: 1px solid #e8e8e8;
+  border-radius: 13px;
+}
+
+.settings-balance-stat > span {
+  color: #707070;
+
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.settings-balance-stat > strong {
+  color: #16803d;
+
+  font-size: 1.15rem;
+  font-weight: 800;
+}
+
+.settings-balance-stat > small {
+  color: #8a8a8a;
+
+  font-size: 0.67rem;
+  line-height: 1.45;
+}
+
+.settings-balance-stat-value--debt {
+  color: #c62828 !important;
+}
+
+/* ====================================== */
+/* BALANCE RULES                          */
+/* ====================================== */
+
+.settings-balance-rules {
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 12px;
+
+  margin-bottom: 25px;
+}
+
+.settings-balance-rule {
+  min-width: 0;
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 11px;
+
+  padding: 14px;
+
+  background: #ffffff;
+
+  border: 1px solid #e8e8e8;
+  border-radius: 13px;
+}
+
+.settings-balance-rule-icon {
+  width: 38px;
+  height: 38px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #ff5a00;
+
+  background: #fff1e8;
+
+  border-radius: 10px;
+}
+
+.settings-balance-rule-icon--credit {
+  color: #16803d;
+
+  background: #ecfdf3;
+}
+
+.settings-balance-rule-icon--debit {
+  color: #c62828;
+
+  background: #fff1f1;
+}
+
+.settings-balance-rule h3 {
+  margin: 0;
+
+  color: #2d2d2d;
+
+  font-size: 0.82rem;
+  font-weight: 760;
+}
+
+.settings-balance-rule p {
+  margin: 5px 0 0;
+
+  color: #707070;
+
+  font-size: 0.7rem;
+  line-height: 1.5;
+}
+
+/* ====================================== */
+/* BALANCE SUBSECTION                     */
+/* ====================================== */
+
+.settings-balance-subsection {
+  margin-top: 22px;
+  padding-top: 22px;
+
+  border-top: 1px solid #e8e8e8;
+}
+
+.settings-balance-subsection-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 14px;
+
+  margin-bottom: 14px;
+}
+
+.settings-balance-subsection-heading h3 {
+  margin: 0;
+
+  color: #2d2d2d;
+
+  font-size: 0.94rem;
+  font-weight: 760;
+}
+
+.settings-balance-subsection-heading p {
+  margin: 4px 0 0;
+
+  color: #707070;
+
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.settings-balance-subsection-heading > svg {
+  flex-shrink: 0;
+
+  color: #ff5a00;
+}
+
+/* ====================================== */
+/* PAYMENT SUMMARY                        */
+/* ====================================== */
+
+.settings-payment-summary {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 14px;
+
+  background: whitesmoke;
+
+  border: 1px solid #e8e8e8;
+  border-radius: 13px;
+}
+
+.settings-payment-summary-icon {
+  width: 42px;
+  height: 42px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #ff5a00;
+
+  background: #fff1e8;
+
+  border-radius: 11px;
+}
+
+.settings-payment-summary-content {
+  min-width: 0;
+
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+.settings-payment-summary-content strong {
+  color: #2d2d2d;
+
+  font-size: 0.84rem;
+}
+
+.settings-payment-summary-content span {
+  color: #707070;
+
+  font-size: 0.72rem;
+}
+
+.settings-payment-balance-used {
+  flex-shrink: 0;
+
+  padding: 5px 8px;
+
+  color: #16803d;
+
+  background: #ecfdf3;
+
+  border: 1px solid rgba(22, 128, 61, 0.12);
+  border-radius: 999px;
+
+  font-size: 0.66rem;
+  font-weight: 750;
+}
+
+/* ====================================== */
+/* PAYMENT SECURITY NOTE                  */
+/* ====================================== */
+
+.settings-payment-security-note {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 9px;
+
+  margin-top: 10px;
+  padding: 12px;
+
+  color: #166534;
+
+  background: #ecfdf3;
+
+  border: 1px solid rgba(22, 128, 61, 0.12);
+  border-radius: 10px;
+}
+
+.settings-payment-security-note svg {
+  flex-shrink: 0;
+
+  margin-top: 1px;
+}
+
+.settings-payment-security-note p {
+  margin: 0;
+
+  font-size: 0.7rem;
+  line-height: 1.55;
+}
+
+/* ====================================== */
+/* BALANCE HISTORY                        */
+/* ====================================== */
+
+.settings-balance-history {
+  display: flex;
+  flex-direction: column;
+
+  gap: 9px;
+}
+
+.settings-balance-transaction {
+  display: grid;
+
+  grid-template-columns:
+    40px
+    minmax(0, 1fr)
+    auto;
+
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 12px;
+
+  background: whitesmoke;
+
+  border: 1px solid #e8e8e8;
+  border-radius: 11px;
+}
+
+.settings-balance-transaction-icon {
+  width: 40px;
+  height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+}
+
+.settings-balance-transaction-icon--credit {
+  color: #16803d;
+
+  background: #ecfdf3;
+}
+
+.settings-balance-transaction-icon--debit {
+  color: #c62828;
+
+  background: #fff1f1;
+}
+
+.settings-balance-transaction-content {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+.settings-balance-transaction-content strong {
+  overflow: hidden;
+
+  color: #2d2d2d;
+
+  font-size: 0.78rem;
+
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.settings-balance-transaction-content span {
+  color: #8a8a8a;
+
+  font-size: 0.66rem;
+}
+
+.settings-balance-transaction-amount {
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.settings-balance-transaction-amount--credit {
+  color: #16803d;
+}
+
+.settings-balance-transaction-amount--debit {
+  color: #c62828;
+}
+
+/* ====================================== */
+/* EMPTY BALANCE HISTORY                  */
+/* ====================================== */
+
+.settings-balance-empty {
+  min-height: 150px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 24px;
+
+  text-align: center;
+
+  color: #707070;
+
+  background: whitesmoke;
+
+  border: 1px dashed #dcdcdc;
+  border-radius: 13px;
+}
+
+.settings-balance-empty > svg {
+  color: #ff5a00;
+}
+
+.settings-balance-empty strong {
+  color: #2d2d2d;
+
+  font-size: 0.83rem;
+}
+
+.settings-balance-empty span {
+  max-width: 420px;
+
+  font-size: 0.7rem;
+  line-height: 1.5;
+}
+
+/* ====================================== */
+/* SECONDARY BUTTON                       */
+/* ====================================== */
+
+.settings-secondary-button {
+  min-height: 42px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 9px 15px;
+
+  color: #e34f00;
+
+  background: #ffffff;
+
+  border: 1px solid rgba(255, 90, 0, 0.28);
+  border-radius: 10px;
+
+  font-family: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.settings-secondary-button:hover {
+  color: #ffffff;
+
+  background: #ff5a00;
+
+  border-color: #ff5a00;
+
+  transform: translateY(-1px);
+}
+
+/* ====================================== */
+/* RESPONSIVE                             */
+/* ====================================== */
+
+@media (max-width: 900px) {
+  .settings-balance-rules {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 700px) {
+  .profile-summary-actions {
+    width: 100%;
+
+    margin-left: 0;
+
+    justify-content: flex-start;
+  }
+
+  .settings-balance-status-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .settings-balance-hero-top {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .settings-balance-reveal {
+    width: fit-content;
+  }
+}
+
+@media (max-width: 520px) {
+  .profile-balance-preview {
+    width: 100%;
+  }
+
+  .profile-balance-preview-text {
+    flex: 1;
+  }
+
+  .settings-payment-summary {
+    align-items: flex-start;
+
+    flex-wrap: wrap;
+  }
+
+  .settings-payment-balance-used {
+    width: fit-content;
+
+    margin-left: 54px;
+  }
+
+  .settings-balance-transaction {
+    grid-template-columns:
+      40px
+      minmax(0, 1fr);
+  }
+
+  .settings-balance-transaction-amount {
+    grid-column: 2;
+  }
+}
+
+/* ========================================================= */
+/* FINAL MOBILE PROFILE PAGE HEADER RULE                     */
+/* Keep this as the LAST code in this file.                  */
+/* ========================================================= */
+
+@media screen and (max-width: 768px) {
+  /* Hide the large Profile Settings page heading on mobile. */
+  .profile-page .profile-header {
+    display: none !important;
+    visibility: hidden !important;
+
+    width: 0 !important;
+    height: 0 !important;
+
+    min-width: 0 !important;
+    min-height: 0 !important;
+
+    max-width: 0 !important;
+    max-height: 0 !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: 0 !important;
+
+    overflow: hidden !important;
+
+    opacity: 0 !important;
+
+    pointer-events: none !important;
+  }
+
+  /* Keep the profile summary, sidebar/menu and settings content visible. */
+  .profile-page {
+    padding-top: 18px !important;
+  }
+}
+
+/* ====================================== */
+/* SMALL MOBILE                           */
+/* ====================================== */
+
+@media screen and (max-width: 430px) {
+  .profile-page {
+    padding-top: 14px !important;
+  }
+}

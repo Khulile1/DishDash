@@ -1,0 +1,192 @@
+/* ====================================== */
+/* ROUTE TEST PAGE */
+/* ====================================== */
+
+.route-test-page {
+  min-height: 100vh;
+
+  padding: 35px;
+
+  background: #f6f8fb;
+}
+
+.route-test-card {
+  width: 100%;
+  max-width: 1100px;
+
+  margin: 0 auto;
+
+  padding: 30px;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+}
+
+.route-test-card h1 {
+  margin-top: 0;
+
+  color: #071a2b;
+}
+
+/* ====================================== */
+/* POINTS */
+/* ====================================== */
+
+.route-test-points {
+  display: grid;
+
+  grid-template-columns: repeat(2, 1fr);
+
+  gap: 15px;
+
+  margin: 25px 0;
+}
+
+.route-test-points > div {
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+
+  padding: 15px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+}
+
+.route-test-points strong {
+  color: #f97316;
+
+  font-size: 1.3rem;
+}
+
+.route-test-points small {
+  color: #94a3b8;
+}
+
+/* ====================================== */
+/* BUTTON */
+/* ====================================== */
+
+.route-test-button {
+  min-height: 46px;
+
+  padding: 0 20px;
+
+  color: #ffffff;
+
+  background: #f97316;
+
+  border: 0;
+  border-radius: 10px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+.route-test-button:disabled {
+  opacity: 0.6;
+
+  cursor: not-allowed;
+}
+
+/* ====================================== */
+/* RESULT */
+/* ====================================== */
+
+.route-test-result {
+  display: flex;
+
+  gap: 20px;
+
+  margin: 20px 0;
+}
+
+.route-test-result > div {
+  min-width: 170px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+
+  padding: 14px 18px;
+
+  background: #fff4ec;
+
+  border-radius: 10px;
+}
+
+.route-test-result span {
+  color: #64748b;
+
+  font-size: 0.8rem;
+}
+
+.route-test-result strong {
+  color: #071a2b;
+
+  font-size: 1.1rem;
+}
+
+/* ====================================== */
+/* ERROR */
+/* ====================================== */
+
+.route-test-error {
+  margin: 18px 0;
+
+  padding: 12px;
+
+  color: #b91c1c;
+
+  background: #fef2f2;
+
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+}
+
+/* ====================================== */
+/* MAP */
+/* ====================================== */
+
+.route-test-map {
+  position: relative;
+
+  width: 100%;
+  height: 550px;
+
+  margin-top: 25px;
+
+  overflow: hidden;
+
+  border: 1px solid #dce3ea;
+  border-radius: 14px;
+}
+
+.route-test-leaflet,
+.route-test-map .leaflet-container {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ====================================== */
+/* IMPORTANT TILE FIX */
+/* ====================================== */
+
+.route-test-map .leaflet-tile {
+  width: 256px !important;
+  height: 256px !important;
+
+  max-width: none !important;
+  max-height: none !important;
+}
+
+.route-test-map .leaflet-container img {
+  max-width: none !important;
+}

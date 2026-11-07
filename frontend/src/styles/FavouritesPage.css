@@ -1,0 +1,1366 @@
+/* =========================================================
+   DISH DASH FAVOURITES PAGE
+   ORANGE + WHITE + WHITESMOKE
+   ========================================================= */
+
+/* ====================================== */
+/* VARIABLES */
+/* ====================================== */
+
+.favourites-page {
+  --favourites-orange: #ff5a00;
+
+  --favourites-orange-dark: #e34f00;
+
+  --favourites-orange-light: #fff1e8;
+
+  --favourites-background: whitesmoke;
+
+  --favourites-surface: #ffffff;
+
+  --favourites-text: #2d2d2d;
+
+  --favourites-muted: #707070;
+
+  --favourites-border: #e8e8e8;
+
+  --favourites-green: #16803d;
+
+  --favourites-green-light: #ecfdf3;
+
+  --favourites-red: #c62828;
+
+  --favourites-red-light: #fff1f1;
+
+  --favourites-shadow: 0 12px 32px rgba(0, 0, 0, 0.065);
+
+  --favourites-shadow-hover: 0 22px 46px rgba(0, 0, 0, 0.1);
+}
+
+/* ====================================== */
+/* RESET */
+/* ====================================== */
+
+.favourites-page,
+.favourites-page *,
+.favourites-page *::before,
+.favourites-page *::after {
+  box-sizing: border-box;
+}
+
+/* ====================================== */
+/* OUTER LAYOUT */
+/* ====================================== */
+
+.favourites-layout {
+  width: 100%;
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  background: whitesmoke;
+}
+
+/* ====================================== */
+/* PAGE */
+/* ====================================== */
+
+.favourites-page {
+  width: 100%;
+
+  flex: 1;
+
+  padding: 42px 0 85px;
+
+  color: var(--favourites-text);
+
+  background: var(--favourites-background);
+}
+
+/* ====================================== */
+/* CONTAINER */
+/* ====================================== */
+
+.favourites-container {
+  width: min(1180px, calc(100% - 40px));
+
+  margin: 0 auto;
+}
+
+/* ====================================== */
+/* BACK BUTTON */
+/* ====================================== */
+
+.favourites-back-button {
+  width: fit-content;
+
+  min-height: 40px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  margin: 0 0 25px;
+
+  padding: 9px 14px;
+
+  color: var(--favourites-text);
+
+  background: #ffffff;
+
+  border: 1px solid var(--favourites-border);
+
+  border-radius: 10px;
+
+  font-family: inherit;
+
+  font-size: 0.86rem;
+
+  font-weight: 650;
+
+  cursor: pointer;
+
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.035);
+
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.favourites-back-button svg {
+  color: var(--favourites-orange);
+}
+
+.favourites-back-button:hover {
+  color: var(--favourites-orange-dark);
+
+  background: var(--favourites-orange-light);
+
+  border-color: rgba(255, 90, 0, 0.22);
+
+  transform: translateX(-2px);
+}
+
+/* ====================================== */
+/* HEADER */
+/* ====================================== */
+
+.favourites-header {
+  width: 100%;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 30px;
+
+  margin-bottom: 34px;
+
+  padding: 30px 32px;
+
+  background: #ffffff;
+
+  border: 1px solid var(--favourites-border);
+
+  border-radius: 22px;
+
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.045);
+}
+
+/* ====================================== */
+/* HEADER CONTENT */
+/* ====================================== */
+
+.favourites-header-content {
+  max-width: 680px;
+}
+
+.favourites-eyebrow {
+  width: fit-content;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin-bottom: 12px;
+
+  padding: 6px 10px;
+
+  color: var(--favourites-orange-dark);
+
+  background: var(--favourites-orange-light);
+
+  border-radius: 999px;
+
+  font-size: 0.72rem;
+
+  font-weight: 750;
+
+  letter-spacing: 0.04em;
+
+  text-transform: uppercase;
+}
+
+.favourites-eyebrow svg {
+  color: var(--favourites-orange);
+}
+
+.favourites-header h1 {
+  margin: 0;
+
+  color: var(--favourites-text);
+
+  font-size: clamp(2rem, 4vw, 3rem);
+
+  font-weight: 820;
+
+  line-height: 1.05;
+
+  letter-spacing: -0.045em;
+}
+
+.favourites-header p {
+  max-width: 600px;
+
+  margin: 13px 0 0;
+
+  color: var(--favourites-muted);
+
+  font-size: 0.98rem;
+
+  line-height: 1.7;
+}
+
+/* ====================================== */
+/* COUNT */
+/* ====================================== */
+
+.favourites-count {
+  min-width: 110px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 14px 18px;
+
+  background: var(--favourites-orange-light);
+
+  border: 1px solid rgba(255, 90, 0, 0.12);
+
+  border-radius: 16px;
+}
+
+.favourites-count strong {
+  color: var(--favourites-orange);
+
+  font-size: 1.5rem;
+
+  line-height: 1;
+}
+
+.favourites-count span {
+  margin-top: 5px;
+
+  color: var(--favourites-muted);
+
+  font-size: 0.72rem;
+
+  font-weight: 650;
+}
+
+/* ====================================== */
+/* GRID */
+/* ====================================== */
+
+.favourites-grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 24px;
+}
+
+/* ====================================== */
+/* CARD */
+/* ====================================== */
+
+.favourites-card {
+  min-width: 0;
+
+  overflow: hidden;
+
+  display: flex;
+
+  flex-direction: column;
+
+  background: #ffffff;
+
+  border: 1px solid var(--favourites-border);
+
+  border-radius: 20px;
+
+  box-shadow: var(--favourites-shadow);
+
+  cursor: pointer;
+
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.favourites-card:hover {
+  transform: translateY(-6px);
+
+  border-color: rgba(255, 90, 0, 0.24);
+
+  box-shadow: var(--favourites-shadow-hover);
+}
+
+/* ====================================== */
+/* IMAGE */
+/* ====================================== */
+
+.favourites-image-wrapper {
+  position: relative;
+
+  width: 100%;
+
+  height: 220px;
+
+  overflow: hidden;
+
+  background: whitesmoke;
+}
+
+.favourites-image {
+  width: 100%;
+
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition: transform 400ms ease;
+}
+
+.favourites-card:hover .favourites-image {
+  transform: scale(1.045);
+}
+
+/* ====================================== */
+/* IMAGE PLACEHOLDER */
+/* ====================================== */
+
+.favourites-image-placeholder {
+  width: 100%;
+
+  height: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  color: #999999;
+
+  background: linear-gradient(135deg, #f8f8f8, #eeeeee);
+
+  font-size: 0.76rem;
+}
+
+.favourites-image-placeholder svg {
+  color: var(--favourites-orange);
+}
+
+/* ====================================== */
+/* HEART BADGE */
+/* ====================================== */
+
+.favourites-heart-badge {
+  position: absolute;
+
+  top: 13px;
+
+  left: 13px;
+
+  width: 38px;
+
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: var(--favourites-orange);
+
+  background: rgba(255, 255, 255, 0.95);
+
+  border-radius: 50%;
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* ====================================== */
+/* STATUS */
+/* ====================================== */
+
+.favourites-status {
+  position: absolute;
+
+  top: 14px;
+
+  right: 14px;
+
+  padding: 5px 10px;
+
+  border-radius: 999px;
+
+  font-size: 0.7rem;
+
+  font-weight: 750;
+
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.favourites-status--open {
+  color: var(--favourites-green);
+
+  background: rgba(236, 253, 243, 0.96);
+}
+
+.favourites-status--closed {
+  color: var(--favourites-red);
+
+  background: rgba(255, 241, 241, 0.96);
+}
+
+/* ====================================== */
+/* CARD CONTENT */
+/* ====================================== */
+
+.favourites-card-content {
+  min-height: 245px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  flex: 1;
+
+  padding: 20px;
+}
+
+.favourites-card-content h2 {
+  margin: 0;
+
+  color: var(--favourites-text);
+
+  font-size: 1.15rem;
+
+  font-weight: 760;
+}
+
+/* ====================================== */
+/* DESCRIPTION */
+/* ====================================== */
+
+.favourites-description {
+  margin: 10px 0 0;
+
+  color: var(--favourites-muted);
+
+  font-size: 0.84rem;
+
+  line-height: 1.6;
+
+  display: -webkit-box;
+
+  -webkit-line-clamp: 3;
+
+  -webkit-box-orient: vertical;
+
+  overflow: hidden;
+}
+
+/* ====================================== */
+/* ADDRESS */
+/* ====================================== */
+
+.favourites-address {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 7px;
+
+  margin-top: 14px;
+
+  color: var(--favourites-muted);
+
+  font-size: 0.76rem;
+
+  line-height: 1.5;
+}
+
+.favourites-address svg {
+  flex-shrink: 0;
+
+  color: var(--favourites-orange);
+}
+
+/* ====================================== */
+/* CARD ACTIONS */
+/* ====================================== */
+
+.favourites-card-actions {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    auto;
+
+  gap: 9px;
+
+  margin-top: auto;
+
+  padding-top: 18px;
+}
+
+/* ====================================== */
+/* VIEW BUTTON */
+/* ====================================== */
+
+.favourites-view-button {
+  min-height: 43px;
+
+  color: #ffffff;
+
+  background: var(--favourites-orange);
+
+  border: 1px solid var(--favourites-orange);
+
+  border-radius: 10px;
+
+  font-family: inherit;
+
+  font-size: 0.8rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.favourites-view-button:hover {
+  background: var(--favourites-orange-dark);
+
+  border-color: var(--favourites-orange-dark);
+
+  transform: translateY(-1px);
+}
+
+/* ====================================== */
+/* REMOVE BUTTON */
+/* ====================================== */
+
+.favourites-remove-button {
+  width: 43px;
+
+  height: 43px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 0;
+
+  color: var(--favourites-red);
+
+  background: var(--favourites-red-light);
+
+  border: 1px solid rgba(198, 40, 40, 0.1);
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease;
+}
+
+.favourites-remove-button:hover {
+  color: #ffffff;
+
+  background: var(--favourites-red);
+
+  transform: scale(1.04);
+}
+
+/* ====================================== */
+/* EMPTY / ERROR / LOADING */
+/* ====================================== */
+
+.favourites-empty,
+.favourites-state {
+  width: 100%;
+
+  min-height: 370px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 50px 20px;
+
+  text-align: center;
+
+  background: #ffffff;
+
+  border: 1px solid var(--favourites-border);
+
+  border-radius: 20px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+}
+
+/* ====================================== */
+/* EMPTY ICON */
+/* ====================================== */
+
+.favourites-empty-icon,
+.favourites-state-icon {
+  width: 68px;
+
+  height: 68px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-bottom: 18px;
+
+  color: var(--favourites-orange);
+
+  background: var(--favourites-orange-light);
+
+  border-radius: 19px;
+}
+
+.favourites-empty h2,
+.favourites-state h2 {
+  margin: 0;
+
+  color: var(--favourites-text);
+
+  font-size: 1.3rem;
+}
+
+.favourites-empty p,
+.favourites-state p {
+  max-width: 420px;
+
+  margin: 9px auto 0;
+
+  color: var(--favourites-muted);
+
+  font-size: 0.86rem;
+
+  line-height: 1.6;
+}
+
+/* ====================================== */
+/* ERROR */
+/* ====================================== */
+
+.favourites-state--error .favourites-state-icon {
+  color: var(--favourites-red);
+
+  background: var(--favourites-red-light);
+}
+
+/* ====================================== */
+/* LOADER */
+/* ====================================== */
+
+.favourites-loader {
+  width: 42px;
+
+  height: 42px;
+
+  margin-bottom: 18px;
+
+  border: 4px solid #eeeeee;
+
+  border-top-color: var(--favourites-orange);
+
+  border-radius: 50%;
+
+  animation: favourites-spin 0.8s linear infinite;
+}
+
+@keyframes favourites-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ====================================== */
+/* BROWSE / RETRY BUTTON */
+/* ====================================== */
+
+.favourites-browse-button,
+.favourites-retry-button {
+  min-height: 44px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-top: 22px;
+
+  padding: 9px 17px;
+
+  color: #ffffff;
+
+  background: var(--favourites-orange);
+
+  border: none;
+
+  border-radius: 10px;
+
+  font-family: inherit;
+
+  font-size: 0.84rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background-color 180ms ease,
+    transform 180ms ease;
+}
+
+.favourites-browse-button:hover,
+.favourites-retry-button:hover {
+  background: var(--favourites-orange-dark);
+
+  transform: translateY(-1px);
+}
+
+/* ====================================== */
+/* ACCESSIBILITY */
+/* ====================================== */
+
+.favourites-page button:focus-visible,
+.favourites-card:focus-visible {
+  outline: 3px solid rgba(255, 90, 0, 0.24);
+
+  outline-offset: 3px;
+}
+
+/* ====================================== */
+/* TABLET */
+/* ====================================== */
+
+@media (max-width: 1050px) {
+  .favourites-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ====================================== */
+/* SMALL TABLET */
+/* ====================================== */
+
+@media (max-width: 760px) {
+  .favourites-page {
+    padding: 30px 0 65px;
+  }
+
+  .favourites-container {
+    width: min(100% - 30px, 1180px);
+  }
+
+  .favourites-header {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 20px;
+
+    padding: 25px;
+  }
+
+  .favourites-count {
+    min-width: 0;
+
+    flex-direction: row;
+
+    gap: 6px;
+  }
+
+  .favourites-count span {
+    margin-top: 0;
+  }
+}
+
+/* ====================================== */
+/* MOBILE */
+/* ====================================== */
+
+@media (max-width: 600px) {
+  .favourites-grid {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+  }
+
+  .favourites-image-wrapper {
+    height: 220px;
+  }
+
+  .favourites-header {
+    border-radius: 17px;
+  }
+
+  .favourites-card {
+    border-radius: 17px;
+  }
+
+  .favourites-back-button {
+    margin-bottom: 18px;
+  }
+}
+
+/* ====================================== */
+/* SMALL MOBILE */
+/* ====================================== */
+
+@media (max-width: 430px) {
+  .favourites-page {
+    padding-top: 22px;
+  }
+
+  .favourites-container {
+    width: calc(100% - 22px);
+  }
+
+  .favourites-header {
+    padding: 21px 18px;
+  }
+
+  .favourites-header h1 {
+    font-size: 2rem;
+  }
+
+  .favourites-card-content {
+    padding: 18px;
+  }
+
+  .favourites-image-wrapper {
+    height: 195px;
+  }
+}
+
+/* ====================================== */
+/* REDUCED MOTION */
+/* ====================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .favourites-page *,
+  .favourites-page *::before,
+  .favourites-page *::after {
+    animation: none !important;
+
+    transition: none !important;
+
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ========================================================= */
+/* FINAL MOBILE FAVOURITES HEADER RULE                       */
+/* Keep this as the LAST code in this file.                  */
+/* ========================================================= */
+
+@media screen and (max-width: 768px) {
+  .favourites-page .favourites-header {
+    display: none !important;
+    visibility: hidden !important;
+
+    width: 0 !important;
+    height: 0 !important;
+
+    min-width: 0 !important;
+    min-height: 0 !important;
+
+    max-width: 0 !important;
+    max-height: 0 !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: 0 !important;
+
+    overflow: hidden !important;
+
+    opacity: 0 !important;
+
+    pointer-events: none !important;
+  }
+
+  .favourites-page {
+    padding-top: 18px !important;
+  }
+}
+
+/* ====================================== */
+/* SMALL MOBILE                           */
+/* ====================================== */
+
+@media screen and (max-width: 430px) {
+  .favourites-page {
+    padding-top: 14px !important;
+  }
+}
+/* ========================================================= */
+/* FINAL FAVOURITES PAGE CONSISTENCY                         */
+/* MATCH RESTAURANTS + MENU                                  */
+/* KEEP THIS AT THE VERY BOTTOM                              */
+/* ========================================================= */
+
+/* ====================================== */
+/* PAGE HEADER                            */
+/* ====================================== */
+
+.favourites-page .favourites-header {
+  background: #071a2b !important;
+
+  background-color: #071a2b !important;
+
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* ====================================== */
+/* HEADER TITLE                           */
+/* ====================================== */
+
+.favourites-page .favourites-header h1 {
+  color: #ffffff !important;
+}
+
+/* ====================================== */
+/* HEADER DESCRIPTION                     */
+/* ====================================== */
+
+.favourites-page .favourites-header p {
+  color: #c5d0dc !important;
+}
+
+/* ====================================== */
+/* EYEBROW                                */
+/* ====================================== */
+
+.favourites-page .favourites-eyebrow {
+  color: #ffffff !important;
+
+  background: rgba(255, 90, 0, 0.18) !important;
+
+  border: 1px solid rgba(255, 90, 0, 0.24) !important;
+}
+
+.favourites-page .favourites-eyebrow svg {
+  color: #ff7a2d !important;
+}
+
+/* ====================================== */
+/* COUNT                                  */
+/* ====================================== */
+
+.favourites-page .favourites-count {
+  min-width: 115px !important;
+
+  background: rgba(255, 255, 255, 0.08) !important;
+
+  border-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+.favourites-page .favourites-count strong {
+  color: #ff7a2d !important;
+}
+
+.favourites-page .favourites-count span {
+  color: #d3dde6 !important;
+}
+
+/* ====================================== */
+/* GRID                                   */
+/* ====================================== */
+
+.favourites-page .favourites-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+
+  gap: 24px !important;
+}
+
+/* ====================================== */
+/* CARD                                   */
+/* ====================================== */
+
+.favourites-page .favourites-card {
+  min-width: 0 !important;
+
+  display: flex !important;
+
+  flex-direction: column !important;
+
+  overflow: hidden !important;
+
+  background: #ffffff !important;
+
+  border: 1px solid var(--favourites-border) !important;
+
+  border-radius: 20px !important;
+
+  box-shadow: var(--favourites-shadow) !important;
+}
+
+/* ====================================== */
+/* CARD HOVER                             */
+/* ====================================== */
+
+.favourites-page .favourites-card:hover {
+  transform: translateY(-6px) !important;
+
+  border-color: rgba(255, 90, 0, 0.24) !important;
+
+  box-shadow: var(--favourites-shadow-hover) !important;
+}
+
+/* ====================================== */
+/* CARD IMAGE                             */
+/* ====================================== */
+
+.favourites-page .favourites-image-wrapper {
+  height: 220px !important;
+}
+
+/* ====================================== */
+/* CARD CONTENT                           */
+/* ====================================== */
+
+.favourites-page .favourites-card-content {
+  min-height: 285px !important;
+
+  display: flex !important;
+
+  flex-direction: column !important;
+
+  flex: 1 !important;
+
+  padding: 21px !important;
+}
+
+/* ====================================== */
+/* CARD TITLE                             */
+/* ====================================== */
+
+.favourites-page .favourites-card-content h2 {
+  color: var(--favourites-text) !important;
+
+  font-size: 1.18rem !important;
+
+  font-weight: 750 !important;
+
+  line-height: 1.3 !important;
+
+  letter-spacing: -0.02em !important;
+}
+
+/* ====================================== */
+/* DESCRIPTION                            */
+/* ====================================== */
+
+.favourites-page .favourites-description {
+  margin: 11px 0 0 !important;
+
+  font-size: 0.84rem !important;
+
+  line-height: 1.6 !important;
+}
+
+/* ====================================== */
+/* ADDRESS                                */
+/* ====================================== */
+
+.favourites-page .favourites-address {
+  margin-top: 14px !important;
+
+  font-size: 0.76rem !important;
+
+  line-height: 1.5 !important;
+}
+
+/* ====================================== */
+/* ACTIONS                                */
+/* ====================================== */
+
+.favourites-page .favourites-card-actions {
+  width: 100% !important;
+
+  display: grid !important;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    44px !important;
+
+  gap: 9px !important;
+
+  margin-top: auto !important;
+
+  padding-top: 18px !important;
+}
+
+/* ====================================== */
+/* VIEW BUTTON                            */
+/* ====================================== */
+
+.favourites-page .favourites-view-button {
+  width: 100% !important;
+
+  min-height: 44px !important;
+
+  display: inline-flex !important;
+
+  align-items: center !important;
+
+  justify-content: center !important;
+
+  padding: 10px 16px !important;
+
+  color: #ffffff !important;
+
+  background: var(--favourites-orange) !important;
+
+  border: 1px solid var(--favourites-orange) !important;
+
+  border-radius: 10px !important;
+
+  font-size: 0.8rem !important;
+
+  font-weight: 700 !important;
+
+  box-shadow: 0 7px 18px rgba(255, 90, 0, 0.18) !important;
+}
+
+.favourites-page .favourites-view-button:hover {
+  background: var(--favourites-orange-dark) !important;
+
+  border-color: var(--favourites-orange-dark) !important;
+
+  box-shadow: 0 10px 22px rgba(255, 90, 0, 0.24) !important;
+}
+
+/* ====================================== */
+/* REMOVE BUTTON                          */
+/* ====================================== */
+
+.favourites-page .favourites-remove-button {
+  width: 44px !important;
+
+  height: 44px !important;
+
+  min-width: 44px !important;
+
+  min-height: 44px !important;
+
+  padding: 0 !important;
+
+  border-radius: 10px !important;
+}
+
+/* ========================================================= */
+/* TABLET                                                    */
+/* ========================================================= */
+
+@media screen and (max-width: 1050px) {
+  .favourites-page .favourites-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* ========================================================= */
+/* MOBILE / TABLET                                           */
+/* ========================================================= */
+
+@media screen and (max-width: 768px) {
+  /*
+    Keep behaviour consistent with your
+    Menu and Restaurants pages:
+    the large desktop header is hidden.
+  */
+
+  .favourites-page .favourites-header {
+    display: none !important;
+
+    visibility: hidden !important;
+
+    width: 0 !important;
+
+    height: 0 !important;
+
+    min-width: 0 !important;
+
+    min-height: 0 !important;
+
+    max-width: 0 !important;
+
+    max-height: 0 !important;
+
+    margin: 0 !important;
+
+    padding: 0 !important;
+
+    border: 0 !important;
+
+    overflow: hidden !important;
+
+    opacity: 0 !important;
+
+    pointer-events: none !important;
+  }
+
+  .favourites-page {
+    padding-top: 18px !important;
+  }
+
+  .favourites-page .favourites-card-content {
+    min-height: 0 !important;
+  }
+}
+
+/* ========================================================= */
+/* MOBILE                                                    */
+/* ========================================================= */
+
+@media screen and (max-width: 600px) {
+  .favourites-page .favourites-grid {
+    grid-template-columns: 1fr !important;
+
+    gap: 18px !important;
+  }
+
+  .favourites-page .favourites-image-wrapper {
+    height: 215px !important;
+  }
+
+  .favourites-page .favourites-card {
+    border-radius: 17px !important;
+  }
+
+  .favourites-page .favourites-card-content {
+    min-height: 0 !important;
+
+    padding: 19px !important;
+  }
+
+  /*
+    Keep View + Remove beside one another.
+  */
+
+  .favourites-page .favourites-card-actions {
+    grid-template-columns:
+      minmax(0, 1fr)
+      44px !important;
+  }
+}
+
+/* ========================================================= */
+/* SMALL MOBILE                                              */
+/* ========================================================= */
+
+@media screen and (max-width: 430px) {
+  .favourites-page {
+    padding-top: 14px !important;
+  }
+
+  .favourites-page .favourites-image-wrapper {
+    height: 195px !important;
+  }
+
+  .favourites-page .favourites-card-content {
+    padding: 18px !important;
+  }
+
+  .favourites-page .favourites-card-actions {
+    grid-template-columns:
+      minmax(0, 1fr)
+      42px !important;
+
+    gap: 8px !important;
+  }
+
+  .favourites-page .favourites-view-button {
+    min-height: 42px !important;
+
+    padding: 8px 10px !important;
+
+    font-size: 0.76rem !important;
+  }
+
+  .favourites-page .favourites-remove-button {
+    width: 42px !important;
+
+    height: 42px !important;
+
+    min-width: 42px !important;
+
+    min-height: 42px !important;
+  }
+}

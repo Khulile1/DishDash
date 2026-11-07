@@ -1,0 +1,1925 @@
+/* =========================================================
+   DISH DASH RESTAURANT ANALYTICS
+   NAVY + ORANGE + WHITE + WHITESMOKE
+   ========================================================= */
+
+/* ====================================== */
+/* VARIABLES */
+/* ====================================== */
+
+.restaurant-analytics-page {
+  --ra-navy: #071a2b;
+  --ra-navy-light: #0d2940;
+  --ra-navy-soft: #102f46;
+
+  --ra-orange: #f97316;
+  --ra-orange-dark: #ea580c;
+
+  --ra-orange-soft: rgba(249, 115, 22, 0.14);
+  --ra-orange-softer: rgba(249, 115, 22, 0.08);
+
+  --ra-background: whitesmoke;
+  --ra-surface: #ffffff;
+  --ra-soft: #f8fafc;
+
+  --ra-text: #1f2937;
+  --ra-muted: #64748b;
+
+  --ra-border: #e5e7eb;
+
+  --ra-green: #16803d;
+  --ra-green-light: #ecfdf3;
+
+  --ra-red: #c62828;
+  --ra-red-light: #fff1f1;
+
+  --ra-warning: #9a6700;
+  --ra-warning-light: #fff8e6;
+
+  --ra-shadow: 0 10px 30px rgba(7, 26, 43, 0.06);
+
+  --ra-shadow-hover: 0 18px 42px rgba(7, 26, 43, 0.1);
+}
+
+/* ====================================== */
+/* RESET */
+/* ====================================== */
+
+.restaurant-analytics-layout,
+.restaurant-analytics-layout *,
+.restaurant-analytics-layout *::before,
+.restaurant-analytics-layout *::after {
+  box-sizing: border-box;
+}
+
+/* ====================================== */
+/* LAYOUT */
+/* ====================================== */
+
+.restaurant-analytics-layout {
+  width: 100%;
+
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  background: whitesmoke;
+}
+
+/* ========================================================= */
+/* ANALYTICS NAVBAR */
+/* MATCH RESTAURANT NAVBAR */
+/* ========================================================= */
+
+.restaurant-analytics-navbar {
+  --ra-navbar-orange: #f97316;
+  --ra-navbar-orange-dark: #ea580c;
+
+  --ra-navbar-navy: #071a2b;
+  --ra-navbar-navy-light: #0d2940;
+
+  --ra-navbar-text: #dce5ec;
+
+  --ra-navbar-soft: rgba(255, 255, 255, 0.065);
+
+  --ra-navbar-border: rgba(255, 255, 255, 0.1);
+
+  position: sticky;
+
+  top: 0;
+
+  z-index: 4000;
+
+  width: 100%;
+
+  background:
+    radial-gradient(
+      circle at 12% 10px,
+      rgba(249, 115, 22, 0.09),
+      transparent 28%
+    ),
+    var(--ra-navbar-navy);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+/* ====================================== */
+/* NAVBAR SHELL */
+/* ====================================== */
+
+.restaurant-analytics-navbar-shell {
+  position: relative;
+
+  width: 96%;
+
+  max-width: 1600px;
+
+  min-height: 66px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin: 0 auto;
+
+  padding: 7px 0;
+}
+
+/* ====================================== */
+/* LOGO */
+/* ====================================== */
+
+.restaurant-analytics-logo {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex: 0 0 auto;
+
+  border-radius: 10px;
+
+  text-decoration: none;
+}
+
+.restaurant-analytics-logo img {
+  display: block;
+
+  width: clamp(112px, 9vw, 148px);
+
+  height: auto;
+
+  max-height: 40px;
+
+  object-fit: contain;
+}
+
+/* ====================================== */
+/* NAVIGATION */
+/* ====================================== */
+
+.restaurant-analytics-nav {
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex: 1;
+
+  gap: 3px;
+}
+
+/* ====================================== */
+/* NAV LINK */
+/* ====================================== */
+
+.restaurant-analytics-nav-link {
+  min-height: 40px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 7px 9px;
+
+  color: var(--ra-navbar-text);
+
+  background: transparent;
+
+  border: 1px solid transparent;
+
+  border-radius: 11px;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  font-weight: 650;
+
+  line-height: 1;
+
+  text-decoration: none;
+
+  white-space: nowrap;
+
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease;
+}
+
+/* ====================================== */
+/* NAV ICON */
+/* ====================================== */
+
+.restaurant-analytics-nav-link svg {
+  width: 18px;
+
+  height: 18px;
+
+  flex-shrink: 0;
+
+  color: var(--ra-navbar-orange);
+}
+
+/* ====================================== */
+/* NAV HOVER */
+/* ====================================== */
+
+.restaurant-analytics-nav-link:hover {
+  color: #ffffff;
+
+  background: rgba(249, 115, 22, 0.11);
+
+  border-color: rgba(249, 115, 22, 0.15);
+}
+
+/* ====================================== */
+/* NAV ACTIVE */
+/* ====================================== */
+
+.restaurant-analytics-nav-link.active {
+  color: #ffffff;
+
+  background: rgba(249, 115, 22, 0.17);
+
+  border-color: rgba(249, 115, 22, 0.22);
+}
+
+/* ====================================== */
+/* NAVBAR ACTIONS */
+/* ====================================== */
+
+.restaurant-analytics-navbar-actions {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  flex: 0 0 auto;
+
+  gap: 7px;
+}
+
+/* ====================================== */
+/* PROFILE */
+/* ====================================== */
+
+.restaurant-analytics-profile {
+  width: 40px;
+
+  height: 40px;
+
+  min-width: 40px;
+
+  flex: 0 0 40px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 0;
+
+  color: var(--ra-navbar-orange);
+
+  background: var(--ra-navbar-soft);
+
+  border: 1px solid var(--ra-navbar-border);
+
+  border-radius: 10px;
+
+  text-decoration: none;
+
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.restaurant-analytics-profile:hover,
+.restaurant-analytics-profile.active {
+  color: #ffffff;
+
+  background: var(--ra-navbar-orange);
+
+  border-color: var(--ra-navbar-orange);
+}
+
+/* ====================================== */
+/* LOGOUT */
+/* ====================================== */
+
+.restaurant-analytics-logout {
+  min-height: 40px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 7px 13px;
+
+  color: #ffffff;
+
+  background: var(--ra-navbar-orange);
+
+  border: 1px solid var(--ra-navbar-orange);
+
+  border-radius: 11px;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.restaurant-analytics-logout:hover {
+  background: var(--ra-navbar-orange-dark);
+
+  border-color: var(--ra-navbar-orange-dark);
+}
+
+.restaurant-analytics-logout:active {
+  transform: scale(0.97);
+}
+
+/* ====================================== */
+/* MOBILE MENU BUTTON */
+/* ====================================== */
+
+.restaurant-analytics-menu-button {
+  width: 42px;
+
+  height: 42px;
+
+  min-width: 42px;
+
+  min-height: 42px;
+
+  flex: 0 0 42px;
+
+  display: none;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin: 0;
+
+  padding: 0;
+
+  color: var(--ra-navbar-orange);
+
+  background: var(--ra-navbar-soft);
+
+  border: 1px solid var(--ra-navbar-border);
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.restaurant-analytics-menu-button:hover {
+  color: #ffffff;
+
+  background: var(--ra-navbar-orange);
+
+  border-color: var(--ra-navbar-orange);
+}
+
+.restaurant-analytics-menu-button:active {
+  transform: scale(0.95);
+}
+
+/* ========================================================= */
+/* PAGE */
+/* ========================================================= */
+
+.restaurant-analytics-page {
+  width: 100%;
+
+  flex: 1;
+
+  padding: 42px 0 85px;
+
+  color: var(--ra-text);
+
+  background: var(--ra-background);
+}
+
+/* ====================================== */
+/* CONTAINER */
+/* ====================================== */
+
+.restaurant-analytics-container {
+  width: min(1180px, calc(100% - 40px));
+
+  margin: 0 auto;
+}
+
+/* ========================================================= */
+/* BACK BUTTON */
+/* ========================================================= */
+
+.restaurant-analytics-back {
+  width: fit-content;
+
+  min-height: 40px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-bottom: 25px;
+
+  padding: 9px 14px;
+
+  color: var(--ra-navy);
+
+  background: #ffffff;
+
+  border: 1px solid var(--ra-border);
+
+  border-radius: 10px;
+
+  font-family: inherit;
+
+  font-size: 0.84rem;
+
+  font-weight: 650;
+
+  cursor: pointer;
+
+  box-shadow: 0 3px 10px rgba(7, 26, 43, 0.035);
+
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.restaurant-analytics-back svg {
+  flex-shrink: 0;
+
+  color: var(--ra-orange);
+}
+
+.restaurant-analytics-back:hover {
+  color: var(--ra-orange-dark);
+
+  background: var(--ra-orange-soft);
+
+  border-color: rgba(249, 115, 22, 0.22);
+
+  transform: translateX(-2px);
+}
+
+/* ========================================================= */
+/* HEADER */
+/* ========================================================= */
+
+.restaurant-analytics-header {
+  position: relative;
+
+  width: 100%;
+
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 28px;
+
+  margin-bottom: 22px;
+
+  padding: 30px 32px;
+
+  overflow: hidden;
+
+  color: #ffffff;
+
+  background: linear-gradient(135deg, #071a2b 0%, #0d2940 100%);
+
+  border: 1px solid rgba(255, 255, 255, 0.07);
+
+  border-radius: 22px;
+
+  box-shadow: 0 14px 36px rgba(7, 26, 43, 0.16);
+}
+
+/* ====================================== */
+/* HEADER GLOW */
+/* ====================================== */
+
+.restaurant-analytics-header::before {
+  content: "";
+
+  position: absolute;
+
+  top: -110px;
+
+  right: -90px;
+
+  width: 280px;
+
+  height: 280px;
+
+  pointer-events: none;
+
+  background: radial-gradient(
+    circle,
+    rgba(249, 115, 22, 0.15),
+    transparent 68%
+  );
+}
+
+.restaurant-analytics-header > * {
+  position: relative;
+
+  z-index: 1;
+}
+
+/* ====================================== */
+/* EYEBROW */
+/* ====================================== */
+
+.restaurant-analytics-eyebrow {
+  width: fit-content;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin-bottom: 11px;
+
+  padding: 6px 10px;
+
+  color: #ffffff;
+
+  background: rgba(249, 115, 22, 0.17);
+
+  border: 1px solid rgba(249, 115, 22, 0.22);
+
+  border-radius: 999px;
+
+  font-size: 0.7rem;
+
+  font-weight: 750;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.04em;
+}
+
+.restaurant-analytics-eyebrow svg {
+  color: var(--ra-orange);
+}
+
+/* ====================================== */
+/* HEADER TITLE */
+/* ====================================== */
+
+.restaurant-analytics-header h1 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: clamp(2rem, 4vw, 3rem);
+
+  font-weight: 820;
+
+  line-height: 1.05;
+
+  letter-spacing: -0.045em;
+}
+
+/* ====================================== */
+/* HEADER DESCRIPTION */
+/* ====================================== */
+
+.restaurant-analytics-header p {
+  max-width: 620px;
+
+  margin: 13px 0 0;
+
+  color: #b8c6d1;
+
+  font-size: 0.94rem;
+
+  line-height: 1.7;
+}
+
+/* ========================================================= */
+/* HEADER FILTERS */
+/* ========================================================= */
+
+.restaurant-analytics-header-controls {
+  display: flex;
+
+  align-items: center;
+
+  gap: 9px;
+
+  flex-shrink: 0;
+}
+
+.restaurant-analytics-header-controls select {
+  min-height: 42px;
+
+  padding: 0 34px 0 12px;
+
+  color: #ffffff;
+
+  background: rgba(255, 255, 255, 0.07);
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+
+  border-radius: 10px;
+
+  outline: none;
+
+  font-family: inherit;
+
+  font-size: 0.78rem;
+
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.restaurant-analytics-header-controls select:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.restaurant-analytics-header-controls select:focus {
+  border-color: rgba(249, 115, 22, 0.55);
+
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+}
+
+.restaurant-analytics-header-controls select option {
+  color: var(--ra-text);
+
+  background: #ffffff;
+}
+
+/* ========================================================= */
+/* CURRENT RESTAURANT */
+/* ========================================================= */
+
+.restaurant-analytics-current {
+  width: fit-content;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin-bottom: 20px;
+
+  padding: 8px 11px;
+
+  color: var(--ra-muted);
+
+  background: #ffffff;
+
+  border: 1px solid var(--ra-border);
+
+  border-radius: 9px;
+
+  font-size: 0.76rem;
+
+  box-shadow: 0 3px 10px rgba(7, 26, 43, 0.035);
+}
+
+.restaurant-analytics-current svg {
+  color: var(--ra-orange);
+}
+
+.restaurant-analytics-current strong {
+  color: var(--ra-navy);
+}
+
+/* ========================================================= */
+/* METRICS */
+/* ========================================================= */
+
+.restaurant-analytics-metrics {
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 18px;
+
+  margin-bottom: 24px;
+}
+
+/* ====================================== */
+/* METRIC CARD */
+/* ====================================== */
+
+.restaurant-analytics-metric-card {
+  min-width: 0;
+
+  padding: 21px;
+
+  background: #ffffff;
+
+  border: 1px solid var(--ra-border);
+
+  border-radius: 17px;
+
+  box-shadow: var(--ra-shadow);
+
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.restaurant-analytics-metric-card:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(249, 115, 22, 0.22);
+
+  box-shadow: var(--ra-shadow-hover);
+}
+
+/* ====================================== */
+/* METRIC ICON */
+/* ====================================== */
+
+.restaurant-analytics-metric-icon {
+  width: 43px;
+
+  height: 43px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-bottom: 17px;
+
+  color: var(--ra-orange);
+
+  background: var(--ra-orange-soft);
+
+  border: 1px solid rgba(249, 115, 22, 0.14);
+
+  border-radius: 12px;
+}
+
+/* ====================================== */
+/* METRIC LABEL */
+/* ====================================== */
+
+.restaurant-analytics-metric-card > span {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: var(--ra-muted);
+
+  font-size: 0.75rem;
+
+  font-weight: 650;
+}
+
+/* ====================================== */
+/* METRIC VALUE */
+/* ====================================== */
+
+.restaurant-analytics-metric-card > strong {
+  display: block;
+
+  overflow: hidden;
+
+  color: var(--ra-navy);
+
+  font-size: clamp(1.25rem, 2vw, 1.65rem);
+
+  font-weight: 800;
+
+  text-overflow: ellipsis;
+}
+
+.restaurant-analytics-metric-card small {
+  display: block;
+
+  margin-top: 7px;
+
+  color: #94a3b8;
+
+  font-size: 0.66rem;
+}
+
+/* ========================================================= */
+/* PANELS */
+/* ========================================================= */
+
+.restaurant-analytics-chart-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.4fr)
+    minmax(300px, 0.6fr);
+
+  gap: 20px;
+
+  margin-bottom: 20px;
+}
+
+.restaurant-analytics-bottom-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(280px, 0.65fr)
+    minmax(0, 1.35fr);
+
+  gap: 20px;
+}
+
+/* ====================================== */
+/* PANEL */
+/* ====================================== */
+
+.restaurant-analytics-panel {
+  min-width: 0;
+
+  padding: 23px;
+
+  background: #ffffff;
+
+  border: 1px solid var(--ra-border);
+
+  border-radius: 19px;
+
+  box-shadow: var(--ra-shadow);
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.restaurant-analytics-panel:hover {
+  border-color: rgba(249, 115, 22, 0.14);
+
+  box-shadow: var(--ra-shadow-hover);
+}
+
+/* ====================================== */
+/* PANEL HEADING */
+/* ====================================== */
+
+.restaurant-analytics-panel-heading {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 23px;
+}
+
+.restaurant-analytics-panel-heading h2 {
+  margin: 0;
+
+  color: var(--ra-navy);
+
+  font-size: 1.05rem;
+
+  font-weight: 760;
+}
+
+.restaurant-analytics-panel-heading p {
+  margin: 4px 0 0;
+
+  color: var(--ra-muted);
+
+  font-size: 0.7rem;
+}
+
+.restaurant-analytics-panel-heading > svg {
+  flex-shrink: 0;
+
+  color: var(--ra-orange);
+}
+
+/* ========================================================= */
+/* REVENUE BAR CHART */
+/* ========================================================= */
+
+.restaurant-analytics-bar-chart {
+  height: 250px;
+
+  display: grid;
+
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+
+  align-items: end;
+
+  gap: 9px;
+}
+
+/* ====================================== */
+/* BAR COLUMN */
+/* ====================================== */
+
+.restaurant-analytics-bar-column {
+  min-width: 0;
+
+  height: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  gap: 6px;
+}
+
+/* ====================================== */
+/* BAR VALUE */
+/* ====================================== */
+
+.restaurant-analytics-bar-value {
+  width: 100%;
+
+  min-height: 22px;
+
+  overflow: hidden;
+
+  color: var(--ra-muted);
+
+  font-size: 0.57rem;
+
+  font-weight: 650;
+
+  text-align: center;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+/* ====================================== */
+/* BAR TRACK */
+/* ====================================== */
+
+.restaurant-analytics-bar-track {
+  position: relative;
+
+  width: min(34px, 80%);
+
+  height: 180px;
+
+  display: flex;
+
+  align-items: flex-end;
+
+  overflow: hidden;
+
+  background: #eef2f6;
+
+  border-radius: 8px 8px 4px 4px;
+}
+
+/* ====================================== */
+/* BAR */
+/* ====================================== */
+
+.restaurant-analytics-bar {
+  width: 100%;
+
+  min-height: 5px;
+
+  background: linear-gradient(180deg, #f97316, #ea580c);
+
+  border-radius: 8px 8px 4px 4px;
+
+  transition: height 300ms ease;
+}
+
+.restaurant-analytics-bar-column > span {
+  color: var(--ra-muted);
+
+  font-size: 0.67rem;
+
+  font-weight: 650;
+}
+
+/* ========================================================= */
+/* ORDER STATUS */
+/* ========================================================= */
+
+.restaurant-analytics-status-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 17px;
+}
+
+/* ====================================== */
+/* STATUS HEADING */
+/* ====================================== */
+
+.restaurant-analytics-status-heading {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 7px;
+}
+
+.restaurant-analytics-status-heading span {
+  color: var(--ra-muted);
+
+  font-size: 0.77rem;
+
+  text-transform: capitalize;
+}
+
+.restaurant-analytics-status-heading strong {
+  color: var(--ra-navy);
+
+  font-size: 0.78rem;
+}
+
+/* ====================================== */
+/* STATUS TRACK */
+/* ====================================== */
+
+.restaurant-analytics-status-track {
+  width: 100%;
+
+  height: 8px;
+
+  overflow: hidden;
+
+  background: #eef2f6;
+
+  border-radius: 999px;
+}
+
+.restaurant-analytics-status-track div {
+  height: 100%;
+
+  min-width: 5px;
+
+  background: linear-gradient(90deg, #071a2b, #0d2940);
+
+  border-radius: 999px;
+}
+
+/* ========================================================= */
+/* TOP ITEMS */
+/* ========================================================= */
+
+.restaurant-analytics-top-items {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 11px;
+}
+
+/* ====================================== */
+/* TOP ITEM */
+/* ====================================== */
+
+.restaurant-analytics-top-item {
+  display: grid;
+
+  grid-template-columns:
+    auto
+    minmax(0, 1fr)
+    auto;
+
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 11px;
+
+  background: var(--ra-soft);
+
+  border: 1px solid var(--ra-border);
+
+  border-radius: 11px;
+
+  transition:
+    background 180ms ease,
+    border-color 180ms ease;
+}
+
+.restaurant-analytics-top-item:hover {
+  background: #ffffff;
+
+  border-color: rgba(249, 115, 22, 0.18);
+}
+
+/* ====================================== */
+/* RANK */
+/* ====================================== */
+
+.restaurant-analytics-rank {
+  width: 31px;
+
+  height: 31px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: #ffffff;
+
+  background: var(--ra-navy);
+
+  border-radius: 9px;
+
+  font-size: 0.74rem;
+
+  font-weight: 800;
+}
+
+/* ====================================== */
+/* TOP ITEM CONTENT */
+/* ====================================== */
+
+.restaurant-analytics-top-item > div {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+.restaurant-analytics-top-item > div strong {
+  overflow: hidden;
+
+  color: var(--ra-navy);
+
+  font-size: 0.78rem;
+
+  font-weight: 750;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+.restaurant-analytics-top-item small {
+  color: var(--ra-muted);
+
+  font-size: 0.65rem;
+}
+
+/* ====================================== */
+/* ITEM REVENUE */
+/* ====================================== */
+
+.restaurant-analytics-item-revenue {
+  color: var(--ra-orange-dark);
+
+  font-size: 0.75rem;
+
+  font-weight: 800;
+}
+
+/* ========================================================= */
+/* RECENT ORDERS TABLE */
+/* ========================================================= */
+
+.restaurant-analytics-orders-table-wrapper {
+  width: 100%;
+
+  overflow-x: auto;
+
+  scrollbar-width: thin;
+}
+
+/* ====================================== */
+/* TABLE */
+/* ====================================== */
+
+.restaurant-analytics-orders-table {
+  width: 100%;
+
+  min-width: 600px;
+
+  border-collapse: collapse;
+}
+
+/* ====================================== */
+/* TABLE HEADER */
+/* ====================================== */
+
+.restaurant-analytics-orders-table th {
+  padding: 0 10px 10px;
+
+  color: var(--ra-muted);
+
+  border-bottom: 1px solid var(--ra-border);
+
+  font-size: 0.68rem;
+
+  font-weight: 700;
+
+  text-align: left;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.025em;
+}
+
+/* ====================================== */
+/* TABLE DATA */
+/* ====================================== */
+
+.restaurant-analytics-orders-table td {
+  padding: 13px 10px;
+
+  color: var(--ra-muted);
+
+  border-bottom: 1px solid var(--ra-border);
+
+  font-size: 0.74rem;
+}
+
+.restaurant-analytics-orders-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.restaurant-analytics-orders-table tbody tr {
+  transition: background 160ms ease;
+}
+
+.restaurant-analytics-orders-table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.restaurant-analytics-orders-table td:first-child {
+  color: var(--ra-navy);
+
+  font-weight: 700;
+}
+
+.restaurant-analytics-orders-table td:last-child strong {
+  color: var(--ra-orange-dark);
+}
+
+/* ========================================================= */
+/* ORDER STATUS BADGE */
+/* ========================================================= */
+
+.restaurant-analytics-order-status {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 4px 7px;
+
+  color: #ffffff;
+
+  background: var(--ra-navy);
+
+  border: 1px solid var(--ra-navy);
+
+  border-radius: 999px;
+
+  font-size: 0.63rem;
+
+  font-weight: 700;
+
+  line-height: 1;
+
+  text-transform: capitalize;
+}
+
+/* ========================================================= */
+/* EMPTY PANEL */
+/* ========================================================= */
+
+.restaurant-analytics-panel-empty {
+  min-height: 160px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 20px;
+
+  color: var(--ra-muted);
+
+  background: var(--ra-soft);
+
+  border: 1px solid var(--ra-border);
+
+  border-radius: 12px;
+
+  font-size: 0.78rem;
+
+  text-align: center;
+}
+
+/* ========================================================= */
+/* PAGE STATE */
+/* ========================================================= */
+
+.restaurant-analytics-state {
+  min-height: 360px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 45px 20px;
+
+  color: var(--ra-muted);
+
+  text-align: center;
+
+  background: #ffffff;
+
+  border: 1px solid var(--ra-border);
+
+  border-radius: 20px;
+
+  box-shadow: var(--ra-shadow);
+}
+
+.restaurant-analytics-state > svg {
+  margin-bottom: 17px;
+
+  color: var(--ra-orange);
+}
+
+.restaurant-analytics-state h2 {
+  margin: 0;
+
+  color: var(--ra-navy);
+
+  font-size: 1.2rem;
+
+  font-weight: 760;
+}
+
+.restaurant-analytics-state p {
+  max-width: 420px;
+
+  margin: 8px 0 0;
+
+  color: var(--ra-muted);
+
+  font-size: 0.8rem;
+
+  line-height: 1.6;
+}
+
+/* ========================================================= */
+/* RETRY BUTTON */
+/* ========================================================= */
+
+.restaurant-analytics-retry {
+  min-height: 42px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  margin-top: 20px;
+
+  padding: 8px 16px;
+
+  color: #ffffff;
+
+  background: var(--ra-navy);
+
+  border: 1px solid var(--ra-navy);
+
+  border-radius: 10px;
+
+  font-family: inherit;
+
+  font-size: 0.8rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.restaurant-analytics-retry:hover {
+  background: var(--ra-navy-light);
+
+  border-color: var(--ra-navy-light);
+
+  transform: translateY(-1px);
+}
+
+/* ========================================================= */
+/* LOADER */
+/* ========================================================= */
+
+.restaurant-analytics-loader {
+  width: 42px;
+
+  height: 42px;
+
+  margin-bottom: 18px;
+
+  border: 4px solid #e5e7eb;
+
+  border-top-color: var(--ra-orange);
+
+  border-radius: 50%;
+
+  animation: restaurant-analytics-spin 0.8s linear infinite;
+}
+
+@keyframes restaurant-analytics-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ========================================================= */
+/* ACCESSIBILITY */
+/* ========================================================= */
+
+.restaurant-analytics-layout button:focus-visible,
+.restaurant-analytics-layout a:focus-visible,
+.restaurant-analytics-layout select:focus-visible {
+  outline: 3px solid rgba(249, 115, 22, 0.28);
+
+  outline-offset: 3px;
+}
+
+/* ========================================================= */
+/* MEDIUM DESKTOP */
+/* ========================================================= */
+
+@media (max-width: 1000px) {
+  .restaurant-analytics-metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .restaurant-analytics-chart-grid,
+  .restaurant-analytics-bottom-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ========================================================= */
+/* MOBILE NAVIGATION */
+/* ========================================================= */
+
+@media (max-width: 1120px) {
+  .restaurant-analytics-navbar-shell {
+    width: 94%;
+
+    min-height: 60px;
+
+    gap: 10px;
+
+    padding: 8px 0;
+  }
+
+  .restaurant-analytics-menu-button {
+    display: inline-flex;
+  }
+
+  .restaurant-analytics-navbar-actions {
+    margin-left: auto;
+
+    gap: 10px;
+  }
+
+  /* ====================================== */
+  /* NAV DROPDOWN */
+  /* ====================================== */
+
+  .restaurant-analytics-nav {
+    position: absolute;
+
+    top: calc(100% + 7px);
+
+    left: 0;
+
+    right: 0;
+
+    z-index: 4200;
+
+    width: 100%;
+
+    display: none;
+
+    grid-template-columns: 1fr;
+
+    gap: 8px;
+
+    margin: 0;
+
+    padding: 14px;
+
+    max-height: calc(100dvh - 85px);
+
+    overflow-y: auto;
+
+    border: 1px solid var(--ra-navbar-border);
+
+    border-radius: 17px;
+
+    background:
+      radial-gradient(
+        circle at 10% 10%,
+        rgba(249, 115, 22, 0.08),
+        transparent 28%
+      ),
+      #0b2237;
+
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
+
+    overscroll-behavior: contain;
+  }
+
+  .restaurant-analytics-nav.is-open {
+    display: grid;
+
+    animation: restaurant-analytics-panel-open 180ms ease;
+  }
+
+  /* ====================================== */
+  /* MOBILE NAV LINK */
+  /* ====================================== */
+
+  .restaurant-analytics-nav-link {
+    width: 100%;
+
+    min-height: 54px;
+
+    justify-content: flex-start;
+
+    padding: 10px 14px;
+
+    color: #dce5ec;
+
+    background: rgba(255, 255, 255, 0.055);
+
+    border: 1px solid rgba(255, 255, 255, 0.07);
+
+    border-radius: 14px;
+
+    font-size: 15px;
+  }
+
+  .restaurant-analytics-nav-link:hover,
+  .restaurant-analytics-nav-link.active {
+    color: #ffffff;
+
+    background: rgba(249, 115, 22, 0.14);
+
+    border-color: rgba(249, 115, 22, 0.22);
+  }
+}
+
+/* ========================================================= */
+/* TABLET */
+/* ========================================================= */
+
+@media (max-width: 700px) {
+  .restaurant-analytics-page {
+    padding: 30px 0 65px;
+  }
+
+  .restaurant-analytics-container {
+    width: min(calc(100% - 30px), 1180px);
+  }
+
+  /* ====================================== */
+  /* HEADER */
+  /* ====================================== */
+
+  .restaurant-analytics-header {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 20px;
+
+    padding: 25px;
+
+    border-radius: 18px;
+  }
+
+  .restaurant-analytics-header-controls {
+    width: 100%;
+
+    flex-wrap: wrap;
+  }
+
+  .restaurant-analytics-header-controls select {
+    flex: 1 1 180px;
+  }
+}
+
+/* ========================================================= */
+/* MOBILE */
+/* ========================================================= */
+
+@media (max-width: 600px) {
+  .restaurant-analytics-page {
+    padding: 24px 0 55px;
+  }
+
+  .restaurant-analytics-container {
+    width: calc(100% - 24px);
+  }
+
+  /* ====================================== */
+  /* NAVBAR */
+  /* ====================================== */
+
+  .restaurant-analytics-navbar-shell {
+    width: 96%;
+
+    gap: 9px;
+  }
+
+  .restaurant-analytics-logo img {
+    width: clamp(100px, 28vw, 125px);
+
+    max-height: 36px;
+  }
+
+  .restaurant-analytics-logout {
+    width: 40px;
+
+    height: 40px;
+
+    min-width: 40px;
+
+    min-height: 40px;
+
+    flex: 0 0 40px;
+
+    padding: 0;
+
+    border-radius: 10px;
+  }
+
+  .restaurant-analytics-logout span {
+    display: none;
+  }
+
+  .restaurant-analytics-profile,
+  .restaurant-analytics-menu-button {
+    width: 40px;
+
+    height: 40px;
+
+    min-width: 40px;
+
+    min-height: 40px;
+
+    flex-basis: 40px;
+  }
+
+  /* ====================================== */
+  /* HEADER */
+  /* ====================================== */
+
+  .restaurant-analytics-header {
+    padding: 23px 20px;
+
+    border-radius: 17px;
+  }
+
+  .restaurant-analytics-header h1 {
+    font-size: clamp(1.8rem, 9vw, 2.2rem);
+  }
+
+  .restaurant-analytics-header p {
+    font-size: 0.84rem;
+
+    line-height: 1.6;
+  }
+
+  /* ====================================== */
+  /* METRICS */
+  /* ====================================== */
+
+  .restaurant-analytics-metrics {
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+  }
+
+  .restaurant-analytics-metric-card {
+    border-radius: 17px;
+  }
+
+  /* ====================================== */
+  /* PANELS */
+  /* ====================================== */
+
+  .restaurant-analytics-panel {
+    padding: 19px;
+
+    border-radius: 17px;
+  }
+
+  .restaurant-analytics-panel-heading {
+    align-items: flex-start;
+  }
+
+  /* ====================================== */
+  /* BAR CHART */
+  /* ====================================== */
+
+  .restaurant-analytics-bar-chart {
+    height: 220px;
+
+    gap: 6px;
+  }
+
+  .restaurant-analytics-bar-track {
+    width: min(30px, 80%);
+
+    height: 150px;
+  }
+
+  /* ====================================== */
+  /* CURRENT RESTAURANT */
+  /* ====================================== */
+
+  .restaurant-analytics-current {
+    max-width: 100%;
+
+    flex-wrap: wrap;
+  }
+}
+
+/* ========================================================= */
+/* SMALL MOBILE */
+/* ========================================================= */
+
+@media (max-width: 400px) {
+  .restaurant-analytics-page {
+    padding-top: 20px;
+  }
+
+  .restaurant-analytics-container {
+    width: calc(100% - 20px);
+  }
+
+  .restaurant-analytics-header {
+    padding: 21px 17px;
+  }
+
+  .restaurant-analytics-header h1 {
+    font-size: 1.9rem;
+  }
+
+  .restaurant-analytics-header-controls {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .restaurant-analytics-header-controls select {
+    width: 100%;
+
+    flex: none;
+  }
+
+  .restaurant-analytics-panel {
+    padding: 17px 15px;
+  }
+
+  .restaurant-analytics-metric-card {
+    padding: 18px;
+  }
+
+  .restaurant-analytics-bar-chart {
+    gap: 4px;
+  }
+
+  .restaurant-analytics-bar-track {
+    width: min(25px, 82%);
+  }
+}
+
+/* ========================================================= */
+/* MOBILE NAV ANIMATION */
+/* ========================================================= */
+
+@keyframes restaurant-analytics-panel-open {
+  from {
+    opacity: 0;
+
+    transform: translateY(-7px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+/* ========================================================= */
+/* REDUCED MOTION */
+/* ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .restaurant-analytics-layout *,
+  .restaurant-analytics-layout *::before,
+  .restaurant-analytics-layout *::after {
+    animation: none !important;
+
+    transition: none !important;
+
+    scroll-behavior: auto !important;
+  }
+}

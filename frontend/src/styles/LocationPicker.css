@@ -1,0 +1,364 @@
+/* ====================================== */
+/* LOCATION PICKER */
+/* ====================================== */
+
+.location-picker {
+  width: 100%;
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 18px;
+
+  box-sizing: border-box;
+}
+
+/* ====================================== */
+/* SEARCH */
+/* ====================================== */
+
+.location-search {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+}
+
+.location-search label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #334155;
+
+  font-size: 0.85rem;
+  font-weight: 650;
+}
+
+.location-search-input-wrapper {
+  width: 100%;
+}
+
+.location-search input {
+  width: 100%;
+  min-height: 48px;
+
+  padding: 0 14px;
+
+  color: #0f172a;
+
+  background: #ffffff;
+
+  border: 1px solid #dce3ea;
+  border-radius: 10px;
+
+  outline: none;
+
+  font: inherit;
+
+  box-sizing: border-box;
+}
+
+.location-search input:focus {
+  border-color: #f97316;
+
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+}
+
+/* ====================================== */
+/* SEARCH STATUS */
+/* ====================================== */
+
+.location-search-status {
+  margin: 6px 0 0;
+
+  color: #64748b;
+
+  font-size: 0.78rem;
+}
+
+.location-search-error {
+  margin: 6px 0 0;
+
+  color: #dc2626;
+
+  font-size: 0.78rem;
+}
+
+/* ====================================== */
+/* SUGGESTIONS */
+/* ====================================== */
+
+.location-suggestions {
+  position: absolute;
+
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+
+  z-index: 3000;
+
+  max-height: 280px;
+
+  overflow-y: auto;
+
+  padding: 6px;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+
+  box-shadow: 0 16px 35px rgba(15, 23, 42, 0.14);
+}
+
+.location-suggestion {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+
+  padding: 11px 12px;
+
+  color: #0f172a;
+
+  background: transparent;
+
+  border: 0;
+  border-radius: 8px;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  box-sizing: border-box;
+}
+
+.location-suggestion:hover {
+  background: #fff4ec;
+}
+
+.location-suggestion strong {
+  font-size: 0.85rem;
+}
+
+.location-suggestion span {
+  color: #64748b;
+
+  font-size: 0.76rem;
+
+  line-height: 1.4;
+}
+
+/* ====================================== */
+/* MAP */
+/* ====================================== */
+
+.location-map {
+  position: relative;
+
+  width: 100%;
+  height: 390px;
+
+  min-width: 0;
+
+  overflow: hidden;
+
+  background: #e5e7eb;
+
+  border: 1px solid #dce3ea;
+  border-radius: 14px;
+
+  box-sizing: border-box;
+}
+
+/* ====================================== */
+/* LEAFLET MAP */
+/* ====================================== */
+
+.location-leaflet-map {
+  width: 100% !important;
+  height: 100% !important;
+
+  min-width: 0;
+
+  border-radius: 14px;
+}
+
+/* Force Leaflet to fill the parent */
+.location-map .leaflet-container {
+  position: relative;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  min-width: 0;
+
+  margin: 0;
+  padding: 0;
+
+  background: #e5e7eb;
+
+  border-radius: 14px;
+}
+
+/* ====================================== */
+/* LEAFLET TILE FIX */
+/* ====================================== */
+
+.location-map .leaflet-map-pane,
+.location-map .leaflet-tile-pane {
+  width: 100%;
+  height: 100%;
+}
+
+.location-map .leaflet-tile {
+  max-width: none !important;
+  max-height: none !important;
+}
+
+/* ====================================== */
+/* LEAFLET CONTROLS */
+/* ====================================== */
+
+.location-map .leaflet-control-container {
+  position: relative;
+  z-index: 500;
+}
+
+/* ====================================== */
+/* SELECTED LOCATION */
+/* ====================================== */
+
+.selected-location {
+  width: 100%;
+
+  padding: 14px 16px;
+
+  background: #f8fafc;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+
+  box-sizing: border-box;
+}
+
+.selected-location-header {
+  margin-bottom: 5px;
+
+  color: #0f172a;
+
+  font-size: 0.85rem;
+}
+
+.selected-location p {
+  margin: 0 0 8px;
+
+  color: #475569;
+
+  font-size: 0.82rem;
+
+  line-height: 1.5;
+}
+
+.selected-location-coordinates {
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  color: #94a3b8;
+
+  font-size: 0.72rem;
+}
+
+/* ====================================== */
+/* TABLET */
+/* ====================================== */
+
+@media (max-width: 900px) {
+  .location-map {
+    height: 360px;
+  }
+}
+
+/* ====================================== */
+/* MOBILE */
+/* ====================================== */
+
+@media (max-width: 600px) {
+  .location-map {
+    height: 310px;
+  }
+
+  .selected-location-coordinates {
+    flex-direction: column;
+
+    gap: 4px;
+  }
+}
+/* ====================================== */
+/* DISH DASH CSS-ONLY MAP PIN             */
+/* Add to LocationPicker.css              */
+/* ====================================== */
+
+.dishdash-map-pin-wrapper {
+  background: transparent !important;
+  border: 0 !important;
+}
+
+.dishdash-map-pin {
+  position: relative;
+
+  width: 30px;
+  height: 30px;
+
+  border: 3px solid #ffffff;
+  border-radius: 50% 50% 50% 0;
+
+  background: #ff5a00;
+
+  box-shadow:
+    0 5px 14px rgba(15, 23, 42, 0.26),
+    0 1px 3px rgba(15, 23, 42, 0.18);
+
+  transform: rotate(-45deg);
+}
+
+.dishdash-map-pin-dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #ffffff;
+
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.location-leaflet-map {
+  background: #e5e7eb;
+}
+
+/* Keep tiles crisp while zooming. */
+.location-leaflet-map .leaflet-tile {
+  max-width: none !important;
+}
+
+/* ====================================== */
+/* MOBILE                                 */
+/* ====================================== */
+
+@media (max-width: 480px) {
+  .dishdash-map-pin {
+    width: 28px;
+    height: 28px;
+  }
+}

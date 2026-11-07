@@ -1,0 +1,797 @@
+/* ========================================================= */
+/* DISH DASH RESTAURANT NAVBAR                               */
+/* MATCHES CUSTOMER NAVBAR STYLE                             */
+/* ========================================================= */
+
+/* ====================================== */
+/* NAVBAR                                 */
+/* ====================================== */
+
+.restaurant-navbar {
+  --restaurant-navbar-orange: #f97316;
+  --restaurant-navbar-orange-dark: #ea580c;
+  --restaurant-navbar-orange-soft: rgba(249, 115, 22, 0.14);
+
+  --restaurant-navbar-navy: #071a2b;
+  --restaurant-navbar-navy-light: #0d2940;
+
+  --restaurant-navbar-white: #ffffff;
+  --restaurant-navbar-text: #dce5ec;
+  --restaurant-navbar-muted: #9fb0bf;
+
+  --restaurant-navbar-soft: rgba(255, 255, 255, 0.065);
+  --restaurant-navbar-soft-hover: rgba(255, 255, 255, 0.1);
+
+  --restaurant-navbar-border: rgba(255, 255, 255, 0.1);
+
+  position: sticky;
+  top: 0;
+
+  z-index: 4000;
+
+  width: 100%;
+
+  background:
+    radial-gradient(
+      circle at 12% 10px,
+      rgba(249, 115, 22, 0.09),
+      transparent 28%
+    ),
+    var(--restaurant-navbar-navy);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+/* ====================================== */
+/* BOX SIZING                             */
+/* ====================================== */
+
+.restaurant-navbar,
+.restaurant-navbar * {
+  box-sizing: border-box;
+}
+
+/* ====================================== */
+/* NAVBAR SHELL                           */
+/* ====================================== */
+
+.restaurant-navbar-shell {
+  position: relative;
+
+  width: 96%;
+  max-width: 1600px;
+
+  min-height: 66px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  margin: 0 auto;
+
+  padding: 7px 0;
+}
+
+/* ====================================== */
+/* LOGO                                   */
+/* ====================================== */
+
+.restaurant-navbar-logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 auto;
+
+  border-radius: 10px;
+
+  text-decoration: none;
+}
+
+.restaurant-navbar-logo img {
+  width: clamp(112px, 9vw, 148px);
+
+  height: auto;
+
+  max-height: 40px;
+
+  display: block;
+
+  object-fit: contain;
+}
+
+/* ====================================== */
+/* NAVIGATION LINKS                       */
+/* ====================================== */
+
+.restaurant-navbar-links {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex: 1;
+
+  gap: 3px;
+}
+
+/* ====================================== */
+/* NAV LINK                               */
+/* ====================================== */
+
+.restaurant-navbar-link {
+  min-height: 40px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 7px 9px;
+
+  border: 1px solid transparent;
+
+  border-radius: 11px;
+
+  color: var(--restaurant-navbar-text);
+
+  background: transparent;
+
+  font-family: inherit;
+
+  font-size: 13px;
+  font-weight: 650;
+
+  line-height: 1;
+
+  text-decoration: none;
+
+  white-space: nowrap;
+
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease;
+}
+
+/* ====================================== */
+/* NAV LINK ICON                          */
+/* ====================================== */
+
+.restaurant-navbar-link svg {
+  width: 18px;
+  height: 18px;
+
+  flex-shrink: 0;
+
+  color: var(--restaurant-navbar-orange);
+}
+
+/* ====================================== */
+/* NAV LINK HOVER                         */
+/* ====================================== */
+
+.restaurant-navbar-link:hover {
+  color: #ffffff;
+
+  background: rgba(249, 115, 22, 0.11);
+
+  border-color: rgba(249, 115, 22, 0.15);
+}
+
+/* ====================================== */
+/* ACTIVE LINK                            */
+/* ====================================== */
+
+.restaurant-navbar-link.active {
+  color: #ffffff;
+
+  background: rgba(249, 115, 22, 0.17);
+
+  border-color: rgba(249, 115, 22, 0.22);
+}
+
+/* ====================================== */
+/* RIGHT ACTIONS                          */
+/* ====================================== */
+
+.restaurant-navbar-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  flex: 0 0 auto;
+
+  gap: 7px;
+}
+
+/* ====================================== */
+/* PROFILE                                */
+/* ====================================== */
+
+.restaurant-navbar-profile {
+  width: 40px;
+  height: 40px;
+
+  min-width: 40px;
+
+  flex: 0 0 40px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid var(--restaurant-navbar-border);
+
+  border-radius: 10px;
+
+  color: var(--restaurant-navbar-orange);
+
+  background: var(--restaurant-navbar-soft);
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.restaurant-navbar-profile svg {
+  width: 20px;
+  height: 20px;
+
+  color: currentColor;
+}
+
+.restaurant-navbar-profile:hover,
+.restaurant-navbar-profile.active {
+  color: #ffffff;
+
+  background: var(--restaurant-navbar-orange);
+
+  border-color: var(--restaurant-navbar-orange);
+}
+
+.restaurant-navbar-profile:active {
+  transform: scale(0.95);
+}
+
+/* ====================================== */
+/* LOGOUT                                 */
+/* ====================================== */
+
+.restaurant-navbar-logout {
+  min-height: 40px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 7px 13px;
+
+  border: 1px solid var(--restaurant-navbar-orange);
+
+  border-radius: 11px;
+
+  color: #ffffff;
+
+  background: var(--restaurant-navbar-orange);
+
+  font-family: inherit;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.restaurant-navbar-logout svg {
+  width: 18px;
+  height: 18px;
+
+  flex-shrink: 0;
+
+  color: currentColor;
+}
+
+.restaurant-navbar-logout:hover {
+  background: var(--restaurant-navbar-orange-dark);
+
+  border-color: var(--restaurant-navbar-orange-dark);
+}
+
+.restaurant-navbar-logout:active {
+  transform: scale(0.97);
+}
+
+/* ====================================== */
+/* MOBILE MENU BUTTON                     */
+/* ====================================== */
+
+.restaurant-navbar-mobile-button {
+  width: 42px;
+  height: 42px;
+
+  min-width: 42px;
+  min-height: 42px;
+
+  display: none;
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 42px;
+
+  margin: 0;
+
+  padding: 0;
+
+  border: 1px solid var(--restaurant-navbar-border);
+
+  border-radius: 10px;
+
+  color: var(--restaurant-navbar-orange);
+
+  background: var(--restaurant-navbar-soft);
+
+  cursor: pointer;
+
+  box-shadow: none;
+
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.restaurant-navbar-mobile-button svg {
+  width: 21px;
+  height: 21px;
+}
+
+.restaurant-navbar-mobile-button:hover {
+  color: #ffffff;
+
+  background: var(--restaurant-navbar-orange);
+
+  border-color: var(--restaurant-navbar-orange);
+}
+
+.restaurant-navbar-mobile-button:active {
+  transform: scale(0.95);
+}
+
+/* ====================================== */
+/* FOCUS                                  */
+/* ====================================== */
+
+.restaurant-navbar-logo:focus-visible,
+.restaurant-navbar-link:focus-visible,
+.restaurant-navbar-profile:focus-visible,
+.restaurant-navbar-logout:focus-visible,
+.restaurant-navbar-mobile-button:focus-visible {
+  outline: 3px solid rgba(249, 115, 22, 0.45);
+
+  outline-offset: 2px;
+}
+
+/* ========================================================= */
+/* TABLET / MOBILE                                           */
+/* ========================================================= */
+
+@media (max-width: 1120px) {
+  /* ====================================== */
+  /* SHELL                                  */
+  /* ====================================== */
+
+  .restaurant-navbar-shell {
+    width: 94%;
+
+    min-height: 60px;
+
+    gap: 10px;
+
+    padding: 8px 0;
+  }
+
+  /* ====================================== */
+  /* LOGO                                   */
+  /* ====================================== */
+
+  .restaurant-navbar-logo img {
+    width: clamp(108px, 18vw, 138px);
+
+    max-height: 38px;
+  }
+
+  /* ====================================== */
+  /* MOBILE MENU BUTTON                     */
+  /* ====================================== */
+
+  .restaurant-navbar-mobile-button {
+    display: inline-flex;
+  }
+
+  /* ====================================== */
+  /* NAVIGATION DROPDOWN                    */
+  /* ====================================== */
+
+  .restaurant-navbar-links {
+    position: absolute;
+
+    top: calc(100% + 7px);
+
+    left: 0;
+    right: 0;
+
+    z-index: 4200;
+
+    width: 100%;
+
+    display: none;
+
+    grid-template-columns: 1fr;
+
+    gap: 8px;
+
+    margin: 0;
+
+    padding: 14px;
+
+    max-height: calc(100dvh - 85px);
+
+    overflow-y: auto;
+
+    border: 1px solid var(--restaurant-navbar-border);
+
+    border-radius: 17px;
+
+    background:
+      radial-gradient(
+        circle at 10% 10%,
+        rgba(249, 115, 22, 0.08),
+        transparent 28%
+      ),
+      #0b2237;
+
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
+
+    overscroll-behavior: contain;
+  }
+
+  /* ====================================== */
+  /* OPEN DROPDOWN                          */
+  /* ====================================== */
+
+  .restaurant-navbar-links.is-open {
+    display: grid;
+
+    animation: restaurant-navbar-panel-open 180ms ease;
+  }
+
+  /* ====================================== */
+  /* MOBILE LINKS                           */
+  /* ====================================== */
+
+  .restaurant-navbar-link {
+    width: 100%;
+
+    min-height: 54px;
+
+    justify-content: flex-start;
+
+    padding: 10px 14px;
+
+    border: 1px solid rgba(255, 255, 255, 0.07);
+
+    border-radius: 14px;
+
+    color: #dce5ec;
+
+    background: rgba(255, 255, 255, 0.055);
+
+    font-size: 15px;
+  }
+
+  .restaurant-navbar-link:hover,
+  .restaurant-navbar-link.active {
+    color: #ffffff;
+
+    background: rgba(249, 115, 22, 0.14);
+
+    border-color: rgba(249, 115, 22, 0.22);
+  }
+
+  /* ====================================== */
+  /* ACTIONS                                */
+  /* ====================================== */
+
+  .restaurant-navbar-actions {
+    margin-left: auto;
+
+    gap: 10px;
+  }
+}
+
+/* ========================================================= */
+/* PHONE                                                     */
+/* ========================================================= */
+
+@media (max-width: 650px) {
+  .restaurant-navbar-shell {
+    width: 96%;
+
+    gap: 9px;
+  }
+
+  /* ====================================== */
+  /* LOGO                                   */
+  /* ====================================== */
+
+  .restaurant-navbar-logo img {
+    width: clamp(100px, 28vw, 125px);
+
+    max-height: 36px;
+  }
+
+  /* ====================================== */
+  /* ACTION SPACING                         */
+  /* ====================================== */
+
+  .restaurant-navbar-actions {
+    gap: 9px;
+  }
+
+  /* ====================================== */
+  /* PROFILE                                */
+  /* ====================================== */
+
+  .restaurant-navbar-profile {
+    width: 40px;
+    height: 40px;
+
+    min-width: 40px;
+
+    flex-basis: 40px;
+  }
+
+  /* ====================================== */
+  /* LOGOUT BECOMES ICON BUTTON            */
+  /* ====================================== */
+
+  .restaurant-navbar-logout {
+    width: 40px;
+    height: 40px;
+
+    min-width: 40px;
+    min-height: 40px;
+
+    flex: 0 0 40px;
+
+    padding: 0;
+
+    border-radius: 10px;
+  }
+
+  .restaurant-navbar-logout span {
+    display: none;
+  }
+
+  /* ====================================== */
+  /* MENU BUTTON                            */
+  /* ====================================== */
+
+  .restaurant-navbar-mobile-button {
+    width: 40px;
+    height: 40px;
+
+    min-width: 40px;
+    min-height: 40px;
+
+    flex-basis: 40px;
+  }
+}
+
+/* ========================================================= */
+/* SMALL PHONE                                               */
+/* ========================================================= */
+
+@media (max-width: 500px) {
+  .restaurant-navbar-shell {
+    width: 97%;
+
+    gap: 8px;
+  }
+
+  /* ====================================== */
+  /* LOGO                                   */
+  /* ====================================== */
+
+  .restaurant-navbar-logo img {
+    width: clamp(92px, 27vw, 115px);
+
+    max-height: 34px;
+  }
+
+  /* ====================================== */
+  /* ACTIONS                                */
+  /* ====================================== */
+
+  .restaurant-navbar-actions {
+    gap: 8px;
+  }
+
+  .restaurant-navbar-profile,
+  .restaurant-navbar-logout,
+  .restaurant-navbar-mobile-button {
+    width: 38px;
+    height: 38px;
+
+    min-width: 38px;
+    min-height: 38px;
+
+    flex-basis: 38px;
+  }
+
+  .restaurant-navbar-profile svg,
+  .restaurant-navbar-logout svg,
+  .restaurant-navbar-mobile-button svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* ========================================================= */
+/* VERY SMALL PHONE                                          */
+/* ========================================================= */
+
+@media (max-width: 410px) {
+  .restaurant-navbar-shell {
+    width: 98%;
+
+    gap: 7px;
+  }
+
+  /* ====================================== */
+  /* LOGO                                   */
+  /* ====================================== */
+
+  .restaurant-navbar-logo img {
+    width: 92px;
+
+    max-height: 32px;
+  }
+
+  /* ====================================== */
+  /* ACTIONS                                */
+  /* ====================================== */
+
+  .restaurant-navbar-actions {
+    gap: 7px;
+  }
+
+  .restaurant-navbar-profile,
+  .restaurant-navbar-logout,
+  .restaurant-navbar-mobile-button {
+    width: 36px;
+    height: 36px;
+
+    min-width: 36px;
+    min-height: 36px;
+
+    flex-basis: 36px;
+  }
+
+  .restaurant-navbar-profile svg,
+  .restaurant-navbar-logout svg,
+  .restaurant-navbar-mobile-button svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  /* ====================================== */
+  /* MOBILE MENU                            */
+  /* ====================================== */
+
+  .restaurant-navbar-links {
+    padding: 12px;
+
+    gap: 7px;
+  }
+
+  .restaurant-navbar-link {
+    min-height: 50px;
+
+    padding: 9px 12px;
+
+    font-size: 14px;
+  }
+}
+
+/* ========================================================= */
+/* TINY PHONE                                                */
+/* ========================================================= */
+
+@media (max-width: 360px) {
+  .restaurant-navbar-shell {
+    gap: 5px;
+  }
+
+  .restaurant-navbar-logo img {
+    width: 82px;
+
+    max-height: 30px;
+  }
+
+  .restaurant-navbar-actions {
+    gap: 5px;
+  }
+
+  .restaurant-navbar-profile,
+  .restaurant-navbar-logout,
+  .restaurant-navbar-mobile-button {
+    width: 34px;
+    height: 34px;
+
+    min-width: 34px;
+    min-height: 34px;
+
+    flex-basis: 34px;
+  }
+
+  .restaurant-navbar-profile svg,
+  .restaurant-navbar-logout svg,
+  .restaurant-navbar-mobile-button svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* ========================================================= */
+/* MOBILE MENU ANIMATION                                     */
+/* ========================================================= */
+
+@keyframes restaurant-navbar-panel-open {
+  from {
+    opacity: 0;
+
+    transform: translateY(-7px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+/* ========================================================= */
+/* REDUCED MOTION                                            */
+/* ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .restaurant-navbar *,
+  .restaurant-navbar-links {
+    animation: none !important;
+
+    transition: none !important;
+  }
+}

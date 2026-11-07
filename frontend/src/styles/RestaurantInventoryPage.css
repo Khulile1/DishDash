@@ -1,0 +1,2115 @@
+/* ========================================================= */
+/* DISH DASH RESTAURANT INVENTORY                            */
+/* NAVY + ORANGE + WHITE + WHITESMOKE                        */
+/* ========================================================= */
+
+/* ====================================== */
+/* VARIABLES                              */
+/* ====================================== */
+
+.restaurant-inventory-page {
+  --ri-navy: #071a2b;
+  --ri-navy-light: #0d2940;
+  --ri-navy-soft: #102f46;
+
+  --ri-orange: #f97316;
+  --ri-orange-dark: #ea580c;
+
+  --ri-orange-soft: rgba(249, 115, 22, 0.14);
+
+  --ri-orange-softer: rgba(249, 115, 22, 0.08);
+
+  --ri-background: whitesmoke;
+  --ri-surface: #ffffff;
+  --ri-soft: #f8fafc;
+
+  --ri-text: #1f2937;
+  --ri-muted: #64748b;
+
+  --ri-border: #e5e7eb;
+
+  --ri-green: #16803d;
+  --ri-green-light: #ecfdf3;
+
+  --ri-red: #c62828;
+  --ri-red-light: #fff1f1;
+
+  --ri-warning: #9a6700;
+  --ri-warning-light: #fff8e6;
+
+  --ri-shadow: 0 10px 30px rgba(7, 26, 43, 0.06);
+
+  --ri-shadow-hover: 0 18px 42px rgba(7, 26, 43, 0.1);
+}
+
+/* ====================================== */
+/* RESET                                  */
+/* ====================================== */
+
+.restaurant-inventory-layout,
+.restaurant-inventory-layout *,
+.restaurant-inventory-layout *::before,
+.restaurant-inventory-layout *::after {
+  box-sizing: border-box;
+}
+
+/* ====================================== */
+/* LAYOUT                                 */
+/* ====================================== */
+
+.restaurant-inventory-layout {
+  width: 100%;
+
+  min-height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  background: whitesmoke;
+}
+
+/* ========================================================= */
+/* INVENTORY NAVBAR                                          */
+/* MATCHES RESTAURANT NAVBAR                                 */
+/* ========================================================= */
+
+.restaurant-inventory-navbar {
+  --inventory-navbar-orange: #f97316;
+  --inventory-navbar-orange-dark: #ea580c;
+
+  --inventory-navbar-navy: #071a2b;
+  --inventory-navbar-navy-light: #0d2940;
+
+  --inventory-navbar-text: #dce5ec;
+
+  --inventory-navbar-soft: rgba(255, 255, 255, 0.065);
+
+  --inventory-navbar-border: rgba(255, 255, 255, 0.1);
+
+  position: sticky;
+
+  top: 0;
+
+  z-index: 4000;
+
+  width: 100%;
+
+  background:
+    radial-gradient(
+      circle at 12% 10px,
+      rgba(249, 115, 22, 0.09),
+      transparent 28%
+    ),
+    var(--inventory-navbar-navy);
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+/* ====================================== */
+/* NAVBAR SHELL                           */
+/* ====================================== */
+
+.restaurant-inventory-navbar-shell {
+  position: relative;
+
+  width: 96%;
+
+  max-width: 1600px;
+
+  min-height: 66px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  margin: 0 auto;
+
+  padding: 7px 0;
+}
+
+/* ====================================== */
+/* LOGO                                   */
+/* ====================================== */
+
+.restaurant-inventory-logo {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex: 0 0 auto;
+
+  border-radius: 10px;
+
+  text-decoration: none;
+}
+
+.restaurant-inventory-logo img {
+  width: clamp(112px, 9vw, 148px);
+
+  height: auto;
+
+  max-height: 40px;
+
+  display: block;
+
+  object-fit: contain;
+}
+
+/* ====================================== */
+/* NAV LINKS                              */
+/* ====================================== */
+
+.restaurant-inventory-nav {
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  flex: 1;
+
+  gap: 3px;
+}
+
+/* ====================================== */
+/* NAV LINK                               */
+/* ====================================== */
+
+.restaurant-inventory-nav-link {
+  min-height: 40px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 7px 9px;
+
+  color: var(--inventory-navbar-text);
+
+  background: transparent;
+
+  border: 1px solid transparent;
+
+  border-radius: 11px;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  font-weight: 650;
+
+  line-height: 1;
+
+  text-decoration: none;
+
+  white-space: nowrap;
+
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease;
+}
+
+/* ====================================== */
+/* NAV ICON                               */
+/* ====================================== */
+
+.restaurant-inventory-nav-link svg {
+  width: 18px;
+
+  height: 18px;
+
+  flex-shrink: 0;
+
+  color: var(--inventory-navbar-orange);
+}
+
+/* ====================================== */
+/* NAV HOVER                              */
+/* ====================================== */
+
+.restaurant-inventory-nav-link:hover {
+  color: #ffffff;
+
+  background: rgba(249, 115, 22, 0.11);
+
+  border-color: rgba(249, 115, 22, 0.15);
+}
+
+/* ====================================== */
+/* NAV ACTIVE                             */
+/* ====================================== */
+
+.restaurant-inventory-nav-link.active {
+  color: #ffffff;
+
+  background: rgba(249, 115, 22, 0.17);
+
+  border-color: rgba(249, 115, 22, 0.22);
+}
+
+/* ====================================== */
+/* NAV ACTIONS                            */
+/* ====================================== */
+
+.restaurant-inventory-navbar-actions {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  flex: 0 0 auto;
+
+  gap: 7px;
+}
+
+/* ====================================== */
+/* PROFILE                                */
+/* ====================================== */
+
+.restaurant-inventory-profile {
+  width: 40px;
+
+  height: 40px;
+
+  min-width: 40px;
+
+  flex: 0 0 40px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 0;
+
+  color: var(--inventory-navbar-orange);
+
+  background: var(--inventory-navbar-soft);
+
+  border: 1px solid var(--inventory-navbar-border);
+
+  border-radius: 10px;
+
+  text-decoration: none;
+
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.restaurant-inventory-profile:hover,
+.restaurant-inventory-profile.active {
+  color: #ffffff;
+
+  background: var(--inventory-navbar-orange);
+
+  border-color: var(--inventory-navbar-orange);
+}
+
+/* ====================================== */
+/* LOGOUT                                 */
+/* ====================================== */
+
+.restaurant-inventory-logout {
+  min-height: 40px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 7px;
+
+  padding: 7px 13px;
+
+  color: #ffffff;
+
+  background: var(--inventory-navbar-orange);
+
+  border: 1px solid var(--inventory-navbar-orange);
+
+  border-radius: 11px;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.restaurant-inventory-logout:hover {
+  background: var(--inventory-navbar-orange-dark);
+
+  border-color: var(--inventory-navbar-orange-dark);
+}
+
+/* ====================================== */
+/* MOBILE MENU BUTTON                     */
+/* ====================================== */
+
+.restaurant-inventory-mobile-button {
+  width: 42px;
+
+  height: 42px;
+
+  min-width: 42px;
+
+  min-height: 42px;
+
+  flex: 0 0 42px;
+
+  display: none;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin: 0;
+
+  padding: 0;
+
+  color: var(--inventory-navbar-orange);
+
+  background: var(--inventory-navbar-soft);
+
+  border: 1px solid var(--inventory-navbar-border);
+
+  border-radius: 10px;
+
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.restaurant-inventory-mobile-button:hover {
+  color: #ffffff;
+
+  background: var(--inventory-navbar-orange);
+
+  border-color: var(--inventory-navbar-orange);
+}
+
+/* ========================================================= */
+/* PAGE                                                      */
+/* ========================================================= */
+
+.restaurant-inventory-page {
+  width: 100%;
+
+  flex: 1;
+
+  padding: 42px 0 85px;
+
+  color: var(--ri-text);
+
+  background: var(--ri-background);
+}
+
+/* ====================================== */
+/* CONTAINER                              */
+/* ====================================== */
+
+.restaurant-inventory-container {
+  width: min(1180px, calc(100% - 40px));
+
+  margin: 0 auto;
+}
+
+/* ========================================================= */
+/* BACK BUTTON                                               */
+/* ========================================================= */
+
+.restaurant-inventory-back {
+  width: fit-content;
+
+  min-height: 40px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-bottom: 25px;
+
+  padding: 9px 14px;
+
+  color: var(--ri-navy);
+
+  background: #ffffff;
+
+  border: 1px solid var(--ri-border);
+
+  border-radius: 10px;
+
+  font-family: inherit;
+
+  font-size: 0.84rem;
+
+  font-weight: 650;
+
+  cursor: pointer;
+
+  box-shadow: 0 3px 10px rgba(7, 26, 43, 0.035);
+
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.restaurant-inventory-back svg {
+  flex-shrink: 0;
+
+  color: var(--ri-orange);
+}
+
+.restaurant-inventory-back:hover {
+  color: var(--ri-orange-dark);
+
+  background: var(--ri-orange-soft);
+
+  border-color: rgba(249, 115, 22, 0.2);
+
+  transform: translateX(-2px);
+}
+
+/* ========================================================= */
+/* HEADER                                                    */
+/* ========================================================= */
+
+.restaurant-inventory-header {
+  position: relative;
+
+  width: 100%;
+
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 30px;
+
+  margin-bottom: 24px;
+
+  padding: 30px 32px;
+
+  overflow: hidden;
+
+  color: #ffffff;
+
+  background: linear-gradient(135deg, #071a2b 0%, #0d2940 100%);
+
+  border: 1px solid rgba(255, 255, 255, 0.07);
+
+  border-radius: 22px;
+
+  box-shadow: 0 14px 36px rgba(7, 26, 43, 0.16);
+}
+
+/* ====================================== */
+/* HEADER ORANGE GLOW                     */
+/* ====================================== */
+
+.restaurant-inventory-header::before {
+  content: "";
+
+  position: absolute;
+
+  top: -110px;
+
+  right: -90px;
+
+  width: 280px;
+
+  height: 280px;
+
+  pointer-events: none;
+
+  background: radial-gradient(
+    circle,
+    rgba(249, 115, 22, 0.15),
+    transparent 68%
+  );
+}
+
+/* ====================================== */
+/* HEADER CONTENT                         */
+/* ====================================== */
+
+.restaurant-inventory-header > * {
+  position: relative;
+
+  z-index: 1;
+}
+
+/* ====================================== */
+/* EYEBROW                                */
+/* ====================================== */
+
+.restaurant-inventory-eyebrow {
+  width: fit-content;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin-bottom: 11px;
+
+  padding: 6px 10px;
+
+  color: #ffffff;
+
+  background: rgba(249, 115, 22, 0.17);
+
+  border: 1px solid rgba(249, 115, 22, 0.22);
+
+  border-radius: 999px;
+
+  font-size: 0.7rem;
+
+  font-weight: 750;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.04em;
+}
+
+.restaurant-inventory-eyebrow svg {
+  color: var(--ri-orange);
+}
+
+/* ====================================== */
+/* HEADER TITLE                           */
+/* ====================================== */
+
+.restaurant-inventory-header h1 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: clamp(2rem, 4vw, 3rem);
+
+  font-weight: 820;
+
+  line-height: 1.05;
+
+  letter-spacing: -0.045em;
+}
+
+/* ====================================== */
+/* HEADER DESCRIPTION                     */
+/* ====================================== */
+
+.restaurant-inventory-header p {
+  max-width: 620px;
+
+  margin: 13px 0 0;
+
+  color: #b8c6d1;
+
+  font-size: 0.94rem;
+
+  line-height: 1.7;
+}
+
+/* ====================================== */
+/* HEADER COUNT                           */
+/* ====================================== */
+
+.restaurant-inventory-header-count {
+  min-width: 105px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 14px 18px;
+
+  color: #ffffff;
+
+  background: rgba(255, 255, 255, 0.07);
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  border-radius: 16px;
+}
+
+.restaurant-inventory-header-count strong {
+  color: var(--ri-orange);
+
+  font-size: 1.5rem;
+
+  font-weight: 800;
+}
+
+.restaurant-inventory-header-count span {
+  color: #b8c6d1;
+
+  font-size: 0.7rem;
+
+  font-weight: 650;
+}
+
+/* ========================================================= */
+/* MESSAGES                                                  */
+/* ========================================================= */
+
+.restaurant-inventory-message {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  margin-bottom: 18px;
+
+  padding: 11px 14px;
+
+  border-radius: 10px;
+
+  font-size: 0.8rem;
+
+  font-weight: 600;
+}
+
+/* ====================================== */
+/* ERROR                                  */
+/* ====================================== */
+
+.restaurant-inventory-message--error {
+  color: var(--ri-red);
+
+  background: var(--ri-red-light);
+
+  border: 1px solid rgba(198, 40, 40, 0.14);
+}
+
+/* ====================================== */
+/* SUCCESS                                */
+/* ====================================== */
+
+.restaurant-inventory-message--success {
+  color: var(--ri-green);
+
+  background: var(--ri-green-light);
+
+  border: 1px solid rgba(22, 128, 61, 0.14);
+}
+
+/* ========================================================= */
+/* TOOLBAR                                                   */
+/* ========================================================= */
+
+.restaurant-inventory-toolbar {
+  display: grid;
+
+  grid-template-columns:
+    minmax(200px, 0.8fr)
+    minmax(240px, 1fr)
+    minmax(170px, 0.5fr);
+
+  align-items: end;
+
+  gap: 14px;
+
+  margin-bottom: 24px;
+
+  padding: 20px;
+
+  background: #ffffff;
+
+  border: 1px solid var(--ri-border);
+
+  border-radius: 17px;
+
+  box-shadow: var(--ri-shadow);
+}
+
+/* ====================================== */
+/* TOOLBAR FIELDS                         */
+/* ====================================== */
+
+.restaurant-inventory-restaurant-selector,
+.restaurant-inventory-filter {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 6px;
+}
+
+.restaurant-inventory-restaurant-selector label,
+.restaurant-inventory-filter label {
+  color: var(--ri-navy);
+
+  font-size: 0.72rem;
+
+  font-weight: 700;
+}
+
+/* ====================================== */
+/* SELECT                                 */
+/* ====================================== */
+
+.restaurant-inventory-restaurant-selector select,
+.restaurant-inventory-filter select {
+  width: 100%;
+
+  min-height: 44px;
+
+  padding: 0 11px;
+
+  color: var(--ri-text);
+
+  background: var(--ri-soft);
+
+  border: 1px solid var(--ri-border);
+
+  border-radius: 9px;
+
+  outline: none;
+
+  font-family: inherit;
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.restaurant-inventory-restaurant-selector select:focus,
+.restaurant-inventory-filter select:focus {
+  background: #ffffff;
+
+  border-color: rgba(249, 115, 22, 0.55);
+
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+}
+
+/* ========================================================= */
+/* SEARCH                                                    */
+/* ========================================================= */
+
+.restaurant-inventory-search {
+  position: relative;
+
+  min-width: 0;
+
+  display: flex;
+
+  align-items: center;
+}
+
+.restaurant-inventory-search svg {
+  position: absolute;
+
+  left: 12px;
+
+  width: 18px;
+
+  height: 18px;
+
+  color: var(--ri-orange);
+
+  pointer-events: none;
+}
+
+.restaurant-inventory-search input {
+  width: 100%;
+
+  min-width: 0;
+
+  min-height: 44px;
+
+  padding: 0 12px 0 40px;
+
+  color: var(--ri-text);
+
+  background: var(--ri-soft);
+
+  border: 1px solid var(--ri-border);
+
+  border-radius: 9px;
+
+  outline: none;
+
+  font-family: inherit;
+
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.restaurant-inventory-search input:focus {
+  background: #ffffff;
+
+  border-color: rgba(249, 115, 22, 0.55);
+
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+}
+
+.restaurant-inventory-search input::placeholder {
+  color: #94a3b8;
+}
+
+/* ========================================================= */
+/* STATS                                                     */
+/* ========================================================= */
+
+.restaurant-inventory-stats {
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 17px;
+
+  margin-bottom: 32px;
+}
+
+/* ====================================== */
+/* STAT CARD                              */
+/* ====================================== */
+
+.restaurant-inventory-stat {
+  min-width: 0;
+
+  padding: 20px;
+
+  background: #ffffff;
+
+  border: 1px solid var(--ri-border);
+
+  border-radius: 16px;
+
+  box-shadow: var(--ri-shadow);
+
+  transition:
+    border-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.restaurant-inventory-stat:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(249, 115, 22, 0.2);
+
+  box-shadow: var(--ri-shadow-hover);
+}
+
+/* ====================================== */
+/* STAT ICON                              */
+/* ====================================== */
+
+.restaurant-inventory-stat-icon {
+  width: 42px;
+
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-bottom: 15px;
+
+  color: var(--ri-orange);
+
+  background: var(--ri-orange-soft);
+
+  border: 1px solid rgba(249, 115, 22, 0.14);
+
+  border-radius: 11px;
+}
+
+/* ====================================== */
+/* STAT LABEL                             */
+/* ====================================== */
+
+.restaurant-inventory-stat > span {
+  display: block;
+
+  color: var(--ri-muted);
+
+  font-size: 0.73rem;
+}
+
+/* ====================================== */
+/* STAT VALUE                             */
+/* ====================================== */
+
+.restaurant-inventory-stat > strong {
+  display: block;
+
+  margin-top: 4px;
+
+  color: var(--ri-navy);
+
+  font-size: 1.5rem;
+
+  font-weight: 800;
+}
+
+/* ====================================== */
+/* WARNING STAT                           */
+/* ====================================== */
+
+.restaurant-inventory-stat--warning .restaurant-inventory-stat-icon {
+  color: var(--ri-warning);
+
+  background: var(--ri-warning-light);
+
+  border-color: rgba(154, 103, 0, 0.14);
+}
+
+/* ====================================== */
+/* DANGER STAT                            */
+/* ====================================== */
+
+.restaurant-inventory-stat--danger .restaurant-inventory-stat-icon {
+  color: var(--ri-red);
+
+  background: var(--ri-red-light);
+
+  border-color: rgba(198, 40, 40, 0.14);
+}
+
+/* ========================================================= */
+/* LIST HEADING                                              */
+/* ========================================================= */
+
+.restaurant-inventory-list-heading {
+  display: flex;
+
+  align-items: flex-end;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-bottom: 18px;
+}
+
+.restaurant-inventory-list-heading h2 {
+  margin: 0;
+
+  color: var(--ri-navy);
+
+  font-size: 1.3rem;
+
+  font-weight: 780;
+}
+
+.restaurant-inventory-list-heading p {
+  margin: 5px 0 0;
+
+  color: var(--ri-muted);
+
+  font-size: 0.78rem;
+
+  line-height: 1.5;
+}
+
+.restaurant-inventory-list-heading > span {
+  flex-shrink: 0;
+
+  color: var(--ri-muted);
+
+  font-size: 0.72rem;
+
+  font-weight: 650;
+}
+
+/* ========================================================= */
+/* INVENTORY GRID                                            */
+/* ========================================================= */
+
+.restaurant-inventory-grid {
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 20px;
+}
+
+/* ========================================================= */
+/* INVENTORY CARD                                            */
+/* ========================================================= */
+
+.restaurant-inventory-card {
+  min-width: 0;
+
+  overflow: hidden;
+
+  background: #ffffff;
+
+  border: 1px solid var(--ri-border);
+
+  border-radius: 18px;
+
+  box-shadow: var(--ri-shadow);
+
+  transition:
+    border-color 200ms ease,
+    transform 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.restaurant-inventory-card:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(249, 115, 22, 0.22);
+
+  box-shadow: var(--ri-shadow-hover);
+}
+
+/* ====================================== */
+/* IMAGE                                  */
+/* ====================================== */
+
+.restaurant-inventory-card-image {
+  position: relative;
+
+  height: 180px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  overflow: hidden;
+
+  color: var(--ri-orange);
+
+  background: linear-gradient(135deg, #f8fafc, #eef2f6);
+}
+
+.restaurant-inventory-card-image img {
+  width: 100%;
+
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+/* ========================================================= */
+/* INVENTORY STATUS                                          */
+/* ========================================================= */
+
+.restaurant-inventory-status {
+  position: absolute;
+
+  top: 12px;
+
+  right: 12px;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-height: 28px;
+
+  padding: 5px 9px;
+
+  border: 1px solid transparent;
+
+  border-radius: 999px;
+
+  font-size: 0.65rem;
+
+  font-weight: 750;
+
+  line-height: 1;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+/* ====================================== */
+/* GOOD                                   */
+/* ====================================== */
+
+.restaurant-inventory-status--good {
+  color: var(--ri-green);
+
+  background: var(--ri-green-light);
+
+  border-color: rgba(22, 128, 61, 0.16);
+}
+
+/* ====================================== */
+/* LOW                                    */
+/* ====================================== */
+
+.restaurant-inventory-status--low {
+  color: var(--ri-warning);
+
+  background: var(--ri-warning-light);
+
+  border-color: rgba(154, 103, 0, 0.17);
+}
+
+/* ====================================== */
+/* OUT                                    */
+/* ====================================== */
+
+.restaurant-inventory-status--out {
+  color: var(--ri-red);
+
+  background: var(--ri-red-light);
+
+  border-color: rgba(198, 40, 40, 0.16);
+}
+
+/* ====================================== */
+/* NOT TRACKED                            */
+/* ====================================== */
+
+.restaurant-inventory-status--not-tracked {
+  color: #475569;
+
+  background: #f1f5f9;
+
+  border-color: #e2e8f0;
+}
+
+/* ========================================================= */
+/* CARD BODY                                                 */
+/* ========================================================= */
+
+.restaurant-inventory-card-body {
+  padding: 18px;
+}
+
+/* ====================================== */
+/* MENU CATEGORY                          */
+/* ====================================== */
+
+.restaurant-inventory-category {
+  width: fit-content;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-bottom: 7px;
+
+  padding: 4px 8px;
+
+  color: #ffffff;
+
+  background: var(--ri-navy);
+
+  border: 1px solid var(--ri-navy);
+
+  border-radius: 999px;
+
+  font-size: 0.65rem;
+
+  font-weight: 750;
+
+  line-height: 1.2;
+
+  text-transform: uppercase;
+}
+
+/* ====================================== */
+/* ITEM NAME                              */
+/* ====================================== */
+
+.restaurant-inventory-card-body h3 {
+  margin: 0;
+
+  color: var(--ri-navy);
+
+  font-size: 1.02rem;
+
+  font-weight: 760;
+}
+
+/* ========================================================= */
+/* CURRENT STOCK                                             */
+/* ========================================================= */
+
+.restaurant-inventory-current-stock {
+  display: flex;
+
+  align-items: baseline;
+
+  gap: 6px;
+
+  margin: 18px 0 13px;
+
+  padding: 13px;
+
+  background: var(--ri-soft);
+
+  border: 1px solid #eef2f6;
+
+  border-radius: 11px;
+}
+
+.restaurant-inventory-current-stock span {
+  margin-right: auto;
+
+  color: var(--ri-muted);
+
+  font-size: 0.73rem;
+}
+
+.restaurant-inventory-current-stock strong {
+  color: var(--ri-navy);
+
+  font-size: 1.45rem;
+
+  font-weight: 800;
+}
+
+.restaurant-inventory-current-stock small {
+  color: var(--ri-muted);
+
+  font-size: 0.65rem;
+}
+
+/* ========================================================= */
+/* QUANTITY CONTROLS                                         */
+/* ========================================================= */
+
+.restaurant-inventory-stock-controls {
+  display: grid;
+
+  grid-template-columns:
+    42px
+    minmax(0, 1fr)
+    42px;
+
+  gap: 8px;
+
+  margin-bottom: 16px;
+}
+
+/* ====================================== */
+/* +/- BUTTONS                            */
+/* ====================================== */
+
+.restaurant-inventory-quantity-button {
+  width: 42px;
+
+  height: 42px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 0;
+
+  color: #ffffff;
+
+  background: var(--ri-navy);
+
+  border: 1px solid var(--ri-navy);
+
+  border-radius: 9px;
+
+  cursor: pointer;
+
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.restaurant-inventory-quantity-button:hover:not(:disabled) {
+  color: #ffffff;
+
+  background: var(--ri-navy-light);
+
+  border-color: var(--ri-navy-light);
+
+  transform: translateY(-1px);
+}
+
+.restaurant-inventory-quantity-button:disabled {
+  cursor: not-allowed;
+
+  opacity: 0.4;
+}
+
+/* ====================================== */
+/* QUANTITY INPUT                         */
+/* ====================================== */
+
+.restaurant-inventory-stock-controls input {
+  width: 100%;
+
+  min-width: 0;
+
+  text-align: center;
+
+  color: var(--ri-navy);
+
+  background: #ffffff;
+
+  border: 1px solid var(--ri-border);
+
+  border-radius: 9px;
+
+  font-family: inherit;
+
+  font-size: 0.9rem;
+
+  font-weight: 750;
+
+  outline: none;
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.restaurant-inventory-stock-controls input:focus {
+  border-color: rgba(249, 115, 22, 0.55);
+
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+}
+
+/* ========================================================= */
+/* LOW STOCK THRESHOLD                                       */
+/* ========================================================= */
+
+.restaurant-inventory-threshold {
+  padding-top: 14px;
+
+  border-top: 1px solid var(--ri-border);
+}
+
+.restaurant-inventory-threshold label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: var(--ri-muted);
+
+  font-size: 0.68rem;
+
+  font-weight: 650;
+}
+
+.restaurant-inventory-threshold > div {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+}
+
+.restaurant-inventory-threshold input {
+  width: 75px;
+
+  min-height: 36px;
+
+  padding: 0 8px;
+
+  color: var(--ri-navy);
+
+  background: #ffffff;
+
+  border: 1px solid var(--ri-border);
+
+  border-radius: 8px;
+
+  outline: none;
+
+  text-align: center;
+
+  font-family: inherit;
+
+  font-weight: 700;
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.restaurant-inventory-threshold input:focus {
+  border-color: rgba(249, 115, 22, 0.55);
+
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+}
+
+.restaurant-inventory-threshold span {
+  color: var(--ri-muted);
+
+  font-size: 0.68rem;
+}
+
+/* ========================================================= */
+/* DISABLE TRACKING                                          */
+/* ========================================================= */
+
+.restaurant-inventory-disable-tracking {
+  width: 100%;
+
+  min-height: 38px;
+
+  margin-top: 15px;
+
+  padding: 8px 10px;
+
+  color: var(--ri-muted);
+
+  background: transparent;
+
+  border: 1px solid var(--ri-border);
+
+  border-radius: 8px;
+
+  font-family: inherit;
+
+  font-size: 0.69rem;
+
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease;
+}
+
+.restaurant-inventory-disable-tracking:hover {
+  color: var(--ri-red);
+
+  background: var(--ri-red-light);
+
+  border-color: rgba(198, 40, 40, 0.18);
+}
+
+/* ========================================================= */
+/* TRACKING DISABLED                                         */
+/* ========================================================= */
+
+.restaurant-inventory-tracking-disabled {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 17px;
+
+  padding: 13px;
+
+  background: var(--ri-soft);
+
+  border: 1px solid var(--ri-border);
+
+  border-radius: 11px;
+}
+
+/* ====================================== */
+/* TRACKING ICON                          */
+/* ====================================== */
+
+.restaurant-inventory-tracking-disabled > svg {
+  flex-shrink: 0;
+
+  color: var(--ri-orange);
+}
+
+.restaurant-inventory-tracking-disabled > div {
+  min-width: 0;
+
+  flex: 1;
+}
+
+.restaurant-inventory-tracking-disabled strong {
+  color: var(--ri-navy);
+
+  font-size: 0.73rem;
+}
+
+.restaurant-inventory-tracking-disabled p {
+  margin: 3px 0 0;
+
+  color: var(--ri-muted);
+
+  font-size: 0.65rem;
+}
+
+/* ====================================== */
+/* ENABLE TRACKING BUTTON                 */
+/* ====================================== */
+
+.restaurant-inventory-tracking-disabled button {
+  min-height: 34px;
+
+  padding: 7px 10px;
+
+  color: #ffffff;
+
+  background: var(--ri-navy);
+
+  border: 1px solid var(--ri-navy);
+
+  border-radius: 8px;
+
+  font-family: inherit;
+
+  font-size: 0.68rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 180ms ease,
+    border-color 180ms ease;
+}
+
+.restaurant-inventory-tracking-disabled button:hover {
+  background: var(--ri-navy-light);
+
+  border-color: var(--ri-navy-light);
+}
+
+/* ========================================================= */
+/* EMPTY STATE                                               */
+/* ========================================================= */
+
+.restaurant-inventory-empty {
+  min-height: 280px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 40px;
+
+  color: var(--ri-muted);
+
+  text-align: center;
+
+  background: #ffffff;
+
+  border: 1px solid var(--ri-border);
+
+  border-radius: 18px;
+
+  box-shadow: var(--ri-shadow);
+}
+
+.restaurant-inventory-empty > svg {
+  margin-bottom: 15px;
+
+  color: var(--ri-orange);
+}
+
+.restaurant-inventory-empty h2 {
+  margin: 0;
+
+  color: var(--ri-navy);
+
+  font-size: 1.15rem;
+
+  font-weight: 760;
+}
+
+.restaurant-inventory-empty p {
+  max-width: 400px;
+
+  margin: 8px 0 0;
+
+  color: var(--ri-muted);
+
+  font-size: 0.78rem;
+
+  line-height: 1.6;
+}
+
+/* ====================================== */
+/* EMPTY BUTTON                           */
+/* ====================================== */
+
+.restaurant-inventory-empty button {
+  min-height: 40px;
+
+  margin-top: 18px;
+
+  padding: 9px 15px;
+
+  color: #ffffff;
+
+  background: var(--ri-navy);
+
+  border: 1px solid var(--ri-navy);
+
+  border-radius: 9px;
+
+  font-family: inherit;
+
+  font-size: 0.78rem;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.restaurant-inventory-empty button:hover {
+  background: var(--ri-navy-light);
+
+  border-color: var(--ri-navy-light);
+
+  transform: translateY(-1px);
+}
+
+/* ========================================================= */
+/* FOCUS                                                     */
+/* ========================================================= */
+
+.restaurant-inventory-layout button:focus-visible,
+.restaurant-inventory-layout a:focus-visible,
+.restaurant-inventory-layout input:focus-visible,
+.restaurant-inventory-layout select:focus-visible {
+  outline: 3px solid rgba(249, 115, 22, 0.28);
+
+  outline-offset: 3px;
+}
+
+/* ========================================================= */
+/* MEDIUM DESKTOP                                            */
+/* ========================================================= */
+
+@media (max-width: 1050px) {
+  .restaurant-inventory-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .restaurant-inventory-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* ========================================================= */
+/* MOBILE NAVIGATION                                         */
+/* ========================================================= */
+
+@media (max-width: 1120px) {
+  .restaurant-inventory-navbar-shell {
+    width: 94%;
+
+    min-height: 60px;
+
+    gap: 10px;
+
+    padding: 8px 0;
+  }
+
+  .restaurant-inventory-mobile-button {
+    display: inline-flex;
+  }
+
+  .restaurant-inventory-navbar-actions {
+    margin-left: auto;
+
+    gap: 10px;
+  }
+
+  /* ====================================== */
+  /* MOBILE NAV DROPDOWN                    */
+  /* ====================================== */
+
+  .restaurant-inventory-nav {
+    position: absolute;
+
+    top: calc(100% + 7px);
+
+    left: 0;
+
+    right: 0;
+
+    z-index: 4200;
+
+    width: 100%;
+
+    display: none;
+
+    grid-template-columns: 1fr;
+
+    gap: 8px;
+
+    margin: 0;
+
+    padding: 14px;
+
+    max-height: calc(100dvh - 85px);
+
+    overflow-y: auto;
+
+    border: 1px solid var(--inventory-navbar-border);
+
+    border-radius: 17px;
+
+    background:
+      radial-gradient(
+        circle at 10% 10%,
+        rgba(249, 115, 22, 0.08),
+        transparent 28%
+      ),
+      #0b2237;
+
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
+
+    overscroll-behavior: contain;
+  }
+
+  .restaurant-inventory-nav.is-open {
+    display: grid;
+  }
+
+  .restaurant-inventory-nav-link {
+    width: 100%;
+
+    min-height: 54px;
+
+    justify-content: flex-start;
+
+    padding: 10px 14px;
+
+    color: #dce5ec;
+
+    background: rgba(255, 255, 255, 0.055);
+
+    border: 1px solid rgba(255, 255, 255, 0.07);
+
+    border-radius: 14px;
+
+    font-size: 15px;
+  }
+
+  .restaurant-inventory-nav-link:hover,
+  .restaurant-inventory-nav-link.active {
+    color: #ffffff;
+
+    background: rgba(249, 115, 22, 0.14);
+
+    border-color: rgba(249, 115, 22, 0.22);
+  }
+}
+
+/* ========================================================= */
+/* TABLET                                                    */
+/* ========================================================= */
+
+@media (max-width: 760px) {
+  .restaurant-inventory-page {
+    padding: 30px 0 65px;
+  }
+
+  .restaurant-inventory-container {
+    width: min(calc(100% - 30px), 1180px);
+  }
+
+  /* ====================================== */
+  /* HEADER                                 */
+  /* ====================================== */
+
+  .restaurant-inventory-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 20px;
+
+    padding: 25px;
+
+    border-radius: 18px;
+  }
+
+  .restaurant-inventory-header-count {
+    min-width: 0;
+
+    width: fit-content;
+
+    flex-direction: row;
+
+    gap: 6px;
+  }
+
+  /* ====================================== */
+  /* TOOLBAR                                */
+  /* ====================================== */
+
+  .restaurant-inventory-toolbar {
+    grid-template-columns: 1fr;
+
+    padding: 18px;
+  }
+
+  /* ====================================== */
+  /* LIST HEADING                           */
+  /* ====================================== */
+
+  .restaurant-inventory-list-heading {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 6px;
+  }
+}
+
+/* ========================================================= */
+/* MOBILE                                                    */
+/* ========================================================= */
+
+@media (max-width: 600px) {
+  .restaurant-inventory-page {
+    padding: 24px 0 55px;
+  }
+
+  .restaurant-inventory-container {
+    width: calc(100% - 24px);
+  }
+
+  /* ====================================== */
+  /* NAVBAR                                 */
+  /* ====================================== */
+
+  .restaurant-inventory-navbar-shell {
+    width: 96%;
+
+    gap: 9px;
+  }
+
+  .restaurant-inventory-logo img {
+    width: clamp(100px, 28vw, 125px);
+
+    max-height: 36px;
+  }
+
+  .restaurant-inventory-logout {
+    width: 40px;
+
+    height: 40px;
+
+    min-width: 40px;
+
+    min-height: 40px;
+
+    flex: 0 0 40px;
+
+    padding: 0;
+
+    border-radius: 10px;
+  }
+
+  .restaurant-inventory-logout span {
+    display: none;
+  }
+
+  .restaurant-inventory-profile,
+  .restaurant-inventory-mobile-button {
+    width: 40px;
+
+    height: 40px;
+
+    min-width: 40px;
+
+    min-height: 40px;
+
+    flex-basis: 40px;
+  }
+
+  /* ====================================== */
+  /* HEADER                                 */
+  /* ====================================== */
+
+  .restaurant-inventory-header {
+    padding: 23px 20px;
+
+    border-radius: 17px;
+  }
+
+  .restaurant-inventory-header h1 {
+    font-size: clamp(1.8rem, 9vw, 2.2rem);
+  }
+
+  .restaurant-inventory-header p {
+    font-size: 0.84rem;
+
+    line-height: 1.6;
+  }
+
+  /* ====================================== */
+  /* STATS                                  */
+  /* ====================================== */
+
+  .restaurant-inventory-grid,
+  .restaurant-inventory-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .restaurant-inventory-stats {
+    gap: 14px;
+
+    margin-bottom: 25px;
+  }
+
+  /* ====================================== */
+  /* TOOLBAR                                */
+  /* ====================================== */
+
+  .restaurant-inventory-toolbar {
+    padding: 16px;
+
+    border-radius: 15px;
+  }
+
+  /* ====================================== */
+  /* CARDS                                  */
+  /* ====================================== */
+
+  .restaurant-inventory-card {
+    border-radius: 17px;
+  }
+
+  .restaurant-inventory-card-image {
+    height: 200px;
+  }
+
+  .restaurant-inventory-card-body {
+    padding: 17px;
+  }
+}
+
+/* ========================================================= */
+/* SMALL MOBILE                                              */
+/* ========================================================= */
+
+@media (max-width: 400px) {
+  .restaurant-inventory-page {
+    padding-top: 20px;
+  }
+
+  .restaurant-inventory-container {
+    width: calc(100% - 20px);
+  }
+
+  .restaurant-inventory-header {
+    padding: 21px 17px;
+  }
+
+  .restaurant-inventory-header h1 {
+    font-size: 1.9rem;
+  }
+
+  .restaurant-inventory-toolbar {
+    padding: 14px;
+  }
+
+  .restaurant-inventory-card-image {
+    height: 190px;
+  }
+
+  .restaurant-inventory-card-body {
+    padding: 15px;
+  }
+
+  .restaurant-inventory-current-stock {
+    padding: 11px;
+  }
+
+  .restaurant-inventory-stock-controls {
+    grid-template-columns:
+      38px
+      minmax(0, 1fr)
+      38px;
+  }
+
+  .restaurant-inventory-quantity-button {
+    width: 38px;
+
+    height: 38px;
+  }
+}
+
+/* ========================================================= */
+/* REDUCED MOTION                                            */
+/* ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .restaurant-inventory-layout *,
+  .restaurant-inventory-layout *::before,
+  .restaurant-inventory-layout *::after {
+    animation: none !important;
+
+    transition: none !important;
+
+    scroll-behavior: auto !important;
+  }
+}

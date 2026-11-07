@@ -1,38 +1,140 @@
-// Import Axios so the frontend can send HTTP requests to the backend
+// ======================================
+// IMPORTS
+// ======================================
+
 import axios from "axios";
 
-// Create a reusable Axios instance for the Local Bite backend
+// ======================================
+// API INSTANCE
+// ======================================
+
 const api = axios.create({
-  // Base URL for all backend API requests
-  // Example:
-  // api.get("/restaurants")
-  // becomes:
-  // http://localhost:5324/api/restaurants
   baseURL: "http://localhost:5325/api",
 
-  // Tell the backend that we are sending JSON data
   headers: {
     "Content-Type": "application/json",
   },
 });
 
-// Interceptor runs BEFORE every request is sent to the backend
-api.interceptors.request.use((config) => {
-  // Get the JWT token saved in the browser after login
-  const token = localStorage.getItem("token");
+// ======================================
+// LOADING EVENTS
+// ======================================
 
-  // If the user has a token, add it to the request
-  if (token) {
-    // Send the token in the Authorization header
-    // Example:
-    // Authorization: Bearer eyJhbGciOiJIUzI1Ni...
-    config.headers.Authorization = `Bearer ${token}`;
-  }
+const startGlobalLoader = () => {
+  window.dispatchEvent(new Event("api-loading-start"));
+};
 
-  // Return the request configuration so Axios can send the request
-  return config;
-});
+const stopGlobalLoader = () => {
+  window.dispatchEvent(new Event("api-loading-end"));
+};
 
-// Export the configured Axios instance
-// Other files can now import and use "api"
+// ======================================
+// REQUEST INTERCEPTOR
+// ======================================
+
+// Runs before every API request
+api.interceptors.request.use(
+  (config) => {
+    // ======================================
+    // START TRUCK LOADER
+    // ======================================
+
+    // Allows specific requests to skip
+    // the loader if needed later.
+    if (!config.skipGlobalLoader) {
+      startGlobalLoader();
+
+      // Mark this request so we know
+      // that it started a loader.
+      config._usesGlobalLoader = true;
+    }
+
+    // ======================================
+    // GET JWT TOKEN
+    // ======================================
+
+    const token = localStorage.getItem("token");
+
+    // ======================================
+    // ADD JWT
+    // ======================================
+
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+
+    return config;
+  },
+
+  (error) => {
+    // If request setup itself fails
+    // there may not be a backend response.
+    return Promise.reject(error);
+  },
+);
+
+// ======================================
+// RESPONSE INTERCEPTOR
+// ======================================
+
+// Runs after every successful
+// or failed API response
+api.interceptors.response.use(
+  // ======================================
+  // SUCCESS
+  // ======================================
+
+  (response) => {
+    // Stop loader only if this
+    // request started one
+    if (response.config?._usesGlobalLoader) {
+      stopGlobalLoader();
+    }
+
+    return response;
+  },
+
+  // ======================================
+  // ERROR
+  // ======================================
+
+  (error) => {
+    // ======================================
+    // STOP TRUCK LOADER
+    // ======================================
+
+    if (error.config?._usesGlobalLoader) {
+      stopGlobalLoader();
+    }
+
+    // ======================================
+    // UNAUTHORIZED
+    // ======================================
+
+    if (error.response?.status === 401) {
+      // Remove expired or
+      // invalid login information
+      localStorage.removeItem("token");
+
+      localStorage.removeItem("user");
+
+      // ======================================
+      // REDIRECT TO LOGIN
+      // ======================================
+
+      // Prevent endless redirect
+      // if we are already on login
+      if (window.location.pathname !== "/login") {
+        window.location.href = "/login";
+      }
+    }
+
+    return Promise.reject(error);
+  },
+);
+
+// ======================================
+// EXPORT
+// ======================================
+
 export default api;

@@ -1,0 +1,1682 @@
+/* =========================================================
+   DISH DASH ORDER PAYMENT PAGE
+   Actual payment AFTER order confirmation
+   Navy + Orange + White + Whitesmoke
+   ========================================================= */
+
+/* =========================================================
+   VARIABLES
+   ========================================================= */
+
+.payment-details-page {
+  --payment-orange: #ff5a00;
+  --payment-orange-dark: #e34f00;
+  --payment-orange-light: #fff1e8;
+
+  --payment-navy: #071a2b;
+  --payment-navy-light: #0d2940;
+
+  --payment-background: whitesmoke;
+  --payment-surface: #ffffff;
+  --payment-soft: #f8f8f8;
+
+  --payment-text: #2d2d2d;
+  --payment-muted: #707070;
+
+  --payment-border: #e8e8e8;
+
+  --payment-green: #16803d;
+  --payment-green-light: #ecfdf3;
+
+  --payment-red: #c62828;
+  --payment-red-light: #fff1f1;
+
+  --payment-shadow: 0 12px 32px rgba(0, 0, 0, 0.055);
+
+  --payment-shadow-hover: 0 20px 42px rgba(0, 0, 0, 0.085);
+}
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+.payment-details-page,
+.payment-details-page *,
+.payment-details-page *::before,
+.payment-details-page *::after {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   OUTER LAYOUT
+   ========================================================= */
+
+.payment-details-layout {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+
+  background: whitesmoke;
+}
+
+/* =========================================================
+   PAGE
+   ========================================================= */
+
+.payment-details-page {
+  width: 100%;
+
+  flex: 1;
+
+  padding: 42px 0 80px;
+
+  color: var(--payment-text);
+  background: var(--payment-background);
+}
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.payment-details-container {
+  width: min(920px, calc(100% - 40px));
+
+  margin: 0 auto;
+}
+
+/* =========================================================
+   BACK BUTTON
+   ========================================================= */
+
+.payment-details-back {
+  width: fit-content;
+
+  min-height: 40px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin: 0 0 25px;
+
+  padding: 9px 14px;
+
+  color: var(--payment-text);
+  background: #ffffff;
+
+  border: 1px solid var(--payment-border);
+  border-radius: 10px;
+
+  font-family: inherit;
+  font-size: 0.86rem;
+  font-weight: 650;
+
+  cursor: pointer;
+
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.035);
+
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.payment-details-back svg {
+  flex-shrink: 0;
+
+  color: var(--payment-orange);
+}
+
+.payment-details-back:hover {
+  color: var(--payment-orange-dark);
+
+  background: var(--payment-orange-light);
+
+  border-color: rgba(255, 90, 0, 0.22);
+
+  transform: translateX(-2px);
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.payment-details-header {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  margin-bottom: 24px;
+
+  padding: 30px 32px;
+
+  color: #ffffff;
+
+  background: var(--payment-navy);
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 22px;
+
+  box-shadow: 0 10px 28px rgba(7, 26, 43, 0.1);
+}
+
+/* =========================================================
+   HEADER EYEBROW
+   ========================================================= */
+
+.payment-details-eyebrow {
+  width: fit-content;
+
+  display: inline-flex;
+  align-items: center;
+
+  gap: 7px;
+
+  margin-bottom: 12px;
+
+  padding: 6px 10px;
+
+  color: #ffffff;
+
+  background: rgba(255, 90, 0, 0.2);
+
+  border: 1px solid rgba(255, 90, 0, 0.26);
+  border-radius: 999px;
+
+  font-size: 0.72rem;
+  font-weight: 800;
+
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.payment-details-eyebrow svg {
+  color: #ff8b4a;
+}
+
+/* =========================================================
+   HEADER TITLE
+   ========================================================= */
+
+.payment-details-header h1 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 820;
+
+  line-height: 1.05;
+  letter-spacing: -0.045em;
+}
+
+/* =========================================================
+   HEADER DESCRIPTION
+   ========================================================= */
+
+.payment-details-header > p {
+  margin: 12px 0 0;
+
+  color: #c5d0dc;
+
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+/* =========================================================
+   HEADER TOTAL
+   ========================================================= */
+
+.payment-details-total {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-top: 21px;
+
+  padding: 14px 16px;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 13px;
+}
+
+.payment-details-total span {
+  color: #d3dde6;
+
+  font-size: 0.75rem;
+  font-weight: 650;
+}
+
+.payment-details-total strong {
+  color: #ff8b4a;
+
+  font-size: 1.25rem;
+  font-weight: 850;
+}
+
+/* =========================================================
+   STANDARD CARD
+   ========================================================= */
+
+.payment-details-card {
+  width: 100%;
+
+  margin-bottom: 18px;
+
+  padding: 24px;
+
+  background: var(--payment-surface);
+
+  border: 1px solid var(--payment-border);
+  border-radius: 18px;
+
+  box-shadow: var(--payment-shadow);
+}
+
+/* =========================================================
+   SECTION HEADING
+   ========================================================= */
+
+.payment-details-section-heading {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 12px;
+
+  margin-bottom: 19px;
+}
+
+.payment-details-section-heading > svg {
+  flex-shrink: 0;
+
+  color: var(--payment-orange);
+}
+
+.payment-details-section-heading > div {
+  min-width: 0;
+}
+
+.payment-details-section-heading h2 {
+  margin: 0;
+
+  color: var(--payment-navy);
+
+  font-size: 1.2rem;
+  font-weight: 820;
+
+  line-height: 1.25;
+}
+
+.payment-details-section-heading p {
+  margin: 5px 0 0;
+
+  color: var(--payment-muted);
+
+  font-size: 0.78rem;
+  line-height: 1.5;
+}
+
+.payment-details-section-heading p strong {
+  color: var(--payment-orange-dark);
+}
+
+/* =========================================================
+   STATUS / DEBT WARNING
+   ========================================================= */
+
+.payment-debt-warning {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    auto
+    minmax(0, 1fr);
+
+  align-items: flex-start;
+
+  gap: 13px;
+
+  margin-bottom: 18px;
+
+  padding: 17px 18px;
+
+  color: var(--payment-red);
+
+  background: var(--payment-red-light);
+
+  border: 1px solid rgba(198, 40, 40, 0.15);
+  border-radius: 15px;
+}
+
+.payment-debt-warning > svg {
+  flex-shrink: 0;
+
+  margin-top: 2px;
+}
+
+.payment-debt-warning span {
+  display: block;
+
+  color: var(--payment-red);
+
+  font-size: 0.68rem;
+  font-weight: 750;
+
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.payment-debt-warning strong {
+  display: block;
+
+  margin-top: 3px;
+
+  color: #8f1d1d;
+
+  font-size: 1rem;
+  font-weight: 800;
+}
+
+.payment-debt-warning p {
+  margin: 6px 0 0;
+
+  color: #7f2929;
+
+  font-size: 0.76rem;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   BALANCE SUMMARY
+   ========================================================= */
+
+.payment-balance-summary {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 18px;
+
+  margin-bottom: 18px;
+
+  padding: 16px 18px;
+
+  background: #ffffff;
+
+  border: 1px solid var(--payment-border);
+  border-radius: 15px;
+
+  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.04);
+}
+
+.payment-balance-summary > div {
+  display: flex;
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+.payment-balance-summary span {
+  color: var(--payment-muted);
+
+  font-size: 0.68rem;
+  font-weight: 650;
+}
+
+.payment-balance-summary strong {
+  color: var(--payment-navy);
+
+  font-size: 1.05rem;
+  font-weight: 820;
+}
+
+.payment-balance-summary p {
+  max-width: 420px;
+
+  margin: 0;
+
+  color: var(--payment-muted);
+
+  font-size: 0.76rem;
+  line-height: 1.5;
+
+  text-align: right;
+}
+
+/* =========================================================
+   ORDER SUMMARY BOX
+   ========================================================= */
+
+.payment-balance-box {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 10px;
+}
+
+.payment-balance-box > div {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+
+  padding: 13px 14px;
+
+  background: whitesmoke;
+
+  border: 1px solid var(--payment-border);
+  border-radius: 11px;
+}
+
+.payment-balance-box span {
+  color: var(--payment-muted);
+
+  font-size: 0.67rem;
+  font-weight: 600;
+}
+
+.payment-balance-box strong {
+  color: var(--payment-navy);
+
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+/* =========================================================
+   PAYMENT METHODS GRID
+   ========================================================= */
+
+.payment-method-grid {
+  width: 100%;
+
+  display: grid;
+
+  gap: 12px;
+}
+
+.payment-method-grid--three {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+/* =========================================================
+   PAYMENT METHOD
+   ========================================================= */
+
+.payment-method-option {
+  min-width: 0;
+  min-height: 92px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding: 15px;
+
+  color: var(--payment-text);
+  background: #ffffff;
+
+  border: 1px solid var(--payment-border);
+  border-radius: 13px;
+
+  font-family: inherit;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.payment-method-option > svg {
+  width: 43px;
+  height: 43px;
+
+  flex: 0 0 43px;
+
+  padding: 10px;
+
+  color: var(--payment-orange);
+
+  background: var(--payment-orange-light);
+
+  border-radius: 11px;
+}
+
+.payment-method-option > div {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 4px;
+}
+
+.payment-method-option strong {
+  color: var(--payment-navy);
+
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.payment-method-option span {
+  color: var(--payment-muted);
+
+  font-size: 0.68rem;
+}
+
+.payment-method-option:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(255, 90, 0, 0.25);
+
+  box-shadow: 0 9px 20px rgba(0, 0, 0, 0.055);
+}
+
+/* =========================================================
+   SELECTED PAYMENT METHOD
+   ========================================================= */
+
+.payment-method-option--selected {
+  background: var(--payment-orange-light);
+
+  border-color: rgba(255, 90, 0, 0.5);
+
+  box-shadow: 0 7px 18px rgba(255, 90, 0, 0.1);
+}
+
+.payment-method-option--selected > svg {
+  color: #ffffff;
+
+  background: var(--payment-orange);
+}
+
+/* =========================================================
+   BALANCE TOGGLE
+   ========================================================= */
+
+.payment-balance-toggle {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 13px 14px;
+
+  color: var(--payment-text);
+
+  background: whitesmoke;
+
+  border: 1px solid var(--payment-border);
+  border-radius: 11px;
+
+  font-size: 0.8rem;
+  font-weight: 650;
+
+  cursor: pointer;
+}
+
+.payment-balance-toggle input {
+  width: 17px;
+  height: 17px;
+
+  flex-shrink: 0;
+
+  accent-color: var(--payment-orange);
+}
+
+/* =========================================================
+   FORM FIELD
+   ========================================================= */
+
+.payment-details-field {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 7px;
+
+  margin-top: 16px;
+}
+
+.payment-details-field label {
+  color: var(--payment-navy);
+
+  font-size: 0.77rem;
+  font-weight: 700;
+}
+
+.payment-details-field input,
+.payment-details-field select {
+  width: 100%;
+
+  min-height: 47px;
+
+  padding: 0 13px;
+
+  color: var(--payment-text);
+  background: #ffffff;
+
+  border: 1px solid var(--payment-border);
+  border-radius: 10px;
+
+  outline: none;
+
+  font-family: inherit;
+  font-size: 0.84rem;
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.payment-details-field input:focus,
+.payment-details-field select:focus {
+  border-color: var(--payment-orange);
+
+  box-shadow: 0 0 0 3px rgba(255, 90, 0, 0.1);
+}
+
+/* =========================================================
+   FORM ROW
+   ========================================================= */
+
+.payment-details-row {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 12px;
+}
+
+/* =========================================================
+   USE FULL BALANCE BUTTON
+   ========================================================= */
+
+.payment-use-full-balance {
+  width: fit-content;
+
+  min-height: 38px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 10px;
+
+  padding: 8px 12px;
+
+  color: var(--payment-orange-dark);
+
+  background: var(--payment-orange-light);
+
+  border: 1px solid rgba(255, 90, 0, 0.2);
+  border-radius: 9px;
+
+  font-family: inherit;
+  font-size: 0.74rem;
+  font-weight: 750;
+
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.payment-use-full-balance:hover {
+  color: #ffffff;
+
+  background: var(--payment-orange);
+
+  border-color: var(--payment-orange);
+}
+
+/* =========================================================
+   BALANCE RESULT
+   ========================================================= */
+
+.payment-balance-result {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 10px;
+
+  margin-top: 14px;
+}
+
+.payment-balance-result > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  padding: 12px 13px;
+
+  background: whitesmoke;
+
+  border: 1px solid var(--payment-border);
+  border-radius: 10px;
+}
+
+.payment-balance-result span {
+  color: var(--payment-muted);
+
+  font-size: 0.7rem;
+}
+
+.payment-balance-result strong {
+  color: var(--payment-navy);
+
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+/* =========================================================
+   CARD TYPE
+   ========================================================= */
+
+.payment-card-type-grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 10px;
+
+  margin-bottom: 4px;
+}
+
+.payment-card-type {
+  min-height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 9px 12px;
+
+  color: var(--payment-text);
+
+  background: #ffffff;
+
+  border: 1px solid var(--payment-border);
+  border-radius: 10px;
+
+  font-size: 0.78rem;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease;
+}
+
+.payment-card-type input {
+  width: 16px;
+  height: 16px;
+
+  accent-color: var(--payment-orange);
+}
+
+.payment-card-type svg {
+  color: var(--payment-orange);
+}
+
+.payment-card-type--selected {
+  color: var(--payment-orange-dark);
+
+  background: var(--payment-orange-light);
+
+  border-color: rgba(255, 90, 0, 0.4);
+}
+
+/* =========================================================
+   CARD NUMBER WRAPPER
+   ========================================================= */
+
+.payment-card-number-wrapper {
+  width: 100%;
+
+  min-height: 47px;
+
+  display: grid;
+
+  grid-template-columns:
+    auto
+    minmax(0, 1fr)
+    auto;
+
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 0 12px;
+
+  background: #ffffff;
+
+  border: 1px solid var(--payment-border);
+  border-radius: 10px;
+
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.payment-card-number-wrapper:focus-within {
+  border-color: var(--payment-orange);
+
+  box-shadow: 0 0 0 3px rgba(255, 90, 0, 0.1);
+}
+
+.payment-card-number-wrapper > svg {
+  flex-shrink: 0;
+
+  color: var(--payment-orange);
+}
+
+.payment-card-number-wrapper input {
+  width: 100%;
+
+  min-width: 0;
+
+  height: 45px;
+
+  padding: 0;
+
+  color: var(--payment-text);
+  background: transparent;
+
+  border: 0;
+  outline: 0;
+
+  font-family: inherit;
+  font-size: 0.84rem;
+}
+
+.payment-card-number-wrapper > span {
+  color: var(--payment-muted);
+
+  font-size: 0.68rem;
+  font-weight: 750;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   SECURITY NOTE
+   ========================================================= */
+
+.payment-security-note {
+  width: 100%;
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 9px;
+
+  margin-top: 17px;
+
+  padding: 12px 13px;
+
+  color: var(--payment-muted);
+
+  background: whitesmoke;
+
+  border: 1px solid var(--payment-border);
+  border-radius: 10px;
+
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+.payment-security-note svg {
+  flex-shrink: 0;
+
+  color: var(--payment-orange);
+}
+
+/* =========================================================
+   CASH OPTION
+   ========================================================= */
+
+.payment-cash-option {
+  width: 100%;
+
+  min-height: 55px;
+
+  display: grid;
+
+  grid-template-columns:
+    auto
+    auto
+    minmax(0, 1fr);
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 10px;
+
+  padding: 12px 14px;
+
+  color: var(--payment-text);
+
+  background: #ffffff;
+
+  border: 1px solid var(--payment-border);
+  border-radius: 11px;
+
+  cursor: pointer;
+}
+
+.payment-cash-option input[type="radio"] {
+  width: 16px;
+  height: 16px;
+
+  accent-color: var(--payment-orange);
+}
+
+.payment-cash-option > svg {
+  color: var(--payment-orange);
+}
+
+.payment-cash-option strong {
+  color: var(--payment-navy);
+
+  font-size: 0.8rem;
+}
+
+.payment-cash-option span {
+  display: block;
+
+  margin-top: 2px;
+
+  color: var(--payment-muted);
+
+  font-size: 0.7rem;
+}
+
+/* =========================================================
+   CASH NOTES
+   ========================================================= */
+
+.payment-cash-notes {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 9px;
+
+  margin: 14px 0;
+}
+
+.payment-cash-note {
+  min-height: 43px;
+
+  padding: 8px;
+
+  color: var(--payment-navy);
+  background: whitesmoke;
+
+  border: 1px solid var(--payment-border);
+  border-radius: 9px;
+
+  font-family: inherit;
+  font-size: 0.76rem;
+  font-weight: 750;
+
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.payment-cash-note:hover:not(:disabled) {
+  color: var(--payment-orange-dark);
+
+  border-color: rgba(255, 90, 0, 0.25);
+
+  transform: translateY(-1px);
+}
+
+.payment-cash-note--selected {
+  color: #ffffff;
+
+  background: var(--payment-orange);
+
+  border-color: var(--payment-orange);
+}
+
+.payment-cash-note:disabled {
+  opacity: 0.35;
+
+  cursor: not-allowed;
+}
+
+/* =========================================================
+   CUSTOM CASH
+   ========================================================= */
+
+.payment-cash-custom {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+}
+
+.payment-cash-custom input {
+  width: min(160px, 100%);
+
+  min-height: 39px;
+
+  padding: 0 10px;
+
+  border: 1px solid var(--payment-border);
+  border-radius: 8px;
+
+  outline: none;
+
+  font-family: inherit;
+}
+
+.payment-cash-custom input:focus {
+  border-color: var(--payment-orange);
+
+  box-shadow: 0 0 0 3px rgba(255, 90, 0, 0.1);
+}
+
+/* =========================================================
+   CASH SUMMARY
+   ========================================================= */
+
+.payment-cash-summary {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 10px;
+
+  margin-top: 14px;
+}
+
+.payment-cash-summary > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  padding: 13px;
+
+  background: whitesmoke;
+
+  border: 1px solid var(--payment-border);
+  border-radius: 10px;
+}
+
+.payment-cash-summary span {
+  color: var(--payment-muted);
+
+  font-size: 0.7rem;
+}
+
+.payment-cash-summary strong {
+  color: var(--payment-navy);
+
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+/* =========================================================
+   MESSAGE BASE
+   ========================================================= */
+
+.payment-details-message {
+  width: 100%;
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 9px;
+
+  margin-bottom: 15px;
+
+  padding: 12px 14px;
+
+  border-radius: 10px;
+
+  font-size: 0.76rem;
+  font-weight: 650;
+
+  line-height: 1.45;
+}
+
+.payment-details-message svg {
+  flex-shrink: 0;
+
+  margin-top: 1px;
+}
+
+/* =========================================================
+   ERROR MESSAGE
+   ========================================================= */
+
+.payment-details-message--error {
+  color: var(--payment-red);
+
+  background: var(--payment-red-light);
+
+  border: 1px solid rgba(198, 40, 40, 0.14);
+}
+
+/* =========================================================
+   SUCCESS MESSAGE
+   ========================================================= */
+
+.payment-details-message--success {
+  color: var(--payment-green);
+
+  background: var(--payment-green-light);
+
+  border: 1px solid rgba(22, 128, 61, 0.14);
+}
+
+/* =========================================================
+   FINAL PAYMENT BUTTON
+   ========================================================= */
+
+.payment-details-save {
+  width: 100%;
+
+  min-height: 49px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-top: 2px;
+
+  padding: 10px 18px;
+
+  color: #ffffff;
+
+  background: var(--payment-orange);
+
+  border: 1px solid var(--payment-orange);
+  border-radius: 11px;
+
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 780;
+
+  cursor: pointer;
+
+  box-shadow: 0 8px 20px rgba(255, 90, 0, 0.2);
+
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    opacity 180ms ease;
+}
+
+.payment-details-save:hover:not(:disabled) {
+  background: var(--payment-orange-dark);
+
+  border-color: var(--payment-orange-dark);
+
+  transform: translateY(-1px);
+
+  box-shadow: 0 11px 25px rgba(255, 90, 0, 0.26);
+}
+
+.payment-details-save:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.payment-details-save:disabled {
+  opacity: 0.45;
+
+  cursor: not-allowed;
+
+  box-shadow: none;
+}
+
+/* =========================================================
+   LOADER SPINNER
+   ========================================================= */
+
+.payment-details-spin {
+  animation: payment-details-spin 0.8s linear infinite;
+}
+
+@keyframes payment-details-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================================================
+   FOCUS
+   ========================================================= */
+
+.payment-details-page button:focus-visible,
+.payment-details-page input:focus-visible,
+.payment-details-page select:focus-visible {
+  outline: 3px solid rgba(255, 90, 0, 0.24);
+
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media screen and (max-width: 800px) {
+  .payment-details-page {
+    padding: 30px 0 65px;
+  }
+
+  .payment-details-container {
+    width: min(100% - 30px, 920px);
+  }
+
+  .payment-balance-box {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .payment-method-grid--three {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media screen and (max-width: 600px) {
+  /* ====================================== */
+  /* MATCH OTHER APP PAGES                 */
+  /* HIDE LARGE HEADER ON MOBILE           */
+  /* ====================================== */
+
+  .payment-details-page .payment-details-header {
+    display: none !important;
+
+    visibility: hidden !important;
+
+    width: 0 !important;
+    height: 0 !important;
+
+    min-width: 0 !important;
+    min-height: 0 !important;
+
+    max-width: 0 !important;
+    max-height: 0 !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+
+    border: 0 !important;
+
+    overflow: hidden !important;
+
+    opacity: 0 !important;
+
+    pointer-events: none !important;
+  }
+
+  .payment-details-page {
+    padding-top: 18px;
+  }
+
+  .payment-details-container {
+    width: calc(100% - 28px);
+  }
+
+  .payment-details-back {
+    margin-bottom: 18px;
+  }
+
+  /* ====================================== */
+  /* CARDS                                  */
+  /* ====================================== */
+
+  .payment-details-card {
+    padding: 19px;
+
+    border-radius: 16px;
+  }
+
+  .payment-debt-warning,
+  .payment-balance-summary {
+    border-radius: 14px;
+  }
+
+  /* ====================================== */
+  /* PAYMENT METHODS                       */
+  /* ====================================== */
+
+  .payment-method-grid--three {
+    grid-template-columns: 1fr;
+
+    gap: 9px;
+  }
+
+  .payment-method-option {
+    min-height: 70px;
+
+    padding: 12px;
+  }
+
+  .payment-method-option > svg {
+    width: 40px;
+    height: 40px;
+
+    flex-basis: 40px;
+
+    padding: 9px;
+  }
+
+  /* ====================================== */
+  /* BALANCE SUMMARY                       */
+  /* ====================================== */
+
+  .payment-balance-summary {
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    gap: 8px;
+  }
+
+  .payment-balance-summary p {
+    max-width: none;
+
+    text-align: left;
+  }
+
+  /* ====================================== */
+  /* ORDER SUMMARY                         */
+  /* ====================================== */
+
+  .payment-balance-box {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 8px;
+  }
+
+  /* ====================================== */
+  /* EXPIRY + CVV                          */
+  /* ====================================== */
+
+  .payment-details-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 8px;
+  }
+
+  .payment-details-row .payment-details-field input,
+  .payment-details-row .payment-details-field select {
+    padding-inline: 8px;
+
+    font-size: 0.78rem;
+  }
+
+  /* ====================================== */
+  /* CASH                                   */
+  /* ====================================== */
+
+  .payment-cash-notes {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: 7px;
+  }
+
+  .payment-cash-note {
+    min-height: 40px;
+
+    padding: 6px;
+
+    font-size: 0.7rem;
+  }
+
+  .payment-cash-custom {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 8px;
+  }
+
+  .payment-cash-custom input {
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media screen and (max-width: 430px) {
+  .payment-details-page {
+    padding-top: 14px;
+  }
+
+  .payment-details-container {
+    width: calc(100% - 22px);
+  }
+
+  .payment-details-card {
+    margin-bottom: 14px;
+
+    padding: 17px 15px;
+  }
+
+  .payment-details-section-heading {
+    gap: 9px;
+
+    margin-bottom: 15px;
+  }
+
+  .payment-details-section-heading h2 {
+    font-size: 1.06rem;
+  }
+
+  .payment-details-section-heading p {
+    font-size: 0.72rem;
+  }
+
+  /* ====================================== */
+  /* SUMMARY                               */
+  /* ====================================== */
+
+  .payment-balance-box {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .payment-balance-box > div {
+    padding: 11px;
+  }
+
+  /* ====================================== */
+  /* CARD TYPE                             */
+  /* ====================================== */
+
+  .payment-card-type-grid {
+    gap: 7px;
+  }
+
+  .payment-card-type {
+    min-height: 44px;
+
+    padding: 7px;
+
+    font-size: 0.7rem;
+  }
+
+  /* ====================================== */
+  /* EXPIRY                                */
+  /* ====================================== */
+
+  .payment-details-row {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 6px;
+  }
+
+  .payment-details-row .payment-details-field label {
+    font-size: 0.68rem;
+  }
+
+  .payment-details-row .payment-details-field input,
+  .payment-details-row .payment-details-field select {
+    min-height: 44px;
+
+    padding-inline: 5px;
+
+    font-size: 0.72rem;
+  }
+
+  /* ====================================== */
+  /* BALANCE                               */
+  /* ====================================== */
+
+  .payment-balance-result,
+  .payment-cash-summary {
+    grid-template-columns: 1fr;
+
+    gap: 7px;
+  }
+
+  /* ====================================== */
+  /* CASH NOTES                            */
+  /* ====================================== */
+
+  .payment-cash-notes {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: 5px;
+  }
+
+  .payment-cash-note {
+    padding: 5px;
+
+    font-size: 0.66rem;
+  }
+
+  /* ====================================== */
+  /* BUTTON                                */
+  /* ====================================== */
+
+  .payment-details-save {
+    min-height: 46px;
+
+    font-size: 0.78rem;
+  }
+}
+
+/* =========================================================
+   VERY SMALL MOBILE
+   ========================================================= */
+
+@media screen and (max-width: 360px) {
+  .payment-details-container {
+    width: calc(100% - 16px);
+  }
+
+  .payment-details-card {
+    padding: 15px 12px;
+  }
+
+  .payment-balance-box > div {
+    padding: 9px;
+  }
+
+  .payment-balance-box strong {
+    font-size: 0.8rem;
+  }
+
+  .payment-details-row {
+    gap: 4px;
+  }
+
+  .payment-cash-notes {
+    gap: 4px;
+  }
+
+  .payment-cash-note {
+    font-size: 0.62rem;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .payment-details-page *,
+  .payment-details-page *::before,
+  .payment-details-page *::after {
+    animation: none !important;
+
+    transition: none !important;
+
+    scroll-behavior: auto !important;
+  }
+}

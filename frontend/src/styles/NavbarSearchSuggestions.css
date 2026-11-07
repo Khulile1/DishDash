@@ -1,0 +1,294 @@
+/* ========================================================= */
+/* NAVBAR LIVE SEARCH SUGGESTIONS                            */
+/* ========================================================= */
+
+.navbar-search-suggestions {
+  width: 100%;
+
+  margin-top: 0.65rem;
+
+  overflow: hidden;
+
+  border: 1px solid #e5e7eb;
+  border-radius: 0.9rem;
+
+  background: #ffffff;
+}
+
+/* ====================================== */
+/* FEEDBACK                               */
+/* ====================================== */
+
+.navbar-search-feedback {
+  padding: 0.95rem 1rem;
+
+  color: #6b7280;
+
+  font-size: 0.88rem;
+}
+
+.navbar-search-feedback--error {
+  color: #b42318;
+}
+
+/* ====================================== */
+/* RESULTS LIST                           */
+/* ====================================== */
+
+.navbar-search-suggestion-list {
+  width: 100%;
+
+  max-height: 24rem;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow-y: auto;
+
+  overscroll-behavior: contain;
+}
+
+/* ====================================== */
+/* RESULT                                 */
+/* ====================================== */
+
+.navbar-search-suggestion {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.8rem;
+
+  padding: 0.75rem;
+
+  border: 0;
+
+  border-bottom: 1px solid #f1f5f9;
+
+  background: #ffffff;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition: background 160ms ease;
+}
+
+.navbar-search-suggestion:last-child {
+  border-bottom: 0;
+}
+
+.navbar-search-suggestion:hover,
+.navbar-search-suggestion:focus-visible {
+  background: #fff7f2;
+
+  outline: none;
+}
+
+/* ====================================== */
+/* IMAGE                                  */
+/* ====================================== */
+
+.navbar-search-suggestion-image {
+  width: 3rem;
+  height: 3rem;
+
+  flex: 0 0 3rem;
+
+  display: grid;
+
+  place-items: center;
+
+  overflow: hidden;
+
+  border-radius: 0.7rem;
+
+  background: #f3f4f6;
+
+  color: #f97316;
+}
+
+.navbar-search-suggestion-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+/* ====================================== */
+/* CONTENT                                */
+/* ====================================== */
+
+.navbar-search-suggestion-content {
+  min-width: 0;
+
+  flex: 1;
+}
+
+.navbar-search-suggestion-title-row {
+  width: 100%;
+
+  display: flex;
+
+  align-items: baseline;
+
+  justify-content: space-between;
+
+  gap: 0.65rem;
+}
+
+.navbar-search-suggestion-title-row strong {
+  min-width: 0;
+
+  overflow: hidden;
+
+  color: #111827;
+
+  font-size: 0.95rem;
+  font-weight: 750;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+.navbar-search-suggestion-price {
+  flex-shrink: 0;
+
+  color: #111827;
+
+  font-size: 0.87rem;
+  font-weight: 800;
+}
+
+/* ====================================== */
+/* SUBTITLE                               */
+/* ====================================== */
+
+.navbar-search-suggestion-subtitle {
+  display: block;
+
+  margin-top: 0.15rem;
+
+  overflow: hidden;
+
+  color: #64748b;
+
+  font-size: 0.8rem;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+/* ====================================== */
+/* TYPE                                   */
+/* ====================================== */
+
+.navbar-search-suggestion-type {
+  display: block;
+
+  margin-top: 0.2rem;
+
+  color: #94a3b8;
+
+  font-size: 0.68rem;
+
+  font-weight: 600;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.045em;
+}
+
+/* ========================================================= */
+/* MOBILE                                                    */
+/* ========================================================= */
+
+@media (max-width: 40.625rem) {
+  .navbar-search-suggestions {
+    margin-top: 0.55rem;
+
+    border-radius: 0.8rem;
+  }
+
+  .navbar-search-suggestion-list {
+    max-height: min(62dvh, 30rem);
+  }
+
+  .navbar-search-suggestion {
+    min-height: 4.6rem;
+
+    gap: 0.75rem;
+
+    padding: 0.7rem;
+  }
+
+  .navbar-search-suggestion-image {
+    width: 3.35rem;
+    height: 3.35rem;
+
+    flex-basis: 3.35rem;
+  }
+
+  .navbar-search-suggestion-title-row strong {
+    font-size: 0.98rem;
+  }
+
+  .navbar-search-suggestion-price {
+    font-size: 0.88rem;
+  }
+
+  .navbar-search-suggestion-subtitle {
+    margin-top: 0.2rem;
+
+    font-size: 0.82rem;
+  }
+
+  .navbar-search-suggestion-type {
+    margin-top: 0.25rem;
+
+    font-size: 0.68rem;
+  }
+}
+
+/* ========================================================= */
+/* SMALL MOBILE                                              */
+/* ========================================================= */
+
+@media (max-width: 28rem) {
+  .navbar-search-suggestion {
+    min-height: 4.35rem;
+
+    gap: 0.65rem;
+
+    padding: 0.65rem;
+  }
+
+  .navbar-search-suggestion-image {
+    width: 3rem;
+    height: 3rem;
+
+    flex-basis: 3rem;
+  }
+
+  .navbar-search-suggestion-title-row {
+    gap: 0.35rem;
+  }
+
+  .navbar-search-suggestion-title-row strong {
+    font-size: 0.9rem;
+  }
+
+  .navbar-search-suggestion-price {
+    font-size: 0.8rem;
+  }
+
+  .navbar-search-suggestion-subtitle {
+    font-size: 0.76rem;
+  }
+}
