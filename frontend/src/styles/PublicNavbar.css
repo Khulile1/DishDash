@@ -1,6 +1,7 @@
-/* =========================================================
+/* =========================================
    DISH DASH — PUBLIC NAVBAR
-========================================================= */
+   COMPACT, TOP-ALIGNED & RESPONSIVE
+========================================= */
 
 .public-navbar {
   --public-orange: #ff6b14;
@@ -15,44 +16,57 @@
   --public-border: rgba(255, 255, 255, 0.12);
 
   width: 100%;
+
   position: sticky;
   top: 0;
   z-index: 5000;
+
   background: var(--public-navy);
+
   border-bottom: 1px solid var(--public-border);
+
+  transition:
+    background 250ms ease,
+    box-shadow 250ms ease;
 }
 
-/* =========================================================
-   LANDING PAGE OVERLAY
-========================================================= */
+/* =========================================
+   LANDING PAGE VIDEO OVERLAY
+========================================= */
 
 .public-navbar--overlay {
   position: absolute;
+
   top: 0;
   left: 0;
   right: 0;
+
   width: 100%;
 
-  /* Extend the gradient behind the slightly lowered navigation. */
-  padding-bottom: 18px;
+  margin: 0;
+  padding: 0;
+
   background: linear-gradient(
     180deg,
     rgba(7, 26, 43, 0.78) 0%,
     rgba(7, 26, 43, 0.36) 65%,
     transparent 100%
   );
-  border-bottom: none;
+
+  border: none;
+  box-shadow: none;
 }
 
-/* Keep the overlay navigation comfortably inside the hero edges. */
+/* REMOVE PREVIOUS DOWNWARD OFFSET */
+
 .public-navbar--overlay .public-navbar-shell {
-  width: min(1400px, calc(100% - 100px));
-  transform: translateY(10px);
+  width: 100%;
+  transform: none;
 }
 
-/* =========================================================
+/* =========================================
    RESET
-========================================================= */
+========================================= */
 
 .public-navbar,
 .public-navbar *,
@@ -61,221 +75,397 @@
   box-sizing: border-box;
 }
 
-/* =========================================================
-   NAVBAR SHELL
-========================================================= */
-
-.public-navbar-shell {
-  width: min(1480px, calc(100% - 80px));
-  height: 76px;
-  min-height: 76px;
-  display: grid;
-  grid-template-columns: 180px 1fr 260px;
-  align-items: center;
-  gap: 24px;
-  margin: 0 auto;
+.public-navbar a {
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* =========================================================
-   LOGO
-========================================================= */
+/* =========================================
+   NAVBAR SHELL
+========================================= */
+
+.public-navbar-shell {
+  position: relative;
+
+  width: 100%;
+  max-width: none;
+
+  height: 68px;
+  min-height: 68px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(120px, 1fr)
+    auto
+    minmax(230px, 1fr);
+
+  align-items: center;
+  gap: 24px;
+
+  margin: 0;
+  padding: 0 24px;
+
+  animation: public-navbar-appear 550ms ease both;
+}
+
+/* =========================================
+   LOGO — SMALLER AND FURTHER LEFT
+========================================= */
 
 .public-navbar-logo {
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
+
   width: fit-content;
+  min-width: 0;
+
+  margin: 0;
+  padding: 0;
+
+  flex-shrink: 0;
+
+  line-height: 0;
   text-decoration: none;
 }
 
 .public-navbar-logo img {
   display: block;
-  width: auto;
-  height: 46px;
-  max-width: 100px;
+
+  width: 98px;
+  height: 38px;
+
+  max-width: 100%;
+  max-height: 38px;
+
   object-fit: contain;
+  object-position: left center;
+
+  flex-shrink: 0;
+
+  transition:
+    transform 250ms ease,
+    filter 250ms ease;
 }
 
-/* =========================================================
-   PANEL
-========================================================= */
+@media (hover: hover) {
+  .public-navbar-logo:hover img {
+    transform: translateY(-1px) scale(1.03);
+
+    filter: drop-shadow(0 4px 10px rgba(255, 107, 20, 0.2));
+  }
+}
+
+/* =========================================
+   NAVBAR PANEL
+========================================= */
 
 .public-navbar-panel {
   min-width: 0;
   display: contents;
 }
 
-/* =========================================================
-   NAV LINKS
-========================================================= */
+/* =========================================
+   NAVIGATION LINKS
+========================================= */
 
 .public-navbar-links {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 46px;
+
+  gap: 42px;
   min-width: 0;
 }
 
 .public-navbar-link {
   position: relative;
-  min-height: 76px;
+
+  min-height: 68px;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   padding: 0 2px;
+
   color: rgba(255, 255, 255, 0.9);
+
   font-size: 14px;
   font-weight: 700;
-  text-decoration: none;
+
   white-space: nowrap;
+
   transition:
-    color 170ms ease,
-    opacity 170ms ease;
+    color 220ms ease,
+    transform 220ms ease;
+}
+
+/* ANIMATED UNDERLINE */
+
+.public-navbar-link::after {
+  content: "";
+
+  position: absolute;
+
+  left: 50%;
+  bottom: 7px;
+
+  width: 0;
+  height: 3px;
+
+  background: var(--public-orange);
+  border-radius: 999px;
+
+  transform: translateX(-50%);
+
+  transition: width 260ms ease;
 }
 
 .public-navbar-link:hover {
   color: #ffffff;
+  transform: translateY(-1px);
 }
 
-/* =========================================================
-   ACTIVE NAV LINK
-========================================================= */
+.public-navbar-link:hover::after {
+  width: 34px;
+}
 
-.public-navbar-link--active {
+/* ACTIVE LINKS */
+
+.public-navbar-link--active,
+.public-navbar-link.active,
+.public-navbar-link[aria-current="page"] {
   color: #ffffff;
 }
 
-.public-navbar-link--active::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: 10px;
+.public-navbar-link--active::after,
+.public-navbar-link.active::after,
+.public-navbar-link[aria-current="page"]::after {
   width: 34px;
-  height: 4px;
-  transform: translateX(-50%);
-  background: var(--public-orange);
-  border-radius: 999px;
 }
 
-/* =========================================================
+/* =========================================
    NAVBAR ACTIONS
-========================================================= */
+========================================= */
 
 .public-navbar-actions {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+
   gap: 12px;
   min-width: 0;
 }
 
-/* =========================================================
+/* =========================================
    LOGIN BUTTON
-========================================================= */
+========================================= */
 
 .public-navbar-login {
-  min-height: 44px;
+  min-height: 42px;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   padding: 0 18px;
+
   color: #ffffff;
   background: rgba(255, 255, 255, 0.08);
+
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 12px;
+
   font-size: 13px;
   font-weight: 700;
+
   white-space: nowrap;
+
   cursor: pointer;
+
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+
   transition:
-    background 170ms ease,
-    border-color 170ms ease,
-    transform 170ms ease;
+    background 220ms ease,
+    border-color 220ms ease,
+    transform 220ms ease,
+    box-shadow 220ms ease;
 }
 
 .public-navbar-login:hover {
+  color: #ffffff;
+
   background: rgba(255, 255, 255, 0.14);
   border-color: rgba(255, 255, 255, 0.28);
-  transform: translateY(-1px);
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
-/* =========================================================
+.public-navbar-login:active {
+  transform: scale(0.97);
+}
+
+/* =========================================
    ORDER BUTTON
-========================================================= */
+========================================= */
 
 .public-navbar-order {
-  min-height: 46px;
+  min-height: 44px;
+
   display: inline-flex;
   align-items: center;
   justify-content: center;
+
   gap: 8px;
-  padding: 0 21px;
+  padding: 0 20px;
+
   color: #ffffff;
   background: var(--public-orange);
+
   border: 1px solid var(--public-orange);
   border-radius: 13px;
+
   font-size: 13px;
   font-weight: 750;
+
   white-space: nowrap;
+
   cursor: pointer;
+
   box-shadow: 0 8px 22px rgba(255, 107, 20, 0.24);
+
   transition:
-    background 170ms ease,
-    border-color 170ms ease,
-    transform 170ms ease,
-    box-shadow 170ms ease;
+    background 220ms ease,
+    border-color 220ms ease,
+    transform 220ms ease,
+    box-shadow 220ms ease;
 }
 
 .public-navbar-order:hover {
+  color: #ffffff;
+
   background: var(--public-orange-dark);
   border-color: var(--public-orange-dark);
-  transform: translateY(-1px);
-  box-shadow: 0 10px 26px rgba(255, 107, 20, 0.32);
+
+  transform: translateY(-2px);
+
+  box-shadow: 0 12px 28px rgba(255, 107, 20, 0.34);
 }
 
-/* =========================================================
+.public-navbar-order:active {
+  transform: scale(0.97);
+}
+
+/* =========================================
    MOBILE MENU BUTTON
-========================================================= */
+========================================= */
 
 .public-navbar-menu-button {
-  width: 42px;
-  height: 42px;
+  width: 40px;
+  height: 40px;
+
   display: none;
   align-items: center;
   justify-content: center;
+
   margin-left: auto;
   padding: 0;
+
   color: var(--public-orange);
+
   background: rgba(255, 255, 255, 0.08);
+
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 11px;
+
   cursor: pointer;
+
+  transition:
+    background 220ms ease,
+    border-color 220ms ease,
+    transform 220ms ease;
 }
 
-/* =========================================================
+.public-navbar-menu-button:hover,
+.public-navbar-menu-button[aria-expanded="true"] {
+  background: rgba(255, 107, 20, 0.14);
+  border-color: var(--public-orange);
+}
+
+.public-navbar-menu-button:active {
+  transform: scale(0.95);
+}
+
+/* =========================================
+   KEYBOARD FOCUS
+========================================= */
+
+.public-navbar a:focus-visible,
+.public-navbar button:focus-visible {
+  outline: 3px solid rgba(255, 107, 20, 0.8);
+  outline-offset: 4px;
+}
+
+/* =========================================
+   ANIMATIONS
+========================================= */
+
+@keyframes public-navbar-appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes public-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =========================================
    LAPTOP
-========================================================= */
+========================================= */
 
 @media (max-width: 1200px) {
   .public-navbar-shell {
-    width: calc(100% - 48px);
-    grid-template-columns: 130px 1fr 230px;
-    gap: 18px;
+    padding: 0 20px;
+
+    grid-template-columns:
+      minmax(105px, 1fr)
+      auto
+      minmax(200px, 1fr);
+
+    gap: 16px;
   }
 
   .public-navbar--overlay .public-navbar-shell {
-    width: calc(100% - 64px);
+    width: 100%;
+    transform: none;
   }
 
   .public-navbar-links {
-    gap: 30px;
+    gap: 26px;
   }
 
   .public-navbar-logo img {
-    height: 42px;
+    width: 92px;
+    height: 36px;
+    max-height: 36px;
   }
 
   .public-navbar-link {
@@ -291,97 +481,182 @@
   }
 }
 
-/* =========================================================
-   TABLET / MOBILE MENU
-========================================================= */
+/* =========================================
+   SMALL LAPTOP
+========================================= */
+
+@media (min-width: 851px) and (max-width: 1020px) {
+  .public-navbar-shell {
+    gap: 12px;
+
+    grid-template-columns:
+      minmax(100px, 1fr)
+      auto
+      minmax(190px, 1fr);
+  }
+
+  .public-navbar-links {
+    gap: 16px;
+  }
+
+  .public-navbar-link {
+    font-size: 12px;
+  }
+
+  .public-navbar-actions {
+    gap: 8px;
+  }
+
+  .public-navbar-login {
+    padding: 0 12px;
+    font-size: 12px;
+  }
+
+  .public-navbar-order {
+    padding: 0 13px;
+    font-size: 12px;
+  }
+}
+
+/* =========================================
+   TABLET / MOBILE
+========================================= */
 
 @media (max-width: 850px) {
   .public-navbar-shell {
-    width: calc(100% - 30px);
-    height: 66px;
-    min-height: 66px;
+    width: 100%;
+
+    height: 62px;
+    min-height: 62px;
+
     display: flex;
     align-items: center;
-    position: relative;
+
     gap: 12px;
+    padding: 0 15px;
   }
 
   .public-navbar--overlay {
-    padding-bottom: 10px;
+    padding: 0;
   }
 
   .public-navbar--overlay .public-navbar-shell {
-    width: calc(100% - 30px);
-    transform: translateY(5px);
+    width: 100%;
+    transform: none;
   }
+
+  /* LOGO */
 
   .public-navbar-logo {
     flex: 0 0 auto;
   }
 
   .public-navbar-logo img {
-    height: 40px;
+    width: 88px;
+    height: 34px;
+    max-height: 34px;
   }
+
+  /* MENU TOGGLE */
 
   .public-navbar-menu-button {
     display: inline-flex;
   }
 
+  /* MOBILE DROPDOWN */
+
   .public-navbar-panel {
     position: absolute;
-    top: calc(100% + 8px);
-    left: 0;
-    right: 0;
+
+    top: calc(100% + 6px);
+    left: 15px;
+    right: 15px;
+
     z-index: 100;
-    width: 100%;
+
+    width: auto;
+
     display: none;
-    padding: 14px;
     flex-direction: column;
     align-items: stretch;
+
     gap: 14px;
+    padding: 14px;
+
     background: rgba(7, 26, 43, 0.98);
+
     border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 16px;
+
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.32);
+
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
+
+    transform-origin: top right;
   }
 
   .public-navbar-panel--open {
     display: flex;
+
+    animation: public-menu-in 260ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
   }
+
+  /* MOBILE LINKS */
 
   .public-navbar-links {
     width: 100%;
+
     display: flex;
     flex-direction: column;
     align-items: stretch;
+
     gap: 4px;
   }
 
   .public-navbar-link {
     width: 100%;
-    min-height: 48px;
+    min-height: 46px;
+
     justify-content: flex-start;
+
     padding: 0 14px;
+
     border-radius: 10px;
+    font-size: 13px;
+
+    transition:
+      color 220ms ease,
+      background 220ms ease,
+      padding-left 220ms ease;
   }
 
-  .public-navbar-link:hover,
-  .public-navbar-link--active {
+  .public-navbar-link:hover {
+    background: rgba(255, 107, 20, 0.11);
+    padding-left: 18px;
+  }
+
+  .public-navbar-link--active,
+  .public-navbar-link.active,
+  .public-navbar-link[aria-current="page"] {
     background: rgba(255, 107, 20, 0.11);
   }
 
-  .public-navbar-link--active::after {
+  .public-navbar-link::after {
     display: none;
   }
 
+  /* MOBILE ACTIONS */
+
   .public-navbar-actions {
     width: 100%;
+
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+
     gap: 10px;
     padding-top: 13px;
+
     border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
@@ -391,24 +666,40 @@
   }
 }
 
-/* =========================================================
+/* =========================================
    SMALL MOBILE
-========================================================= */
+========================================= */
 
 @media (max-width: 430px) {
   .public-navbar-shell {
-    width: calc(100% - 24px);
-  }
-
-  .public-navbar--overlay .public-navbar-shell {
-    width: calc(100% - 24px);
+    padding: 0 12px;
   }
 
   .public-navbar-logo img {
-    height: 36px;
+    width: 80px;
+    height: 32px;
+    max-height: 32px;
+  }
+
+  .public-navbar-panel {
+    left: 12px;
+    right: 12px;
   }
 
   .public-navbar-actions {
     grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .public-navbar *,
+  .public-navbar *::before,
+  .public-navbar *::after {
+    animation: none !important;
+    transition: none !important;
   }
 }

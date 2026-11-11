@@ -1,58 +1,42 @@
-/* =========================================================
+/* =========================================
+   DISH DASH — FULL SCREEN VIDEO LANDING
+========================================= */
 
-   DISH DASH — PREMIUM VIDEO LANDING PAGE
-
-==== */
-
-/* =========================================================
-
-   PAGE WRAPPER
-
-==== */
+/* PAGE WRAPPER */
 
 .dish-page {
   width: 100%;
-
   min-height: 100vh;
-
-  background: #ffffff;
+  min-height: 100dvh;
+  margin: 0;
+  padding: 0;
+  overflow-x: clip;
+  background: #071a2b;
 }
 
-/* =========================================================
-
-   LANDING PAGE
-
-==== */
+/* LANDING PAGE */
 
 .dish-landing {
   --dish-orange: #f97316;
-
   --dish-orange-light: #fb923c;
-
   --dish-orange-dark: #ea580c;
-
   --dish-navy: #071a2b;
-
   --dish-navy-light: #0d2940;
-
   --dish-text: #18212a;
-
   --dish-muted: #5f6b76;
 
   width: 100%;
-
   min-height: 100vh;
+  min-height: 100dvh;
 
   display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
 
-  align-items: flex-start;
+  margin: 0;
+  padding: 0;
 
-  justify-content: center;
-
-  padding: 22px 28px 28px;
-
-  background: #ffffff;
-
+  background: var(--dish-navy);
   color: var(--dish-text);
 
   font-family:
@@ -66,11 +50,7 @@
   box-sizing: border-box;
 }
 
-/* =========================================================
-
-   RESET
-
-==== */
+/* RESET */
 
 .dish-landing *,
 .dish-landing *::before,
@@ -80,164 +60,198 @@
 
 .dish-landing a {
   text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* =========================================================
-
-   HERO
-
-==== */
+/* =========================================
+   FULL SCREEN HERO
+========================================= */
 
 .dish-hero {
   position: relative;
+  isolation: isolate;
 
-  width: min(1480px, 100%);
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
 
-  height: calc(100svh - 44px);
+  min-height: 100vh;
+  min-height: 100dvh;
 
-  min-height: 560px;
-
-  max-height: 780px;
+  max-width: none;
+  max-height: none;
 
   display: flex;
-
   flex-direction: column;
+
+  margin: 0;
+  padding: 0;
 
   overflow: hidden;
 
-  background: #071a2b;
+  background: var(--dish-navy);
 
-  border-radius: 6px;
+  border: none;
+  border-radius: 0;
+
+  box-shadow: none;
 }
 
-/* =========================================================
+/* SUBTLE ORANGE AMBIENT LIGHT */
 
-   HERO VIDEO
+.dish-hero::before {
+  content: "";
 
-==== */
+  position: absolute;
+  z-index: 2;
+
+  top: -200px;
+  right: -220px;
+
+  width: 520px;
+  height: 520px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(249, 115, 22, 0.13) 0%,
+    rgba(249, 115, 22, 0.04) 38%,
+    transparent 70%
+  );
+
+  pointer-events: none;
+
+  animation: dish-ambient 14s ease-in-out infinite alternate;
+}
+
+/* =========================================
+   FULL SCREEN VIDEO
+========================================= */
 
 .dish-hero-video {
   position: absolute;
 
   inset: 0;
-
   z-index: 0;
 
-  width: 100%;
+  display: block;
 
+  width: 100%;
   height: 100%;
 
   object-fit: cover;
-
-  /*
-
-    Adjust this if you want more of the bike/rider visible.
-
-  */
-
   object-position: center 54%;
 
   pointer-events: none;
+
+  transform: scale(1.005);
+
+  transition: transform 1400ms ease;
 }
 
-/* =========================================================
+@media (hover: hover) {
+  .dish-hero:hover .dish-hero-video {
+    transform: scale(1.035);
+  }
+}
 
-   DARK VIDEO OVERLAY
-
-==== */
+/* =========================================
+   VIDEO OVERLAY
+========================================= */
 
 .dish-hero-overlay {
   position: absolute;
 
   inset: 0;
-
   z-index: 1;
 
   pointer-events: none;
 
   background: linear-gradient(
     to bottom,
-
     rgba(7, 26, 43, 0.68) 0%,
-
     rgba(7, 26, 43, 0.54) 18%,
-
     rgba(7, 26, 43, 0.36) 40%,
-
     rgba(7, 26, 43, 0.28) 62%,
-
     rgba(7, 26, 43, 0.58) 100%
   );
 }
 
-/* =========================================================
-
+/* =========================================
    NAVIGATION
-
-==== */
+========================================= */
 
 .dish-nav {
   position: relative;
-
   z-index: 10;
 
   width: 100%;
-
-  min-height: 64px;
+  min-height: 68px;
 
   display: grid;
 
   grid-template-columns:
-    minmax(105px, 1fr)
+    minmax(150px, 1fr)
     auto
-    minmax(205px, 1fr);
+    minmax(215px, 1fr);
 
   align-items: center;
-
   gap: 24px;
 
   padding: 10px 42px;
+
+  animation: dish-fade-down 650ms ease both;
 }
 
-/* =========================================================
-
-   LOGO
-
-==== */
+/* LOGO */
 
 .dish-logo {
   width: fit-content;
+  min-width: 0;
 
   display: inline-flex;
-
   align-items: center;
-
   justify-content: flex-start;
+
+  flex-shrink: 0;
+  line-height: 0;
 }
 
 .dish-logo-image {
   display: block;
 
-  width: 82px;
+  width: clamp(112px, 9.5vw, 148px);
+  height: 48px;
 
-  height: auto;
-
-  max-height: 38px;
+  max-width: 100%;
+  max-height: none;
 
   object-fit: contain;
+  object-position: left center;
+
+  flex-shrink: 0;
+
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.12));
+
+  transition:
+    transform 250ms ease,
+    filter 250ms ease;
 }
 
-/* =========================================================
+@media (hover: hover) {
+  .dish-logo:hover .dish-logo-image {
+    transform: translateY(-2px) scale(1.025);
 
-   NAV LINKS
+    filter: drop-shadow(0 5px 12px rgba(249, 115, 22, 0.18));
+  }
+}
 
-==== */
+/* NAVIGATION LINKS */
 
 .dish-nav-links {
   display: flex;
-
   align-items: center;
-
   justify-content: center;
 
   gap: 34px;
@@ -246,17 +260,18 @@
 .dish-nav-links a {
   position: relative;
 
-  padding: 8px 0;
+  padding: 9px 0;
 
   color: rgba(255, 255, 255, 0.9);
 
   font-size: 13px;
-
   font-weight: 600;
 
   white-space: nowrap;
 
-  transition: color 160ms ease;
+  transition:
+    color 220ms ease,
+    transform 220ms ease;
 }
 
 .dish-nav-links a::after {
@@ -265,41 +280,43 @@
   position: absolute;
 
   left: 50%;
-
   bottom: 1px;
 
   width: 0;
-
   height: 2px;
 
   background: var(--dish-orange);
-
   border-radius: 999px;
 
   transform: translateX(-50%);
 
-  transition: width 160ms ease;
+  transition: width 260ms ease;
 }
 
 .dish-nav-links a:hover {
   color: var(--dish-orange-light);
+  transform: translateY(-1px);
 }
 
 .dish-nav-links a:hover::after {
   width: 100%;
 }
 
-/* =========================================================
+.dish-nav-links a.active,
+.dish-nav-links a[aria-current="page"] {
+  color: var(--dish-orange-light);
+}
 
-   NAV ACTIONS
+.dish-nav-links a.active::after,
+.dish-nav-links a[aria-current="page"]::after {
+  width: 100%;
+}
 
-==== */
+/* NAVIGATION ACTIONS */
 
 .dish-nav-actions {
   display: flex;
-
   align-items: center;
-
   justify-content: flex-end;
 
   gap: 20px;
@@ -309,96 +326,85 @@
   color: rgba(255, 255, 255, 0.9);
 
   font-size: 13px;
-
   font-weight: 650;
 
-  transition: color 160ms ease;
+  transition:
+    color 220ms ease,
+    transform 220ms ease;
 }
 
 .dish-login-link:hover {
   color: var(--dish-orange-light);
+  transform: translateY(-1px);
 }
 
-/* =========================================================
-
-   NAV ORDER BUTTON
-
-==== */
+/* NAV ORDER BUTTON */
 
 .dish-nav-button {
   min-height: 42px;
 
   display: inline-flex;
-
   align-items: center;
-
   justify-content: center;
-
   gap: 9px;
 
   padding: 0 20px;
 
   color: #ffffff;
-
   background: var(--dish-orange);
 
+  border: 1px solid transparent;
   border-radius: 999px;
 
   font-size: 13px;
-
   font-weight: 750;
 
   box-shadow: 0 7px 18px rgba(249, 115, 22, 0.25);
 
   transition:
-    background 160ms ease,
-    transform 160ms ease,
-    box-shadow 160ms ease;
+    background 220ms ease,
+    transform 220ms ease,
+    box-shadow 220ms ease;
 }
 
 .dish-nav-button:hover {
   color: #ffffff;
-
   background: var(--dish-orange-dark);
 
-  transform: translateY(-1px);
+  transform: translateY(-3px);
 
-  box-shadow: 0 10px 24px rgba(249, 115, 22, 0.32);
+  box-shadow: 0 12px 26px rgba(249, 115, 22, 0.36);
 }
 
-/* =========================================================
+.dish-nav-button:active {
+  transform: scale(0.97);
+}
 
-   HERO CONTENT
-
-==== */
+/* =========================================
+   HERO CONTENT — CENTRED
+========================================= */
 
 .dish-hero-content {
   position: absolute;
 
   top: 48%;
   left: 50%;
-  transform: translate(-50%, -50%);
 
   z-index: 5;
 
-  width: min(800px, calc(100% - 48px));
-
+  width: min(900px, calc(100% - 48px));
   margin: 0;
 
   display: flex;
-
   flex-direction: column;
-
   align-items: center;
 
   text-align: center;
+
+  transform: translate(-50%, -50%);
 }
 
-/* =========================================================
-
-   HERO EYEBROW
-
-==== */
+/* EYEBROW */
 
 .dish-eyebrow {
   margin-bottom: 12px;
@@ -406,45 +412,39 @@
   color: var(--dish-orange-light);
 
   font-size: 12px;
-
   font-weight: 850;
-
   letter-spacing: 0.14em;
 
   text-transform: uppercase;
 
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+
+  animation: dish-fade-up 700ms 120ms both;
 }
 
-/* =========================================================
-
-   HERO TITLE
-
-==== */
+/* HERO TITLE */
 
 .dish-hero-content h1 {
-  max-width: 820px;
-
+  max-width: 900px;
   margin: 0;
 
   color: #ffffff;
 
   font-size: clamp(3.4rem, 5vw, 5.4rem);
-
   font-weight: 850;
 
   letter-spacing: -0.058em;
-
   line-height: 0.96;
 
+  text-align: center;
+  text-wrap: balance;
+
   text-shadow: 0 4px 22px rgba(0, 0, 0, 0.28);
+
+  animation: dish-fade-up 800ms 200ms both;
 }
 
-/* =========================================================
-
-   HERO DESCRIPTION
-
-==== */
+/* HERO DESCRIPTION */
 
 .dish-hero-content > p {
   max-width: 570px;
@@ -454,254 +454,297 @@
   color: rgba(255, 255, 255, 0.82);
 
   font-size: 16px;
-
   font-weight: 520;
-
   line-height: 1.55;
 
+  text-align: center;
+  text-wrap: pretty;
+
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.22);
+
+  animation: dish-fade-up 800ms 320ms both;
 }
 
-/* =========================================================
-
-   HERO ACTIONS
-
-==== */
+/* HERO ACTIONS */
 
 .dish-hero-actions {
   display: flex;
-
   align-items: center;
-
   justify-content: center;
 
   gap: 10px;
-
   margin-top: 20px;
+
+  animation: dish-fade-up 800ms 440ms both;
 }
 
-/* =========================================================
-
-   PRIMARY BUTTON
-
-==== */
+/* PRIMARY BUTTON */
 
 .dish-primary-button {
   min-height: 43px;
 
   display: inline-flex;
-
   align-items: center;
-
   justify-content: center;
 
   padding: 0 22px;
 
   color: #ffffff;
-
   background: var(--dish-orange);
 
+  border: 1px solid transparent;
   border-radius: 999px;
 
   font-size: 13px;
-
   font-weight: 750;
 
   box-shadow: 0 8px 24px rgba(249, 115, 22, 0.3);
 
   transition:
-    background 160ms ease,
-    transform 160ms ease,
-    box-shadow 160ms ease;
+    background 220ms ease,
+    transform 220ms ease,
+    box-shadow 220ms ease;
 }
 
 .dish-primary-button:hover {
   color: #ffffff;
-
   background: var(--dish-orange-dark);
 
-  transform: translateY(-1px);
+  transform: translateY(-3px) scale(1.02);
 
-  box-shadow: 0 11px 28px rgba(249, 115, 22, 0.38);
+  box-shadow: 0 14px 32px rgba(249, 115, 22, 0.4);
 }
 
-/* =========================================================
+.dish-primary-button:active {
+  transform: scale(0.97);
+}
 
-   SECONDARY BUTTON
-
-==== */
+/* SECONDARY BUTTON */
 
 .dish-secondary-button {
   min-height: 43px;
 
   display: inline-flex;
-
   align-items: center;
-
   justify-content: center;
 
   gap: 8px;
-
   padding: 0 18px;
 
   color: #ffffff;
-
   background: rgba(255, 255, 255, 0.1);
 
   border: 1px solid rgba(255, 255, 255, 0.28);
-
   border-radius: 999px;
 
   font-size: 13px;
-
   font-weight: 680;
 
   backdrop-filter: blur(7px);
+  -webkit-backdrop-filter: blur(7px);
 
   transition:
-    color 160ms ease,
-    background 160ms ease,
-    border-color 160ms ease,
-    transform 160ms ease;
+    color 220ms ease,
+    background 220ms ease,
+    border-color 220ms ease,
+    transform 220ms ease,
+    box-shadow 220ms ease;
 }
 
 .dish-secondary-button:hover {
   color: #ffffff;
 
   background: rgba(255, 255, 255, 0.18);
-
   border-color: var(--dish-orange-light);
 
-  transform: translateY(-1px);
+  transform: translateY(-3px);
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
-/* =========================================================
+.dish-secondary-button:active {
+  transform: scale(0.97);
+}
 
-   BOTTOM STATS
-
-==== */
+/* =========================================
+   BOTTOM STATS — CENTRED
+========================================= */
 
 .dish-stats {
   position: absolute;
-
   z-index: 7;
 
   left: 50%;
-
   bottom: 25px;
 
   width: min(720px, calc(100% - 60px));
 
-  transform: translateX(-50%);
-
   display: grid;
-
   grid-template-columns: repeat(3, 1fr);
-
   align-items: center;
+
+  transform: translateX(-50%);
 }
-
-/* =========================================================
-
-   STAT
-
-==== */
 
 .dish-stat {
   position: relative;
-
   min-width: 0;
 
   display: flex;
-
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 
   gap: 4px;
+  padding: 8px 20px;
 
-  padding: 0 34px;
+  text-align: center;
 
-  text-align: left;
+  border-radius: 12px;
+
+  transition:
+    transform 250ms ease,
+    background 250ms ease;
 }
+
+.dish-stat:nth-child(1) {
+  animation: dish-fade-up 700ms 600ms both;
+}
+
+.dish-stat:nth-child(2) {
+  animation: dish-fade-up 700ms 720ms both;
+}
+
+.dish-stat:nth-child(3) {
+  animation: dish-fade-up 700ms 840ms both;
+}
+
+@media (hover: hover) {
+  .dish-stat:hover {
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.055);
+  }
+}
+
+/* SEPARATORS */
 
 .dish-stat:not(:last-child)::after {
   content: "";
 
   position: absolute;
 
-  top: 4px;
-
+  top: 8px;
   right: 0;
 
   width: 1px;
-
   height: 39px;
 
   background: rgba(255, 255, 255, 0.24);
 }
 
+/* STAT TITLE */
+
 .dish-stat strong {
   color: #ffffff;
 
   font-size: 15px;
-
   font-weight: 800;
 
+  text-align: center;
+
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+  transition: color 200ms ease;
 }
+
+.dish-stat:hover strong {
+  color: var(--dish-orange-light);
+}
+
+/* STAT DESCRIPTION */
 
 .dish-stat span {
   color: rgba(255, 255, 255, 0.72);
 
   font-size: 12px;
-
   font-weight: 500;
+
+  text-align: center;
 
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
 }
 
-/* =========================================================
+/* =========================================
+   ACCESSIBILITY
+========================================= */
 
-   FOCUS
-
-==== */
-
-.dish-landing a:focus-visible {
-  outline: 3px solid rgba(249, 115, 22, 0.5);
-
+.dish-landing a:focus-visible,
+.dish-landing button:focus-visible {
+  outline: 3px solid rgba(249, 115, 22, 0.8);
   outline-offset: 4px;
 }
 
-/* =========================================================
+/* =========================================
+   ANIMATIONS
+========================================= */
 
+@keyframes dish-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dish-fade-down {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes dish-ambient {
+  from {
+    opacity: 0.55;
+    transform: translate(-15px, 10px) scale(0.95);
+  }
+
+  to {
+    opacity: 0.9;
+    transform: translate(15px, -10px) scale(1.08);
+  }
+}
+
+/* =========================================
    LAPTOP
-
-==== */
+========================================= */
 
 @media (max-width: 1200px) {
-  .dish-landing {
-    padding: 18px 20px 22px;
-  }
-
-  .dish-hero {
-    min-height: 560px;
-
-    height: calc(100svh - 36px);
-  }
-
   .dish-nav {
     padding: 10px 30px;
+
+    grid-template-columns:
+      minmax(125px, 1fr)
+      auto
+      minmax(185px, 1fr);
   }
 
   .dish-logo-image {
-    width: 76px;
+    width: 122px;
+    height: 44px;
   }
 
   .dish-nav-links {
     gap: 24px;
-  }
-
-  .dish-hero-content {
-    top: 48%;
   }
 
   .dish-hero-content h1 {
@@ -709,11 +752,9 @@
   }
 }
 
-/* =========================================================
-
+/* =========================================
    TABLET
-
-==== */
+========================================= */
 
 @media (max-width: 820px) {
   .dish-landing {
@@ -722,18 +763,20 @@
 
   .dish-hero {
     width: 100%;
-
-    height: 100svh;
+    height: 100vh;
+    height: 100dvh;
 
     min-height: 620px;
+    max-height: none;
 
     border-radius: 0;
   }
 
   .dish-nav {
-    min-height: 62px;
+    min-height: 64px;
 
     grid-template-columns: auto 1fr;
+    gap: 14px;
 
     padding: 10px 20px;
   }
@@ -747,12 +790,12 @@
   }
 
   .dish-logo-image {
-    width: 72px;
+    width: 118px;
+    height: 43px;
   }
 
   .dish-hero-content {
     width: calc(100% - 38px);
-
     top: 46%;
   }
 
@@ -767,37 +810,41 @@
   .dish-hero-overlay {
     background: linear-gradient(
       to bottom,
-
       rgba(7, 26, 43, 0.72) 0%,
-
       rgba(7, 26, 43, 0.52) 28%,
-
       rgba(7, 26, 43, 0.34) 58%,
-
       rgba(7, 26, 43, 0.63) 100%
     );
   }
+
+  .dish-stats {
+    width: min(720px, calc(100% - 32px));
+  }
+
+  .dish-stat {
+    padding: 8px 16px;
+  }
 }
 
-/* =========================================================
-
+/* =========================================
    MOBILE
-
-==== */
+========================================= */
 
 @media (max-width: 560px) {
   .dish-nav {
-    min-height: 58px;
+    min-height: 60px;
 
     padding: 8px 13px;
-
     gap: 8px;
   }
 
   .dish-logo-image {
-    width: 62px;
+    width: 104px;
+    height: 38px;
+  }
 
-    max-height: 31px;
+  .dish-nav-actions {
+    gap: 10px;
   }
 
   .dish-login-link {
@@ -806,27 +853,22 @@
 
   .dish-nav-button {
     min-height: 37px;
-
     padding: 0 13px;
-
     font-size: 11px;
   }
 
   .dish-hero-content {
     width: calc(100% - 28px);
-
     top: 45%;
   }
 
   .dish-eyebrow {
     margin-bottom: 10px;
-
     font-size: 10px;
   }
 
   .dish-hero-content h1 {
     font-size: clamp(2.65rem, 12vw, 3.5rem);
-
     line-height: 0.98;
   }
 
@@ -834,35 +876,28 @@
     max-width: 330px;
 
     margin-top: 14px;
-
     font-size: 14px;
   }
 
   .dish-hero-actions {
-    gap: 6px;
-
+    gap: 8px;
     margin-top: 17px;
   }
 
   .dish-primary-button,
   .dish-secondary-button {
     min-height: 39px;
-
     padding: 0 14px;
-
     font-size: 11px;
   }
 
   .dish-stats {
     bottom: 18px;
-
     width: calc(100% - 20px);
   }
 
   .dish-stat {
-    padding: 0 10px;
-
-    text-align: center;
+    padding: 7px 10px;
   }
 
   .dish-stat strong {
@@ -876,15 +911,26 @@
   .dish-stat:not(:last-child)::after {
     height: 34px;
   }
+
+  .dish-hero::before {
+    width: 320px;
+    height: 320px;
+
+    top: -120px;
+    right: -130px;
+  }
 }
 
-/* =========================================================
-
+/* =========================================
    SMALL PHONE
-
-==== */
+========================================= */
 
 @media (max-width: 380px) {
+  .dish-logo-image {
+    width: 92px;
+    height: 35px;
+  }
+
   .dish-hero-content h1 {
     font-size: 2.5rem;
   }
@@ -899,7 +945,7 @@
   }
 
   .dish-stat {
-    padding: 0 7px;
+    padding: 7px;
   }
 
   .dish-stat span {
@@ -907,11 +953,46 @@
   }
 }
 
-/* Respect reduced-motion preferences. */
+/* =========================================
+   SHORT DESKTOP SCREENS
+========================================= */
+
+@media (min-width: 821px) and (max-height: 680px) {
+  .dish-hero-content {
+    top: 47%;
+  }
+
+  .dish-hero-content h1 {
+    font-size: clamp(2.8rem, 4.5vw, 4.3rem);
+  }
+
+  .dish-hero-content > p {
+    margin-top: 13px;
+  }
+
+  .dish-hero-actions {
+    margin-top: 16px;
+  }
+
+  .dish-stats {
+    bottom: 16px;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION
+========================================= */
+
 @media (prefers-reduced-motion: reduce) {
   .dish-landing *,
   .dish-landing *::before,
   .dish-landing *::after {
+    animation: none !important;
     transition: none !important;
+  }
+
+  .dish-hero-video,
+  .dish-hero:hover .dish-hero-video {
+    transform: none;
   }
 }
