@@ -23,7 +23,7 @@ import {
   getFavouriteRestaurantIds,
   toggleFavouriteRestaurant,
 } from "../../services/favouriteService";
-import "../../styles/HomePage.css";
+import "../../styles/Homepage.css";
 
 const DEFAULT_RESTAURANT_IMAGE =
   "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1000&q=85";
