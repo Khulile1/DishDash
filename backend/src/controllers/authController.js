@@ -1,21 +1,29 @@
 "use strict";
 
 // ======================================
+
 // IMPORTS
+
 // ======================================
 
 const User = require("../models/user");
+
 const nodemailer = require("nodemailer");
+
 const crypto = require("crypto");
 
 const {
   hashPassword,
+
   comparePassword,
+
   generateToken,
 } = require("../services/authService");
 
 // ======================================
+
 // CONFIGURATION
+
 // ======================================
 
 const TEN_MINUTES = 10 * 60 * 1000;
@@ -30,7 +38,9 @@ const PASSWORD_MESSAGE =
   "Your password must contain at least eight characters, including an uppercase letter, a lowercase letter, a number, and a special character.";
 
 // ======================================
+
 // VALIDATION HELPERS
+
 // ======================================
 
 const isText = (value) => typeof value === "string" && value.trim().length > 0;
@@ -43,7 +53,9 @@ const isValidEmail = (email) =>
   EMAIL_REGEX.test(normalizeEmail(email));
 
 // ======================================
+
 // HASH PASSWORD RESET VALUES
+
 // ======================================
 
 const hashResetValue = (value) => {
@@ -51,7 +63,9 @@ const hashResetValue = (value) => {
 };
 
 // ======================================
+
 // GENERATE SIX-DIGIT CODE
+
 // ======================================
 
 const generateVerificationCode = () => {
@@ -59,20 +73,29 @@ const generateVerificationCode = () => {
 };
 
 // ======================================
+
 // FORMAT PUBLIC USER DATA
+
 // ======================================
 
 const publicUser = (user) => ({
   id: user._id,
+
   name: user.name,
+
   surname: user.surname,
+
   email: user.email,
+
   role: user.role,
+
   isVerified: user.isVerified,
 });
 
 // ======================================
+
 // NODEMAILER SMTP CONFIGURATION
+
 // ======================================
 
 let transporter = null;
@@ -96,18 +119,24 @@ const getTransporter = () => {
 
   transporter = nodemailer.createTransport({
     host: SMTP_HOST.trim(),
+
     port,
+
     secure,
 
     // Prefer IPv4 for SMTP connections.
+
     family: 4,
 
     connectionTimeout: 15000,
+
     greetingTimeout: 15000,
+
     socketTimeout: 20000,
 
     auth: {
       user: SMTP_USER.trim(),
+
       pass: SMTP_PASS.replace(/\s+/g, ""),
     },
   });
@@ -116,10 +145,126 @@ const getTransporter = () => {
 };
 
 // ======================================
+
 // SEND EMAIL USING NODEMAILER
+
 // ======================================
 
-const sendEmail = async ({ to, subject, text }) => {
+const escapeHtml = (value) =>
+  String(value).replace(/[&<>"']/g, (character) => {
+    const entities = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#39;",
+    };
+    return entities[character];
+  });
+
+// Table-based layout and inline styles work well in common email clients.
+const buildBrandedEmail = ({
+  heading,
+  description,
+  code,
+  actionUrl,
+  actionLabel,
+  securityNote,
+}) => {
+  const actionButton = actionUrl
+    ? `
+      <tr>
+        <td align="center" style="padding:4px 28px 24px;">
+          <a href="${escapeHtml(actionUrl)}"
+             style="background-color:#f97316;border-radius:10px;color:#ffffff;display:inline-block;
+                    font-family:Arial,sans-serif;font-size:15px;font-weight:700;
+                    padding:14px 26px;text-align:center;text-decoration:none;">
+            ${escapeHtml(actionLabel)}
+          </a>
+        </td>
+      </tr>`
+    : "";
+
+  return `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DishDash</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f5f6fa;font-family:Arial,Helvetica,sans-serif;">
+  <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"
+         style="background-color:#f5f6fa;padding:36px 12px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%"
+               style="max-width:560px;background-color:#ffffff;border:1px solid #ebeef2;border-radius:16px;">
+          <tr>
+            <td align="center" style="background-color:#17212f;border-radius:16px 16px 0 0;padding:30px 24px;">
+              <span style="color:#ffffff;font-size:30px;font-weight:800;letter-spacing:-1px;">Dish</span><span
+                style="color:#fb923c;font-size:30px;font-weight:800;letter-spacing:-1px;">Dash</span>
+              <p style="color:#cbd5e1;font-size:12px;letter-spacing:2px;margin:10px 0 0;text-transform:uppercase;">
+                Good food. Delivered.
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:34px 32px 12px;">
+              <h1 style="color:#17212f;font-size:25px;line-height:1.3;margin:0 0 16px;">
+                ${escapeHtml(heading)}
+              </h1>
+              <p style="color:#4b5563;font-size:15px;line-height:1.7;margin:0;">
+                ${escapeHtml(description)}
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding:18px 32px 26px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+                     style="background-color:#fff7ed;border:1px solid #fed7aa;border-radius:12px;">
+                <tr>
+                  <td align="center" style="padding:22px 12px;">
+                    <p style="color:#9a3412;font-size:12px;font-weight:700;letter-spacing:1px;
+                              margin:0 0 12px;text-transform:uppercase;">
+                      Your verification code
+                    </p>
+                    <p style="color:#17212f;font-size:34px;font-weight:800;letter-spacing:8px;
+                              line-height:1.2;margin:0;">
+                      ${escapeHtml(code)}
+                    </p>
+                    <p style="color:#9a3412;font-size:13px;margin:14px 0 0;">
+                      This code expires in 10 minutes.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          ${actionButton}
+          <tr>
+            <td style="padding:0 32px 32px;">
+              <p style="color:#6b7280;font-size:13px;line-height:1.6;margin:0;">
+                ${escapeHtml(securityNote)}
+              </p>
+            </td>
+          </tr>
+          <tr>
+            <td align="center" style="background-color:#f8fafc;border-top:1px solid #e5e7eb;
+                                       border-radius:0 0 16px 16px;padding:22px 24px;">
+              <p style="color:#6b7280;font-size:12px;line-height:1.6;margin:0;">
+                Sent by the DishDash team. Please do not share your verification code.
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>`;
+};
+
+const sendEmail = async ({ to, subject, text, html }) => {
   const mailTransporter = getTransporter();
 
   const from =
@@ -128,18 +273,26 @@ const sendEmail = async ({ to, subject, text }) => {
 
   await mailTransporter.sendMail({
     from,
+
     to,
+
     subject,
+
     text,
+
+    html,
   });
 };
 
 // ======================================
+
 // SEND EMAIL VERIFICATION CODE
+
 // ======================================
 
 const sendVerificationEmail = async (email, verificationCode) => {
   const message = `
+
 Hello,
 
 Welcome to Dish Dash!
@@ -161,18 +314,33 @@ If you did not create a Dish Dash account, you may safely ignore this email.
 Thank you for choosing Dish Dash.
 
 Kind regards,
+
 The Dish Dash Team
+
 `;
 
   await sendEmail({
     to: email,
+
     subject: "Dish Dash | Email Verification",
+
     text: message.trim(),
+
+    html: buildBrandedEmail({
+      heading: "Welcome to DishDash!",
+      description:
+        "You're almost ready to explore DishDash. Enter the six-digit code below to verify your email address and activate your account.",
+      code: verificationCode,
+      securityNote:
+        "If you didn't create a DishDash account, you can safely ignore this email.",
+    }),
   });
 };
 
 // ======================================
+
 // SEND PASSWORD RESET EMAIL
+
 // ======================================
 
 const sendPasswordResetEmail = async (email, resetCode, resetToken) => {
@@ -188,6 +356,7 @@ const sendPasswordResetEmail = async (email, resetCode, resetToken) => {
     `&email=${encodeURIComponent(email)}`;
 
   const message = `
+
 Hello,
 
 We received a request to reset the password associated with your Dish Dash account.
@@ -205,9 +374,13 @@ ${resetLink}
 Follow these steps to complete the process:
 
 1. Open the password reset link.
+
 2. Enter the six-digit verification code.
+
 3. Create a new password.
+
 4. Confirm your new password.
+
 5. Submit your request to complete the password reset.
 
 Your new password must be different from your current password.
@@ -217,18 +390,35 @@ For security purposes, the verification code and reset link will expire 10 minut
 If you did not request a password reset, please ignore this email. Your current password will remain unchanged.
 
 Kind regards,
+
 The Dish Dash Team
+
 `;
 
   await sendEmail({
     to: email,
+
     subject: "Dish Dash | Password Reset Request",
+
     text: message.trim(),
+
+    html: buildBrandedEmail({
+      heading: "Reset your password",
+      description:
+        "We received a request to reset your DishDash password. Open the secure link below and enter this six-digit code to choose a new password.",
+      code: resetCode,
+      actionUrl: resetLink,
+      actionLabel: "Reset my password",
+      securityNote:
+        "If you didn't request a password reset, ignore this email. Your current password will remain unchanged.",
+    }),
   });
 };
 
 // ======================================
+
 // PASSWORD RESET ERROR RESPONSE
+
 // ======================================
 
 const sendResetLinkError = (res, code = "RESET_LINK_INVALID") => {
@@ -248,7 +438,9 @@ const sendResetLinkError = (res, code = "RESET_LINK_INVALID") => {
 };
 
 // ======================================
+
 // FIND PASSWORD RESET REQUEST
+
 // ======================================
 
 const findResetRequest = async (email, token) => {
@@ -266,6 +458,7 @@ const findResetRequest = async (email, token) => {
 
   const user = await User.findOne({
     email: normalizeEmail(email),
+
     passwordResetToken: hashedToken,
   }).select(
     "+password +passwordResetCode +passwordResetToken +passwordResetExpires",
@@ -287,18 +480,22 @@ const findResetRequest = async (email, token) => {
   if (!Number.isFinite(expiresAt) || expiresAt <= Date.now()) {
     return {
       error: "RESET_LINK_EXPIRED",
+
       user,
     };
   }
 
   return {
     user,
+
     expiresAt,
   };
 };
 
 // ======================================
+
 // REGISTER USER
+
 // ======================================
 
 const register = async (req, res) => {
@@ -306,7 +503,9 @@ const register = async (req, res) => {
     const { name, surname, email, password, role } = req.body || {};
 
     // ======================================
+
     // VALIDATE REQUIRED FIELDS
+
     // ======================================
 
     if (![name, surname, email, password].every(isText)) {
@@ -317,7 +516,9 @@ const register = async (req, res) => {
     }
 
     // ======================================
+
     // VALIDATE EMAIL
+
     // ======================================
 
     if (!isValidEmail(email)) {
@@ -327,7 +528,9 @@ const register = async (req, res) => {
     }
 
     // ======================================
+
     // VALIDATE PASSWORD
+
     // ======================================
 
     if (!PASSWORD_REGEX.test(password)) {
@@ -337,7 +540,9 @@ const register = async (req, res) => {
     }
 
     // ======================================
+
     // VALIDATE ROLE
+
     // ======================================
 
     const selectedRole = role === undefined ? "customer" : role;
@@ -349,13 +554,17 @@ const register = async (req, res) => {
     }
 
     // ======================================
+
     // NORMALIZE EMAIL
+
     // ======================================
 
     const normalizedEmail = normalizeEmail(email);
 
     // ======================================
+
     // CHECK EXISTING USER
+
     // ======================================
 
     const existingUser = await User.findOne({
@@ -370,26 +579,36 @@ const register = async (req, res) => {
     }
 
     // ======================================
+
     // HASH PASSWORD
+
     // ======================================
 
     const hashedPassword = await hashPassword(password);
 
     // ======================================
+
     // GENERATE VERIFICATION CODE
+
     // ======================================
 
     const verificationCode = generateVerificationCode();
 
     // ======================================
+
     // CREATE USER
+
     // ======================================
 
     const user = await User.create({
       name: name.trim(),
+
       surname: surname.trim(),
+
       email: normalizedEmail,
+
       password: hashedPassword,
+
       role: selectedRole,
 
       isVerified: false,
@@ -400,7 +619,9 @@ const register = async (req, res) => {
     });
 
     // ======================================
+
     // SEND VERIFICATION EMAIL
+
     // ======================================
 
     try {
@@ -419,7 +640,9 @@ const register = async (req, res) => {
     }
 
     // ======================================
+
     // REGISTRATION SUCCESS
+
     // ======================================
 
     return res.status(201).json({
@@ -448,7 +671,9 @@ const register = async (req, res) => {
 };
 
 // ======================================
+
 // VERIFY EMAIL
+
 // ======================================
 
 const verifyEmail = async (req, res) => {
@@ -458,7 +683,9 @@ const verifyEmail = async (req, res) => {
     const verificationCode = String(code ?? "").trim();
 
     // ======================================
+
     // VALIDATE REQUEST
+
     // ======================================
 
     if (!isValidEmail(email) || !/^\d{6}$/.test(verificationCode)) {
@@ -469,7 +696,9 @@ const verifyEmail = async (req, res) => {
     }
 
     // ======================================
+
     // FIND USER
+
     // ======================================
 
     const user = await User.findOne({
@@ -484,7 +713,9 @@ const verifyEmail = async (req, res) => {
     }
 
     // ======================================
+
     // CHECK VERIFICATION STATUS
+
     // ======================================
 
     if (user.isVerified) {
@@ -495,7 +726,9 @@ const verifyEmail = async (req, res) => {
     }
 
     // ======================================
+
     // CHECK EXPIRY
+
     // ======================================
 
     if (
@@ -509,7 +742,9 @@ const verifyEmail = async (req, res) => {
     }
 
     // ======================================
+
     // VERIFY CODE
+
     // ======================================
 
     if (user.verificationCode !== verificationCode) {
@@ -520,7 +755,9 @@ const verifyEmail = async (req, res) => {
     }
 
     // ======================================
+
     // VERIFY USER
+
     // ======================================
 
     user.isVerified = true;
@@ -532,7 +769,9 @@ const verifyEmail = async (req, res) => {
     await user.save();
 
     // ======================================
+
     // SUCCESS
+
     // ======================================
 
     return res.status(200).json({
@@ -550,7 +789,9 @@ const verifyEmail = async (req, res) => {
 };
 
 // ======================================
+
 // RESEND VERIFICATION CODE
+
 // ======================================
 
 const resendVerificationCode = async (req, res) => {
@@ -558,7 +799,9 @@ const resendVerificationCode = async (req, res) => {
     const { email } = req.body || {};
 
     // ======================================
+
     // VALIDATE EMAIL
+
     // ======================================
 
     if (!isValidEmail(email)) {
@@ -568,7 +811,9 @@ const resendVerificationCode = async (req, res) => {
     }
 
     // ======================================
+
     // FIND USER
+
     // ======================================
 
     const user = await User.findOne({
@@ -583,7 +828,9 @@ const resendVerificationCode = async (req, res) => {
     }
 
     // ======================================
+
     // CHECK VERIFICATION STATUS
+
     // ======================================
 
     if (user.isVerified) {
@@ -593,7 +840,9 @@ const resendVerificationCode = async (req, res) => {
     }
 
     // ======================================
+
     // GENERATE NEW CODE
+
     // ======================================
 
     const verificationCode = generateVerificationCode();
@@ -605,7 +854,9 @@ const resendVerificationCode = async (req, res) => {
     await user.save();
 
     // ======================================
+
     // SEND EMAIL
+
     // ======================================
 
     try {
@@ -620,7 +871,9 @@ const resendVerificationCode = async (req, res) => {
     }
 
     // ======================================
+
     // SUCCESS
+
     // ======================================
 
     return res.status(200).json({
@@ -638,7 +891,9 @@ const resendVerificationCode = async (req, res) => {
 };
 
 // ======================================
+
 // FORGOT PASSWORD
+
 // ======================================
 
 const forgotPassword = async (req, res) => {
@@ -646,7 +901,9 @@ const forgotPassword = async (req, res) => {
     const { email } = req.body || {};
 
     // ======================================
+
     // VALIDATE EMAIL
+
     // ======================================
 
     if (!isValidEmail(email)) {
@@ -658,7 +915,9 @@ const forgotPassword = async (req, res) => {
     const normalizedEmail = normalizeEmail(email);
 
     // ======================================
+
     // FIND USER
+
     // ======================================
 
     const user = await User.findOne({
@@ -675,13 +934,17 @@ const forgotPassword = async (req, res) => {
     }
 
     // ======================================
+
     // GENERATE RESET CODE
+
     // ======================================
 
     const resetCode = generateVerificationCode();
 
     // ======================================
+
     // GENERATE RESET TOKEN
+
     // ======================================
 
     const resetToken = crypto.randomBytes(32).toString("hex");
@@ -689,7 +952,9 @@ const forgotPassword = async (req, res) => {
     const hashedResetToken = hashResetValue(resetToken);
 
     // ======================================
+
     // SAVE RESET DATA
+
     // ======================================
 
     user.passwordResetCode = hashResetValue(resetCode);
@@ -701,7 +966,9 @@ const forgotPassword = async (req, res) => {
     await user.save();
 
     // ======================================
+
     // SEND RESET EMAIL
+
     // ======================================
 
     try {
@@ -710,15 +977,20 @@ const forgotPassword = async (req, res) => {
       console.error("Password reset email error:", emailError);
 
       // Clear only this failed reset request.
+
       await User.updateOne(
         {
           _id: user._id,
+
           passwordResetToken: hashedResetToken,
         },
+
         {
           $set: {
             passwordResetCode: null,
+
             passwordResetToken: null,
+
             passwordResetExpires: null,
           },
         },
@@ -731,7 +1003,9 @@ const forgotPassword = async (req, res) => {
     }
 
     // ======================================
+
     // SUCCESS
+
     // ======================================
 
     return res.status(200).json({
@@ -748,7 +1022,9 @@ const forgotPassword = async (req, res) => {
 };
 
 // ======================================
+
 // VERIFY PASSWORD RESET TOKEN
+
 // ======================================
 
 const verifyResetToken = async (req, res) => {
@@ -758,13 +1034,17 @@ const verifyResetToken = async (req, res) => {
     const { email, token } = req.body || {};
 
     // ======================================
+
     // FIND RESET REQUEST
+
     // ======================================
 
     const result = await findResetRequest(email, token);
 
     // ======================================
+
     // CHECK INVALID / EXPIRED TOKEN
+
     // ======================================
 
     if (result.error) {
@@ -772,12 +1052,16 @@ const verifyResetToken = async (req, res) => {
         await User.updateOne(
           {
             _id: result.user._id,
+
             passwordResetToken: result.user.passwordResetToken,
           },
+
           {
             $set: {
               passwordResetCode: null,
+
               passwordResetToken: null,
+
               passwordResetExpires: null,
             },
           },
@@ -788,7 +1072,9 @@ const verifyResetToken = async (req, res) => {
     }
 
     // ======================================
+
     // SUCCESS
+
     // ======================================
 
     return res.status(200).json({
@@ -810,7 +1096,9 @@ const verifyResetToken = async (req, res) => {
 };
 
 // ======================================
+
 // RESET PASSWORD
+
 // ======================================
 
 const resetPassword = async (req, res) => {
@@ -820,7 +1108,9 @@ const resetPassword = async (req, res) => {
     const { email, token, code, password, confirmPassword } = req.body || {};
 
     // ======================================
+
     // VALIDATE RESET LINK
+
     // ======================================
 
     const result = await findResetRequest(email, token);
@@ -834,7 +1124,9 @@ const resetPassword = async (req, res) => {
     const resetCode = String(code ?? "").trim();
 
     // ======================================
+
     // VALIDATE RESET CODE FORMAT
+
     // ======================================
 
     if (!/^\d{6}$/.test(resetCode)) {
@@ -846,7 +1138,9 @@ const resetPassword = async (req, res) => {
     }
 
     // ======================================
+
     // VERIFY RESET CODE
+
     // ======================================
 
     if (hashResetValue(resetCode) !== user.passwordResetCode) {
@@ -859,7 +1153,9 @@ const resetPassword = async (req, res) => {
     }
 
     // ======================================
+
     // VALIDATE PASSWORD FIELDS
+
     // ======================================
 
     if (!isText(password) || !isText(confirmPassword)) {
@@ -870,7 +1166,9 @@ const resetPassword = async (req, res) => {
     }
 
     // ======================================
+
     // CHECK PASSWORD CONFIRMATION
+
     // ======================================
 
     if (password !== confirmPassword) {
@@ -881,7 +1179,9 @@ const resetPassword = async (req, res) => {
     }
 
     // ======================================
+
     // CHECK PASSWORD REQUIREMENTS
+
     // ======================================
 
     if (!PASSWORD_REGEX.test(password)) {
@@ -891,7 +1191,9 @@ const resetPassword = async (req, res) => {
     }
 
     // ======================================
+
     // PREVENT PASSWORD REUSE
+
     // ======================================
 
     const isSamePassword = await comparePassword(password, user.password);
@@ -906,13 +1208,17 @@ const resetPassword = async (req, res) => {
     }
 
     // ======================================
+
     // HASH NEW PASSWORD
+
     // ======================================
 
     const hashedPassword = await hashPassword(password);
 
     // ======================================
+
     // UPDATE PASSWORD
+
     // ======================================
 
     const update = await User.updateOne(
@@ -929,6 +1235,7 @@ const resetPassword = async (req, res) => {
           $gt: new Date(),
         },
       },
+
       {
         $set: {
           password: hashedPassword,
@@ -940,13 +1247,16 @@ const resetPassword = async (req, res) => {
           passwordResetExpires: null,
         },
       },
+
       {
         runValidators: true,
       },
     );
 
     // ======================================
+
     // PREVENT TOKEN REUSE
+
     // ======================================
 
     if (update.modifiedCount !== 1) {
@@ -958,7 +1268,9 @@ const resetPassword = async (req, res) => {
     }
 
     // ======================================
+
     // SUCCESS
+
     // ======================================
 
     return res.status(200).json({
@@ -976,7 +1288,9 @@ const resetPassword = async (req, res) => {
 };
 
 // ======================================
+
 // LOGIN
+
 // ======================================
 
 const login = async (req, res) => {
@@ -986,7 +1300,9 @@ const login = async (req, res) => {
     const { email, password } = req.body || {};
 
     // ======================================
+
     // VALIDATE REQUIRED FIELDS
+
     // ======================================
 
     if (!isText(email) || !isText(password)) {
@@ -996,7 +1312,9 @@ const login = async (req, res) => {
     }
 
     // ======================================
+
     // VALIDATE EMAIL FORMAT
+
     // ======================================
 
     if (!isValidEmail(email)) {
@@ -1006,7 +1324,9 @@ const login = async (req, res) => {
     }
 
     // ======================================
+
     // FIND USER
+
     // ======================================
 
     const user = await User.findOne({
@@ -1014,7 +1334,9 @@ const login = async (req, res) => {
     }).select("+password");
 
     // ======================================
+
     // VALIDATE CREDENTIALS
+
     // ======================================
 
     if (!user || !(await comparePassword(password, user.password))) {
@@ -1025,7 +1347,9 @@ const login = async (req, res) => {
     }
 
     // ======================================
+
     // CHECK EMAIL VERIFICATION
+
     // ======================================
 
     if (!user.isVerified) {
@@ -1036,13 +1360,17 @@ const login = async (req, res) => {
     }
 
     // ======================================
+
     // GENERATE JWT TOKEN
+
     // ======================================
 
     const token = generateToken(user);
 
     // ======================================
+
     // LOGIN SUCCESS
+
     // ======================================
 
     return res.status(200).json({
@@ -1062,15 +1390,23 @@ const login = async (req, res) => {
 };
 
 // ======================================
+
 // EXPORT CONTROLLERS
+
 // ======================================
 
 module.exports = {
   register,
+
   login,
+
   verifyEmail,
+
   resendVerificationCode,
+
   forgotPassword,
+
   verifyResetToken,
+
   resetPassword,
 };
