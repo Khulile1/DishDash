@@ -43,17 +43,23 @@ const isValidEmail = (email) =>
   EMAIL_REGEX.test(normalizeEmail(email));
 
 // ======================================
-// PASSWORD RESET HELPERS
+// HASH PASSWORD RESET VALUES
 // ======================================
 
-const hashResetValue = (value) =>
-  crypto.createHash("sha256").update(String(value)).digest("hex");
-
-const generateVerificationCode = () =>
-  crypto.randomInt(100000, 1000000).toString();
+const hashResetValue = (value) => {
+  return crypto.createHash("sha256").update(String(value)).digest("hex");
+};
 
 // ======================================
-// PUBLIC USER INFORMATION
+// GENERATE SIX-DIGIT CODE
+// ======================================
+
+const generateVerificationCode = () => {
+  return crypto.randomInt(100000, 1000000).toString();
+};
+
+// ======================================
+// FORMAT PUBLIC USER DATA
 // ======================================
 
 const publicUser = (user) => ({
@@ -66,68 +72,34 @@ const publicUser = (user) => ({
 });
 
 // ======================================
-// EMAIL CONFIGURATION
+// NODEMAILER SMTP CONFIGURATION
 // ======================================
 
-let smtpTransporter = null;
+let transporter = null;
 
-// ======================================
-// GET EMAIL SENDER
-// ======================================
+const getTransporter = () => {
+  if (transporter) {
+    return transporter;
+  }
 
-const getFromAddress = () => {
-  const raw = (process.env.FROM_EMAIL || process.env.SMTP_USER || "").trim();
+  const { SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS } = process.env;
 
-  if (!raw) {
+  if (!isText(SMTP_HOST) || !isText(SMTP_USER) || !isText(SMTP_PASS)) {
     throw new Error(
-      "Email sender is not configured. Please set FROM_EMAIL or SMTP_USER.",
+      "Email service is not configured. Please check the SMTP environment variables.",
     );
   }
 
-  const match = raw.match(/^(.*?)\s*<([^<>]+)>$/);
+  const port = Number(SMTP_PORT) || 587;
 
-  if (match) {
-    return {
-      name: match[1].trim() || "Dish Dash",
-      email: match[2].trim(),
-    };
-  }
+  const secure = port === 465 || process.env.SMTP_SECURE === "true";
 
-  return {
-    name: "Dish Dash",
-    email: raw,
-  };
-};
-
-// ======================================
-// SMTP TRANSPORTER
-// ======================================
-
-const getSmtpTransporter = () => {
-  if (smtpTransporter) {
-    return smtpTransporter;
-  }
-
-  const { SMTP_HOST, SMTP_USER, SMTP_PASS } = process.env;
-
-  if (!SMTP_HOST?.trim() || !SMTP_USER?.trim() || !SMTP_PASS?.trim()) {
-    throw new Error(
-      "SMTP configuration is incomplete. Please configure SMTP_HOST, SMTP_USER, and SMTP_PASS.",
-    );
-  }
-
-  const port = Number(process.env.SMTP_PORT) || 587;
-
-  const secure =
-    port === 465 ||
-    process.env.SMTP_SECURE === "true" ||
-    process.env.SMTP_SECURE === "1";
-
-  smtpTransporter = nodemailer.createTransport({
+  transporter = nodemailer.createTransport({
     host: SMTP_HOST.trim(),
     port,
     secure,
 
+    // Prefer IPv4 for SMTP connections.
     family: 4,
 
     connectionTimeout: 15000,
@@ -136,77 +108,26 @@ const getSmtpTransporter = () => {
 
     auth: {
       user: SMTP_USER.trim(),
-      pass: SMTP_PASS.trim(),
+      pass: SMTP_PASS.replace(/\s+/g, ""),
     },
   });
 
-  return smtpTransporter;
+  return transporter;
 };
 
 // ======================================
-// SEND EMAIL
+// SEND EMAIL USING NODEMAILER
 // ======================================
 
 const sendEmail = async ({ to, subject, text }) => {
-  const sender = getFromAddress();
+  const mailTransporter = getTransporter();
 
-  const sendGridKey = process.env.SENDGRID_API_KEY?.trim();
+  const from =
+    process.env.FROM_EMAIL?.trim() ||
+    `"Dish Dash" <${process.env.SMTP_USER.trim()}>`;
 
-  // ======================================
-  // SENDGRID EMAIL DELIVERY
-  // ======================================
-
-  if (sendGridKey) {
-    const response = await fetch("https://api.sendgrid.com/v3/mail/send", {
-      method: "POST",
-
-      headers: {
-        Authorization: `Bearer ${sendGridKey}`,
-        "Content-Type": "application/json",
-      },
-
-      body: JSON.stringify({
-        personalizations: [
-          {
-            to: [{ email: to }],
-          },
-        ],
-
-        from: sender,
-
-        subject,
-
-        content: [
-          {
-            type: "text/plain",
-            value: text,
-          },
-        ],
-      }),
-    });
-
-    if (!response.ok) {
-      const details = await response.text();
-
-      throw new Error(
-        `Email delivery failed (${response.status}): ${details.slice(0, 500)}`,
-      );
-    }
-
-    return;
-  }
-
-  // ======================================
-  // SMTP EMAIL DELIVERY
-  // ======================================
-
-  const transporter = getSmtpTransporter();
-
-  await transporter.sendMail({
-    from: {
-      name: sender.name,
-      address: sender.email,
-    },
+  await mailTransporter.sendMail({
+    from,
     to,
     subject,
     text,
@@ -221,15 +142,23 @@ const sendVerificationEmail = async (email, verificationCode) => {
   const message = `
 Hello,
 
-Thank you for registering with Dish Dash.
+Welcome to Dish Dash!
+
+Thank you for creating an account with us.
 
 To complete your registration and activate your account, please verify your email address using the code below.
 
-Verification code: ${verificationCode}
+Your verification code:
 
-For your security, this code will expire in 10 minutes.
+${verificationCode}
 
-If you did not create a Dish Dash account, please disregard this email.
+This code is valid for 10 minutes.
+
+For your security, please do not share this code with anyone.
+
+If you did not create a Dish Dash account, you may safely ignore this email.
+
+Thank you for choosing Dish Dash.
 
 Kind regards,
 The Dish Dash Team
@@ -237,7 +166,7 @@ The Dish Dash Team
 
   await sendEmail({
     to: email,
-    subject: "Dish Dash | Verify Your Email Address",
+    subject: "Dish Dash | Email Verification",
     text: message.trim(),
   });
 };
@@ -263,25 +192,29 @@ Hello,
 
 We received a request to reset the password associated with your Dish Dash account.
 
-To proceed with resetting your password, please use the verification code and secure link provided below.
+To reset your password, please use the verification code and secure link below.
 
-Password reset code: ${resetCode}
+Your password reset code:
+
+${resetCode}
 
 Password reset link:
+
 ${resetLink}
 
-To complete the process:
+Follow these steps to complete the process:
 
 1. Open the password reset link.
 2. Enter the six-digit verification code.
 3. Create a new password.
 4. Confirm your new password.
+5. Submit your request to complete the password reset.
 
-Please ensure that your new password is different from your current password.
+Your new password must be different from your current password.
 
 For security purposes, the verification code and reset link will expire 10 minutes after the request was made.
 
-If you did not request a password reset, you may safely ignore this email. Your existing password will remain unchanged.
+If you did not request a password reset, please ignore this email. Your current password will remain unchanged.
 
 Kind regards,
 The Dish Dash Team
@@ -307,7 +240,7 @@ const sendResetLinkError = (res, code = "RESET_LINK_INVALID") => {
     code,
 
     message: expired
-      ? "Your password reset link has expired. Please request a new password reset link."
+      ? "Your password reset link has expired. Please request a new link."
       : "This password reset link is invalid, has already been used, or is no longer available. Please request a new link.",
 
     redirectTo: "/unauthorized",
@@ -379,7 +312,7 @@ const register = async (req, res) => {
     if (![name, surname, email, password].every(isText)) {
       return res.status(400).json({
         message:
-          "Please provide your first name, surname, email address, and password to complete registration.",
+          "Please provide your name, surname, email address, and password to complete registration.",
       });
     }
 
@@ -404,7 +337,7 @@ const register = async (req, res) => {
     }
 
     // ======================================
-    // VALIDATE ACCOUNT ROLE
+    // VALIDATE ROLE
     // ======================================
 
     const selectedRole = role === undefined ? "customer" : role;
@@ -416,10 +349,14 @@ const register = async (req, res) => {
     }
 
     // ======================================
-    // CHECK EXISTING ACCOUNT
+    // NORMALIZE EMAIL
     // ======================================
 
     const normalizedEmail = normalizeEmail(email);
+
+    // ======================================
+    // CHECK EXISTING USER
+    // ======================================
 
     const existingUser = await User.findOne({
       email: normalizedEmail,
@@ -473,7 +410,7 @@ const register = async (req, res) => {
 
       return res.status(201).json({
         message:
-          "Your account has been created successfully, but we could not send the verification email. Please request a new verification code to activate your account.",
+          "Your account has been created, but we could not send the verification email. Please request a new verification code to activate your account.",
 
         emailSent: false,
 
@@ -482,7 +419,7 @@ const register = async (req, res) => {
     }
 
     // ======================================
-    // SUCCESS
+    // REGISTRATION SUCCESS
     // ======================================
 
     return res.status(201).json({
@@ -520,6 +457,10 @@ const verifyEmail = async (req, res) => {
 
     const verificationCode = String(code ?? "").trim();
 
+    // ======================================
+    // VALIDATE REQUEST
+    // ======================================
+
     if (!isValidEmail(email) || !/^\d{6}$/.test(verificationCode)) {
       return res.status(400).json({
         message:
@@ -554,7 +495,7 @@ const verifyEmail = async (req, res) => {
     }
 
     // ======================================
-    // CHECK CODE EXPIRY
+    // CHECK EXPIRY
     // ======================================
 
     if (
@@ -568,25 +509,31 @@ const verifyEmail = async (req, res) => {
     }
 
     // ======================================
-    // VALIDATE CODE
+    // VERIFY CODE
     // ======================================
 
     if (user.verificationCode !== verificationCode) {
       return res.status(400).json({
         message:
-          "The verification code you entered is incorrect. Please check the code and try again.",
+          "The verification code is incorrect. Please check the code and try again.",
       });
     }
 
     // ======================================
-    // VERIFY ACCOUNT
+    // VERIFY USER
     // ======================================
 
     user.isVerified = true;
+
     user.verificationCode = null;
+
     user.verificationCodeExpires = null;
 
     await user.save();
+
+    // ======================================
+    // SUCCESS
+    // ======================================
 
     return res.status(200).json({
       message:
@@ -610,6 +557,10 @@ const resendVerificationCode = async (req, res) => {
   try {
     const { email } = req.body || {};
 
+    // ======================================
+    // VALIDATE EMAIL
+    // ======================================
+
     if (!isValidEmail(email)) {
       return res.status(400).json({
         message: "Please provide a valid email address.",
@@ -631,10 +582,13 @@ const resendVerificationCode = async (req, res) => {
       });
     }
 
+    // ======================================
+    // CHECK VERIFICATION STATUS
+    // ======================================
+
     if (user.isVerified) {
       return res.status(400).json({
-        message:
-          "Your email address has already been verified. You can now sign in.",
+        message: "Your email address is already verified. You can now sign in.",
       });
     }
 
@@ -657,13 +611,17 @@ const resendVerificationCode = async (req, res) => {
     try {
       await sendVerificationEmail(user.email, verificationCode);
     } catch (emailError) {
-      console.error("Verification email error:", emailError);
+      console.error("Resend verification email error:", emailError);
 
       return res.status(503).json({
         message:
           "We could not send your verification code at this time. Please try again shortly.",
       });
     }
+
+    // ======================================
+    // SUCCESS
+    // ======================================
 
     return res.status(200).json({
       message:
@@ -687,6 +645,10 @@ const forgotPassword = async (req, res) => {
   try {
     const { email } = req.body || {};
 
+    // ======================================
+    // VALIDATE EMAIL
+    // ======================================
+
     if (!isValidEmail(email)) {
       return res.status(400).json({
         message: "Please enter a valid email address.",
@@ -695,13 +657,13 @@ const forgotPassword = async (req, res) => {
 
     const normalizedEmail = normalizeEmail(email);
 
+    // ======================================
+    // FIND USER
+    // ======================================
+
     const user = await User.findOne({
       email: normalizedEmail,
     });
-
-    // ======================================
-    // PREVENT ACCOUNT ENUMERATION
-    // ======================================
 
     const successMessage =
       "If an account exists with this email address, password reset instructions will be sent shortly.";
@@ -713,17 +675,21 @@ const forgotPassword = async (req, res) => {
     }
 
     // ======================================
-    // GENERATE RESET CODE AND TOKEN
+    // GENERATE RESET CODE
     // ======================================
 
     const resetCode = generateVerificationCode();
+
+    // ======================================
+    // GENERATE RESET TOKEN
+    // ======================================
 
     const resetToken = crypto.randomBytes(32).toString("hex");
 
     const hashedResetToken = hashResetValue(resetToken);
 
     // ======================================
-    // SAVE RESET INFORMATION
+    // SAVE RESET DATA
     // ======================================
 
     user.passwordResetCode = hashResetValue(resetCode);
@@ -735,7 +701,7 @@ const forgotPassword = async (req, res) => {
     await user.save();
 
     // ======================================
-    // SEND PASSWORD RESET EMAIL
+    // SEND RESET EMAIL
     // ======================================
 
     try {
@@ -743,6 +709,7 @@ const forgotPassword = async (req, res) => {
     } catch (emailError) {
       console.error("Password reset email error:", emailError);
 
+      // Clear only this failed reset request.
       await User.updateOne(
         {
           _id: user._id,
@@ -762,6 +729,10 @@ const forgotPassword = async (req, res) => {
           "We could not send the password reset email. Please try again shortly.",
       });
     }
+
+    // ======================================
+    // SUCCESS
+    // ======================================
 
     return res.status(200).json({
       message: successMessage,
@@ -786,21 +757,31 @@ const verifyResetToken = async (req, res) => {
   try {
     const { email, token } = req.body || {};
 
+    // ======================================
+    // FIND RESET REQUEST
+    // ======================================
+
     const result = await findResetRequest(email, token);
 
     // ======================================
-    // INVALID OR EXPIRED TOKEN
+    // CHECK INVALID / EXPIRED TOKEN
     // ======================================
 
     if (result.error) {
       if (result.error === "RESET_LINK_EXPIRED" && result.user) {
-        result.user.passwordResetCode = null;
-
-        result.user.passwordResetToken = null;
-
-        result.user.passwordResetExpires = null;
-
-        await result.user.save();
+        await User.updateOne(
+          {
+            _id: result.user._id,
+            passwordResetToken: result.user.passwordResetToken,
+          },
+          {
+            $set: {
+              passwordResetCode: null,
+              passwordResetToken: null,
+              passwordResetExpires: null,
+            },
+          },
+        );
       }
 
       return sendResetLinkError(res, result.error);
@@ -839,7 +820,7 @@ const resetPassword = async (req, res) => {
     const { email, token, code, password, confirmPassword } = req.body || {};
 
     // ======================================
-    // VALIDATE RESET REQUEST
+    // VALIDATE RESET LINK
     // ======================================
 
     const result = await findResetRequest(email, token);
@@ -853,23 +834,27 @@ const resetPassword = async (req, res) => {
     const resetCode = String(code ?? "").trim();
 
     // ======================================
-    // VALIDATE RESET CODE
+    // VALIDATE RESET CODE FORMAT
     // ======================================
 
     if (!/^\d{6}$/.test(resetCode)) {
       return res.status(400).json({
         code: "RESET_CODE_INVALID",
 
-        message: "Please enter the six-digit password reset code.",
+        message: "Please enter a valid six-digit password reset code.",
       });
     }
+
+    // ======================================
+    // VERIFY RESET CODE
+    // ======================================
 
     if (hashResetValue(resetCode) !== user.passwordResetCode) {
       return res.status(400).json({
         code: "RESET_CODE_INVALID",
 
         message:
-          "The password reset code you entered is incorrect. Please try again.",
+          "The password reset code is incorrect. Please check the code and try again.",
       });
     }
 
@@ -885,7 +870,7 @@ const resetPassword = async (req, res) => {
     }
 
     // ======================================
-    // PASSWORD CONFIRMATION
+    // CHECK PASSWORD CONFIRMATION
     // ======================================
 
     if (password !== confirmPassword) {
@@ -896,7 +881,7 @@ const resetPassword = async (req, res) => {
     }
 
     // ======================================
-    // PASSWORD REQUIREMENTS
+    // CHECK PASSWORD REQUIREMENTS
     // ======================================
 
     if (!PASSWORD_REGEX.test(password)) {
@@ -927,7 +912,7 @@ const resetPassword = async (req, res) => {
     const hashedPassword = await hashPassword(password);
 
     // ======================================
-    // UPDATE USER PASSWORD
+    // UPDATE PASSWORD
     // ======================================
 
     const update = await User.updateOne(
@@ -961,7 +946,7 @@ const resetPassword = async (req, res) => {
     );
 
     // ======================================
-    // PREVENT RESET TOKEN REUSE
+    // PREVENT TOKEN REUSE
     // ======================================
 
     if (update.modifiedCount !== 1) {
@@ -981,7 +966,7 @@ const resetPassword = async (req, res) => {
         "Your password has been reset successfully. You can now sign in to your Dish Dash account using your new password.",
     });
   } catch (error) {
-    console.error("Password reset error:", error);
+    console.error("Reset password error:", error);
 
     return res.status(500).json({
       message:
@@ -1029,7 +1014,7 @@ const login = async (req, res) => {
     }).select("+password");
 
     // ======================================
-    // VALIDATE LOGIN CREDENTIALS
+    // VALIDATE CREDENTIALS
     // ======================================
 
     if (!user || !(await comparePassword(password, user.password))) {
@@ -1057,7 +1042,7 @@ const login = async (req, res) => {
     const token = generateToken(user);
 
     // ======================================
-    // SUCCESS
+    // LOGIN SUCCESS
     // ======================================
 
     return res.status(200).json({
